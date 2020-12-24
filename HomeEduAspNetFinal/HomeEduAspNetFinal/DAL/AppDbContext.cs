@@ -15,5 +15,6 @@ namespace HomeEduAspNetFinal.DAL
 
         }
         public DbSet<AboutArea> AboutAreas { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
     }
 }
