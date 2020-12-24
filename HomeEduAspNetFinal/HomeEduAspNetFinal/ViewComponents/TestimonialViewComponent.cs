@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HomeEduAspNetFinal.DAL;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,15 @@ namespace HomeEduAspNetFinal.ViewComponents
     public class TestimonialViewComponent : ViewComponent
     {
 
-        //private readonly AppDbContext _db;
-        //public HeaderViewComponent()
-        //{
-        //    //_db = db;
-        //    //_userManager = userManager;
-        //}
+        private readonly AppDbContext _db;
+        public TestimonialViewComponent(AppDbContext db)
+        {
+            _db = db;
+            
+        }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            return View(await Task.FromResult(_db.Testimonials.ToList()));
         }
     }
 }

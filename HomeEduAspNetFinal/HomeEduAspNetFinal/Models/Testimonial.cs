@@ -13,7 +13,7 @@ namespace HomeEduAspNetFinal.Models
         public string Person { get; set; }
         [Required, MaxLength(50)]
         public string Profession { get; set; }
-        [Required, MaxLength(100)]
+        [Required, MaxLength(150)]
         public string SayAboutUs { get; set; }
         [Required]
         public string Image { get; set; }
