@@ -1,0 +1,117 @@
+﻿@model List<UserVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center mb-2 py-4 bg-dark font-weight-bold text-light">
+                <i class="mdi mdi-account menu-icon  mr-2 text-facebook" style="font-size:28px;"></i>
+                <h2 class="card-title pt-2 mb-0 mr-5 text-light" style="font-size:larger !important;">Users</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="bg-dark font-weight-bold text-light ">
+                            <th>
+                                Username
+                            </th>
+                            <th>
+                                FirstName
+                            </th>
+                            <th>
+                                LastName
+                            </th>
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Role
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th class="text-right">
+                                Settings
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (UserVM user in Model)
+                        {
+                            <tr class="bg-dark font-weight-bold text-light">
+                                <td>
+                                    @user.UserName
+                                </td>
+                                <td>
+                                    @user.Name
+                                </td>
+                                <td>
+                                    @user.Surname
+                                </td>
+                                <td>
+                                    @user.Email
+                                </td>
+                                @if (user.Role != "Admin")
+                                {
+                                    <td style="color:white">
+                                        @user.Role
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="color:forestgreen">
+                                        @user.Role
+                                    </td>
+                                }
+                                @if (!user.IsDeleted)
+                                {
+                                    <td style="color:forestgreen">
+                                        Active
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="color:red">
+                                        Passive
+                                    </td>
+                                }
+                                <td class="text-right">
+                                    @if (User.Identity.Name != user.UserName)
+                                    {
+                                        @if (user.IsDeleted)
+                                        {
+                                            <a asp-controller="User" asp-action="Activated" asp-route-id="@user.Id" class="btn btn-outline-warning btn-sm">
+                                                Enable
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="User" asp-action="Activated" asp-route-id="@user.Id" class="btn btn-outline-warning btn-sm">
+                                                Disable
+                                            </a>
+                                        }
+
+                                        <a asp-controller="User" asp-action="ResetPassword" asp-route-id="@user.Id" class="btn btn-outline-success btn-sm">Reset Password</a>
+                                        <a asp-controller="User" asp-action="ChangeRole" asp-route-id="@user.Id" class="btn btn-outline-danger btn-sm">Change Role</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="text-success">Yox ey Brat OLmaz.Bu axi senin userindi</a>
+                                    }
+
+
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
