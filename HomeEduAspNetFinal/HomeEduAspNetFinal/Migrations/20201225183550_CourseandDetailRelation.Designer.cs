@@ -4,14 +4,16 @@ using HomeEduAspNetFinal.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomeEduAspNetFinal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201225183550_CourseandDetailRelation")]
+    partial class CourseandDetailRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,8 +176,8 @@ namespace HomeEduAspNetFinal.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<string>("Starts")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("Starts")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Students")
                         .HasColumnType("int");

@@ -9,6 +9,6 @@ namespace HomeEduAspNetFinal.Models
     {
         public int Id { get; set; }
         public string FullName { get; set; }
-        public ICollection<SocMedOfTeacher> SocMedOfTeachers { get; set; }
+        //public ICollection<SocMedOfTeacher> SocMedOfTeachers { get; set; }
     }
 }

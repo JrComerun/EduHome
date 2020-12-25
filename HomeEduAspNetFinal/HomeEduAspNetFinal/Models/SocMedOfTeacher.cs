@@ -10,7 +10,7 @@ namespace HomeEduAspNetFinal.Models
         public int Id { get; set; }
         public string Icon { get; set; }
         public string Link { get; set; }
-        public int TeacherId { get; set; }
-        public Teacher Teacher { get; set; }
+        //public int TeacherId { get; set; }
+        //public Teacher Teacher { get; set; }
     }
 }

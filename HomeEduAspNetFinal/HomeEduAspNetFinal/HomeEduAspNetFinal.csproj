@@ -5,10 +5,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Shared\Components\DetailOfCourse\**" />
+    <Content Remove="Views\Shared\Components\DetailOfCourse\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\DetailOfCourse\**" />
+    <None Remove="Views\Shared\Components\DetailOfCourse\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Migrations\20201224222456_CreateAboutArea.cs" />
     <Compile Remove="Migrations\20201224222456_CreateAboutArea.Designer.cs" />
     <Compile Remove="Migrations\20201224222755_CreateAboutAreaTable.cs" />
     <Compile Remove="Migrations\20201224222755_CreateAboutAreaTable.Designer.cs" />
+    <Compile Remove="Migrations\20201225162255_CourseAndDetailofCoursesLessRelationsTables.cs" />
+    <Compile Remove="Migrations\20201225162255_CourseAndDetailofCoursesLessRelationsTables.Designer.cs" />
+    <Compile Remove="Migrations\20201225163235_AddImageToCourse.cs" />
+    <Compile Remove="Migrations\20201225163235_AddImageToCourse.Designer.cs" />
+    <Compile Remove="Migrations\20201225181404_CourseandDetailRelation.cs" />
+    <Compile Remove="Migrations\20201225181404_CourseandDetailRelation.Designer.cs" />
+    <Compile Remove="Migrations\20201225182058_CourseandDetailRelation.cs" />
+    <Compile Remove="Migrations\20201225182058_CourseandDetailRelation.Designer.cs" />
+    <Compile Remove="Migrations\20201225182613_CourseandDetailRelation.cs" />
+    <Compile Remove="Migrations\20201225182613_CourseandDetailRelation.Designer.cs" />
+    <Compile Remove="Migrations\20201225182855_CourseandDetailRelation.cs" />
+    <Compile Remove="Migrations\20201225182855_CourseandDetailRelation.Designer.cs" />
+    <Compile Remove="ViewComponents\DetailOfCourseViewComponent.cs" />
   </ItemGroup>
 
   <ItemGroup>

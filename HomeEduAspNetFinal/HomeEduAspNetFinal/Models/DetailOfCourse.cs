@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +13,7 @@ namespace HomeEduAspNetFinal.Models
         public string AboutCourse { get; set; } 
         public string HowToApply { get; set; }
         public string Certification { get; set; }
+        
         public string Starts { get; set; }
         public string Duration { get; set; }
         public string ClassDuration { get; set; }
@@ -18,5 +21,8 @@ namespace HomeEduAspNetFinal.Models
         public int Students { get; set; }
         public string Assesments { get; set; }
         public int Price { get; set; }
+        [ForeignKey("Course")]
+        public int CourseId { get; set; }
+        public Course Course { get; set; }
     }
 }
