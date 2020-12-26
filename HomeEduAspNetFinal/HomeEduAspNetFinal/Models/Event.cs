@@ -16,5 +16,6 @@ namespace HomeEduAspNetFinal.Models
         public DetailOfEvent DetailOfEvent { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedTime { get; set; }
+        public ICollection<SpikersOfEvent> SpikersOfEvents { get; set; }
     }
 }

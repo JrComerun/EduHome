@@ -24,5 +24,8 @@ namespace HomeEduAspNetFinal.DAL
         public DbSet<DetailOfTeacher> DetailOfTeachers { get; set; }
         public DbSet<SocMedOfTeacher> SocMedOfTeachers { get; set; }
         public DbSet<SectionTitle> SectionTitle { get; set; }
+        public DbSet<SpikersOfEvent> SpikersOfEvents { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<DetailsOfBlog> DetailsOfBlogs { get; set; }
     }
 }

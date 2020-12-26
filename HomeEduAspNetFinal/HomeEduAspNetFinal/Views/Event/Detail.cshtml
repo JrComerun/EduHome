@@ -27,24 +27,23 @@
 
                         <div class="speakers-area fix">
                             <h4>speakers</h4>
-                            <div class="single-speaker">
-                                <div class="speaker-img">
-                                    <img src="~/assets/img/event/speaker1.jpg" alt="speaker">
-                                </div>
-                                <div class="speaker-name">
-                                    <h5>Anthony Smith</h5>
-                                    <p>CEO, Hastech </p>
-                                </div>
-                            </div>
-                            <div class="single-speaker">
-                                <div class="speaker-img">
-                                    <img src="~/assets/img/event/speaker2.jpg" alt="speaker">
-                                </div>
-                                <div class="speaker-name">
-                                    <h5>Lucy Rose</h5>
-                                    <p>Developer, STD </p>
-                                </div>
-                            </div>
+                            @if (Model.Event.Id == Model.EventId)
+                            {
+                                @foreach (SpikersOfEvent sp in Model.SpikersOfEvents)
+                                {
+                                    <div class="single-speaker">
+                                        <div class="speaker-img">
+                                            <img src="~/assets/img/event/@sp.Image" alt="speaker">
+                                        </div>
+                                        <div class="speaker-name">
+                                            <h5>@sp.FullName</h5>
+                                            <p>@sp.Profession </p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+
                         </div>
                     </div>
                     <div class="reply-area">
@@ -75,17 +74,7 @@
             </div>
             <div class="col-md-4">
                 <div class="blog-sidebar right">
-                    <div class="single-blog-widget mb-50">
-                        <h3>search</h3>
-                        <div class="blog-search">
-                            <form id="search" action="#">
-                                <input type="search" placeholder="Search..." name="search" />
-                                <button type="submit">
-                                    <span><i class="fa fa-search"></i></span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+                    
                     <div class="single-blog-widget mb-50">
                         <h3>categories</h3>
                         <ul>

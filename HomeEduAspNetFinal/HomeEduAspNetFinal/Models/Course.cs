@@ -14,5 +14,6 @@ namespace HomeEduAspNetFinal.Models
         public DetailOfCourse DetailOfCourse { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedTime { get; set; }
+        public ICollection<Blog> Blogs { get; set; }
     }
 }

@@ -22,12 +22,12 @@ namespace HomeEduAspNetFinal.ViewComponents
 
             if (take == null)
             {
-                List<Course> courses = _db.Courses.OrderByDescending(c => c.Id).ToList();
+                List<Course> courses = _db.Courses.ToList();
                 return View(await Task.FromResult(courses));
             }
             else
             {
-                List<Course> courses = _db.Courses.OrderByDescending(c => c.Id).Take((int)take).ToList();
+                List<Course> courses = _db.Courses.Take((int)take).ToList();
                 return View(await Task.FromResult(courses));
             }
             

@@ -25,7 +25,7 @@ namespace HomeEduAspNetFinal.Controllers
         {
             if (id == null) return NotFound();
 
-            DetailOfEvent detail = _db.DetailOfEvents.Include(d => d.Event).FirstOrDefault(c => c.EventId == id);
+            DetailOfEvent detail = _db.DetailOfEvents.Include(d=>d.SpikersOfEvents).Include(d => d.Event).FirstOrDefault(c => c.EventId == id);
             if (detail == null) return NotFound();
             return View(detail);
         }

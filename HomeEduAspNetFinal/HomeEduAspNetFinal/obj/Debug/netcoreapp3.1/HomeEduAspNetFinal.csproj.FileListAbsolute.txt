@@ -347,3 +347,5 @@ C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Teacher\Default.cshtml.g.cs
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\Detail.cshtml.g.cs
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\SectionTitle\Default.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Blog\Default.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Detail.cshtml.g.cs
