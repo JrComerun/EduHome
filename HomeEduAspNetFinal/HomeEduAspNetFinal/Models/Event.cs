@@ -9,8 +9,10 @@ namespace HomeEduAspNetFinal.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Date { get; set; }
-        public string Time { get; set; }
+        public int Day { get; set; }
+        public string Month { get; set; }
         public string Venue { get; set; }
+        public string Image { get; set; }
+        public DetailOfEvent DetailOfEvent { get; set; }
     }
 }

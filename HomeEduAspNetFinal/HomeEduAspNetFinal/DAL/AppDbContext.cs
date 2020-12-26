@@ -18,5 +18,7 @@ namespace HomeEduAspNetFinal.DAL
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<DetailOfCourse> DetailOfCourses { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<DetailOfEvent> DetailOfEvents { get; set; }
     }
 }

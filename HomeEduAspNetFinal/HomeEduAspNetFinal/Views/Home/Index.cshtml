@@ -17,7 +17,7 @@
                                     <h3>EDUCATION MAKES </h3>
                                     <h2>PROPER HUMANITY </h2>
                                     <p>I must explain to you how all this mistaken idea of denouncing pleasure and prsing pain was born and I will give you a complete account of the system  </p>
-                                    <a class="default-btn" href="about.html">Learn more</a>
+                                    <a class="default-btn" asp-controller="About" asp-action="Index">Learn more</a>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                     <h3>EDUCATION MAKES </h3>
                                     <h2>PROPER HUMANITY </h2>
                                     <p>I must explain to you how all this mistaken idea of denouncing pleasure and prsing pain was born and I will give you a complete account of the system  </p>
-                                    <a class="default-btn" href="about.html">Learn more</a>
+                                    <a class="default-btn" asp-controller="About" asp-action="Index">Learn more</a>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                                     <h3>EDUCATION MAKES </h3>
                                     <h2>PROPER HUMANITY </h2>
                                     <p>I must explain to you how all this mistaken idea of denouncing pleasure and prsing pain was born and I will give you a complete account of the system  </p>
-                                    <a class="default-btn" href="about.html">Learn more</a>
+                                    <a class="default-btn" asp-controller="About" asp-action="Index">Learn more</a>
                                 </div>
                             </div>
                         </div>
@@ -121,83 +121,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="single-event mb-35">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="~/assets/img/event/event5.jpg" alt="event">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                        <div class="event-date">
-                            <h3>20 <span>jun</span></h3>
-                        </div>
-                    </div>
-                    <div class="event-content text-left">
-                        <h4><a href="event-details.html">ADVANCE PHP WORKSHOP</a></h4>
-                        <ul>
-                            <li><span>time:</span> 9.00 AM - 4.45 PM</li>
-                            <li><span>venue</span> New Yourk City</li>
-                        </ul>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="single-event mb-35">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="~/assets/img/event/event6.jpg" alt="event">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                        <div class="event-date">
-                            <h3>18 <span>jun</span></h3>
-                        </div>
-                    </div>
-                    <div class="event-content text-left">
-                        <h4><a href="event-details.html">learning english history</a></h4>
-                        <ul>
-                            <li><span>time:</span> 9.00 AM - 4.45 PM</li>
-                            <li><span>venue</span> New Yourk City</li>
-                        </ul>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 hidden-sm col-xs-12">
-                <div class="single-event mb-35">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="~/assets/img/event/event7.jpg" alt="event">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                        <div class="event-date">
-                            <h3>16 <span>jun</span></h3>
-                        </div>
-                    </div>
-                    <div class="event-content text-left">
-                        <h4><a href="event-details.html">UI &amp; UX DESIGNER MEETUP</a></h4>
-                        <ul>
-                            <li><span>time:</span> 9.00 AM - 4.45 PM</li>
-                            <li><span>venue</span> New Yourk City</li>
-                        </ul>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @await Component.InvokeAsync("Event",new { take=3,col=4})
     </div>
 </div>
 <!-- Event Area End -->
