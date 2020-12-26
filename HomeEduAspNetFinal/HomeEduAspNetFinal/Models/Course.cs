@@ -12,5 +12,7 @@ namespace HomeEduAspNetFinal.Models
         public string Description { get; set; }
         public string Image { get; set; }
         public DetailOfCourse DetailOfCourse { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
     }
 }

@@ -3,21 +3,7 @@
     ViewData["Title"] = "Index";
 }
 <!-- Banner Area Start -->
-<div class="banner-area-wrapper">
-    <div class="banner-area text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="banner-content-wrapper">
-                        <div class="banner-content">
-                            <h2>contact</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@await Component.InvokeAsync("SectionTitle", new { title = "Contact" })
 <!-- Banner Area End -->
 <!-- Contact Start -->
 

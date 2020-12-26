@@ -19,7 +19,7 @@ namespace HomeEduAspNetFinal.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync(int? take)
         {
-           
+
             if (take == null)
             {
                 List<Course> courses = _db.Courses.OrderByDescending(c => c.Id).ToList();

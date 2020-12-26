@@ -3,21 +3,7 @@
     ViewData["Title"] = "Login";
 }
 <!-- Banner Area Start -->
-<div class="banner-area-wrapper">
-    <div class="banner-area text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="banner-content-wrapper">
-                        <div class="banner-content">
-                            <h2>login</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@await Component.InvokeAsync("SectionTitle", new { title = "Login", source = ".." })
 <!-- Banner Area End -->
 <!-- Login start -->
 <div class="login-area pt-150 pb-150">
@@ -29,7 +15,7 @@
                         <div class="login-text">
                             <h2>login</h2>
                             <h5>Please login using account detail bellow.</h5>
-                            <div asp-validation-summary="ModelOnly"  style="color: #EC1C23 !important" class=" jrc-val"></div>
+                            <div asp-validation-summary="ModelOnly" style="color: #EC1C23 !important" class=" jrc-val"></div>
                         </div>
                         <div class="login-form">
                             <form method="post">

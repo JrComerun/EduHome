@@ -4,14 +4,16 @@ using HomeEduAspNetFinal.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomeEduAspNetFinal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201226075956_AddTeacherAndDetails")]
+    partial class AddTeacherAndDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -325,21 +327,6 @@ namespace HomeEduAspNetFinal.Migrations
                     b.ToTable("ProfessionOfTeacher");
                 });
 
-            modelBuilder.Entity("HomeEduAspNetFinal.Models.SectionTitle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SectionTitle");
-                });
-
             modelBuilder.Entity("HomeEduAspNetFinal.Models.SocMedOfTeacher", b =>
                 {
                     b.Property<int>("Id")
@@ -374,9 +361,6 @@ namespace HomeEduAspNetFinal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")

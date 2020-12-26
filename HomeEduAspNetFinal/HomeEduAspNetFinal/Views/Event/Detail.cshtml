@@ -3,21 +3,7 @@
     ViewData["Title"] = "Detail Of Event";
 }
 <!-- Banner Area Start -->
-<div class="banner-area-wrapper">
-    <div class="banner-area text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="banner-content-wrapper">
-                        <div class="banner-content">
-                            <h2>event / details</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@await Component.InvokeAsync("SectionTitle", new { title = "Events Details", source = "../.." })
 <!-- Banner Area End -->
 <!-- Event Details Start -->
 <div class="event-details-area blog-area pt-150 pb-140">
@@ -38,7 +24,7 @@
                             <li><span>venue : </span>@Model.Event.Venue</li>
                         </ul>
                         <p>@Html.Raw(Model.Decscription) </p>
-                        
+
                         <div class="speakers-area fix">
                             <h4>speakers</h4>
                             <div class="single-speaker">

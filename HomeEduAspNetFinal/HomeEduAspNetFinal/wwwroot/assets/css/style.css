@@ -221,7 +221,7 @@ textarea {
 }
 
 .banner-area {
-    background: rgba(0, 0, 0, 0) url("../img/banner/banner.jpg") no-repeat scroll center center / cover;
+    background:  no-repeat scroll center center / cover;
     position: relative;
     width: 100%;
     z-index: 1;

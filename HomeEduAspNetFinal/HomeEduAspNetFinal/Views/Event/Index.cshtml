@@ -3,28 +3,14 @@
     ViewData["Title"] = "Event";
 }
 <!-- Banner Area Start -->
-<div class="banner-area-wrapper">
-    <div class="banner-area text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="banner-content-wrapper">
-                        <div class="banner-content">
-                            <h2>event </h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@await Component.InvokeAsync("SectionTitle", new { title = "Events" })
 <!-- Banner Area End -->
 <!-- Blog Start -->
 <div class="blog-area event-area three text-center pt-150 pb-90">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-               @await Component.InvokeAsync("Event", new { take = 0, col = 6 })
+                @await Component.InvokeAsync("Event", new { take = 0, col = 6 })
             </div>
             <div class="col-md-4">
                 <div class="blog-sidebar right text-left">
