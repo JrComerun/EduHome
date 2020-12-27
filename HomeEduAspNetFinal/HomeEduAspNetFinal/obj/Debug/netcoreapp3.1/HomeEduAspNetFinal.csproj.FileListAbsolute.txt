@@ -353,3 +353,4 @@ C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CourseSPartial.cshtml.g.cs
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TeacherSPartial.cshtml.g.cs
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SearchPartial.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BolgSPartial.cshtml.g.cs

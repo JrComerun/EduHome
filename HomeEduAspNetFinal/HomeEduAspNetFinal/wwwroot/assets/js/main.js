@@ -130,7 +130,7 @@
 })(jQuery);
 $(document).ready(function () {
     let searchInput;
-    $(document).on('keyup', '#search-input', function () {
+    $(document).on('keyup', '#search-input-event', function () {
 
         searchInput = $(this).val().trim();
         $("#events-list #event-list").remove();
@@ -148,7 +148,7 @@ $(document).ready(function () {
             });
         }
     })
-    $(document).on('keyup', '#search-input', function () {
+    $(document).on('keyup', '#search-input-course', function () {
 
         searchInput = $(this).val().trim();
         $("#courses-list #course-list").remove();
@@ -166,7 +166,28 @@ $(document).ready(function () {
             });
         }
     })
-    $(document).on('keyup', '#search-input', function () {
+    $(document).on('keyup', '#search-input-blog', function () {
+
+        searchInput = $(this).val().trim();
+        $("#blogs-list #blog-list").remove();
+        $('#old-blogs-list').removeClass('d-none');
+        $('.pagination').removeClass('d-none');
+        if (searchInput.length > 0) {
+            $('.pagination').addClass('d-none');
+            $('#old-blogs-list').addClass('d-none');
+            $.ajax({
+                url: "/Blog/Search/",
+                data: { "search": searchInput },
+                type: "Get",
+                success: function (res) {
+                    console.log(res)
+                    $("#blogs-list").append(res);
+                }
+
+            });
+        }
+    })
+    $(document).on('keyup', '#search-input-teacher', function () {
 
         searchInput = $(this).val().trim();
         $("#teachers-list #teacher-list").remove();
@@ -178,12 +199,27 @@ $(document).ready(function () {
                 data: { "search": searchInput },
                 type: "Get",
                 success: function (res) {
-                    console.log(res)
+                    
                     $("#teachers-list").append(res);
                 }
 
             });
         }
     })
+    //let panigation;
+    //$(document).on('click', '.pagination-jrc', function () {
+    //    panigation = $(this).text();
+    //    &
+       
+    //        $.ajax({
+    //            url: "/Blog/Pagination/",
+    //            data: { "page": panigation },
+    //            type: "Get",
+    //            success: function (res) {
+    //                $("#old-blogs-list").empty()
+    //                $("#old-blogs-list").append(res)
+    //            }
+    //        });   
+    //})
 
 })
