@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Shared\Components\Default.cshtml" />
+    <Content Remove="Views\Shared\_EventSearchPartial.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

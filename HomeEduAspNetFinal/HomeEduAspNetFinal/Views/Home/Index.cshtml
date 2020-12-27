@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-        @await Component.InvokeAsync("Course", 3)
+        @await Component.InvokeAsync("Course", new { take=3})
     </div>
 </div>
 <!-- Courses Area End -->
@@ -121,7 +121,7 @@
                 </div>
             </div>
         </div>
-        @await Component.InvokeAsync("Event",new { take=3,col=4})
+        @await Component.InvokeAsync("Event",new { take=3})
     </div>
 </div>
 <!-- Event Area End -->

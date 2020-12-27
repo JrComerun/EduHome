@@ -10,18 +10,20 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="course-title">
+                <div class="course-title"style="text-align:left !important">
                     <h3>search courses</h3>
                 </div>
                 <div class="course-form">
                     <form id="search" action="#">
-                        <input type="search" placeholder="Search..." name="search" />
-                        <button type="submit">search</button>
+                        <input type="text" id="search-input" placeholder="Search..." name="search" />  
                     </form>
                 </div>
             </div>
         </div>
-        @await Component.InvokeAsync("Event", new { take = 0, col = 4 })
+        <div class="row" id="events-list">
+
+        </div>
+        @await Component.InvokeAsync("Event", new { take=0 })
            
     </div>
 </div>

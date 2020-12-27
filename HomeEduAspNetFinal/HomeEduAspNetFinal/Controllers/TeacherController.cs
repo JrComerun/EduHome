@@ -29,5 +29,11 @@ namespace HomeEduAspNetFinal.Controllers
             if (detail == null) return NotFound();
             return View(detail);
         }
+        public IActionResult Search(string search)
+        {
+            List<Teacher> model = _db.Teachers.Include(t=>t.ProfessionOfTeacher).Include(t=>t.SocMedOfTeachers)
+                .Where(p => p.FullName.Contains(search)).Take(8).OrderByDescending(p => p.Id).ToList();
+            return PartialView("_TeacherSPartial", model);
+        }
     }
 }

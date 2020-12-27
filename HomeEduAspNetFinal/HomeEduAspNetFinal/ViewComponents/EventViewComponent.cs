@@ -19,10 +19,10 @@ namespace HomeEduAspNetFinal.ViewComponents
             _db = db;
 
         }
-        public async Task<IViewComponentResult> InvokeAsync(int? take,int col)
+        public async Task<IViewComponentResult> InvokeAsync(int? take)
         {
-            ViewBag.Col = col;
-            if (take == null||take==0)
+            
+            if (take==0)
             {
                 List<Event> events = _db.Events.ToList();
                 return View(await Task.FromResult(events));

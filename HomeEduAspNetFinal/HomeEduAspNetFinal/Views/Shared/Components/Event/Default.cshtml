@@ -1,8 +1,8 @@
 ﻿@model List<Event>
-<div class="row">
+<div class="row" id="old-events-list">
     @foreach (Event ev in Model)
     {
-        <div class="col-md-@ViewBag.Col col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="single-event mb-60">
                 <div class="event-img">
                     <a asp-controller="Event" asp-action="Detail" asp-route-id="@ev.Id">

@@ -16,9 +16,15 @@ namespace HomeEduAspNetFinal.Controllers
         {
             _db = db;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page=1)
         {
-            return View();
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.Blogs.Count() / 6);
+            ViewBag.Page = page;
+            if (page == 0)
+            {
+                return View(_db.Blogs.Take(6).ToList());
+            }
+            return View(_db.Blogs.Skip(((int)page-1)*6).Take(6).ToList());
         }
         public IActionResult Detail(int? id)
         {

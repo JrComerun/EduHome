@@ -21,7 +21,7 @@ namespace HomeEduAspNetFinal.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(int? take, int col)
         {
             ViewBag.Col = col;
-            if (take == null||take==0)
+            if (take==0)
             {
                 List<Blog> blogs = _db.Blogs.OrderByDescending(c => c.Id).ToList();
                 return View(await Task.FromResult(blogs));

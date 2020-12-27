@@ -15,11 +15,13 @@
                 </div>
                 <div class="course-form">
                     <form id="search" action="#">
-                        <input type="search" placeholder="Search..." name="search" />
-                        <button type="submit">search</button>
+                        <input id="search-input" type="text" placeholder="Search..." name="search" />
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="row" id="courses-list">
+
         </div>
         @await Component.InvokeAsync("Course", null)
     </div>

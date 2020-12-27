@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Blog>
 @{
     ViewData["Title"] = "Blog";
 }
@@ -23,7 +23,55 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-                @await Component.InvokeAsync("Blog", new { take = 6, col = 6 })
+                <div class="row">
+                    @foreach (Blog b in Model)
+                    {
+                        <div class="col-md-@ViewBag.Col col-sm-6 col-xs-12">
+                            <div class="single-blog mb-60">
+                                <div class="blog-img">
+                                    <a asp-controller="Blog" asp-action="Detail" asp-route-id="@b.Id"><img src="~/assets/img/blog/@b.Image" alt="blog"></a>
+                                    <div class="blog-hover">
+                                        <i class="fa fa-link"></i>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-top">
+                                        <p>By @b.Author  /  @b.DateTime.Day, @b.DateTime.ToString("MMMM") @b.DateTime.Year /  </p>
+                                    </div>
+                                    <div class="blog-bottom">
+                                        <h2><a asp-controller="Blog" asp-action="Detail" asp-route-id="@b.Id">@b.Title </a></h2>
+                                        <a asp-controller="Blog" asp-action="Detail" asp-route-id="@b.Id">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="pagination">
+                            <ul>
+                                @for (int i = 1; i <= ViewBag.PageCount; i++)
+                                {
+                                    if (i == ViewBag.Page)
+                                    {
+                                        <li class="disabled"><a>@i</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li ><a asp-controller="Blog" asp-action="Index" asp-route-page="@i">@i</a></li>
+                                    }
+
+                                }
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="blog-sidebar right">
