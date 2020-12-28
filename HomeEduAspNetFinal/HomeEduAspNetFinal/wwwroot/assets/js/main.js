@@ -128,98 +128,80 @@
     });
 
 })(jQuery);
+//*************************
+//   JrC Javascript
+//*************************
+//  Search Start
+//*************************
 $(document).ready(function () {
     let searchInput;
-    $(document).on('keyup', '#search-input-event', function () {
+    function search( path , product) {
+        $(document).on('keyup', `#search-input-${product}`, function () {
 
-        searchInput = $(this).val().trim();
-        $("#events-list #event-list").remove();
-        $('#old-events-list').removeClass('d-none');
-        if (searchInput.length > 0) {
-            $('#old-events-list').addClass('d-none');
+            searchInput = $(this).val().trim();
+
+            $(`#${product}s-list #${product}-list`).remove();
+            $(`#old-${product}s-list`).removeClass(`d-none`);
+            $('.pagination').removeClass('d-none');
+            if (searchInput.length > 0) {
+                $(`#old-${product}s-list`).addClass('d-none');
+                $('.pagination').addClass('d-none');
+                $.ajax({
+                    url: `${path}`,
+                    data: { "search": searchInput },
+                    type: "Get",
+                    success: function (res) {
+                        $(`#${product}s-list`).append(res);
+
+                    }
+
+                });
+            }
+        })
+    }
+    search("/Course/Search/", "course");
+    search("/Event/Search/", "event");
+    search("/Teacher/Search/", "teacher");
+    search("/Blog/Search/", "blog");
+    //*******************
+    //Comments Start
+    //******************
+    let username;
+    let email;
+    let subject;
+    let message;
+    let product;
+    function comment(path, str) {
+        product = str;
+        $(document).on('click', `.reply-btn-${product}`, function (e) {
+            e.preventDefault();
+            username = $(`.name-${product}`).val();
+            email = $(`.email-${product}`).val();
+            subject = $(`.subject-${product}`).val();
+            message = $(`.message-${product}`).val();
+            console.log(username)
             $.ajax({
-                url: "/Event/Search/",
-                data: { "search": searchInput },
-                type: "Get",
-                success: function (res) {
-                    $("#events-list").append(res);
-                }
-
-            });
-        }
-    })
-    $(document).on('keyup', '#search-input-course', function () {
-
-        searchInput = $(this).val().trim();
-        $("#courses-list #course-list").remove();
-        $('#old-courses-list').removeClass('d-none');
-        if (searchInput.length > 0) {
-            $('#old-courses-list').addClass('d-none');
-            $.ajax({
-                url: "/Course/Search/",
-                data: { "search": searchInput },
-                type: "Get",
-                success: function (res) {
-                    $("#courses-list").append(res);
-                }
-
-            });
-        }
-    })
-    $(document).on('keyup', '#search-input-blog', function () {
-
-        searchInput = $(this).val().trim();
-        $("#blogs-list #blog-list").remove();
-        $('#old-blogs-list').removeClass('d-none');
-        $('.pagination').removeClass('d-none');
-        if (searchInput.length > 0) {
-            $('.pagination').addClass('d-none');
-            $('#old-blogs-list').addClass('d-none');
-            $.ajax({
-                url: "/Blog/Search/",
-                data: { "search": searchInput },
-                type: "Get",
+                url: `${path}`,
+                data: {
+                    "username": username,
+                    "email": email,
+                    "subject": subject,
+                    "message": message
+                },
+                type: "Post",
                 success: function (res) {
                     console.log(res)
-                    $("#blogs-list").append(res);
+                    //$(`#comment-list-${str}`).append(res)
                 }
-
             });
-        }
-    })
-    $(document).on('keyup', '#search-input-teacher', function () {
-
-        searchInput = $(this).val().trim();
-        $("#teachers-list #teacher-list").remove();
-        $('#old-teachers-list').removeClass('d-none');
-        if (searchInput.length > 0) {
-            $('#old-teachers-list').addClass('d-none');
-            $.ajax({
-                url: "/Teacher/Search/",
-                data: { "search": searchInput },
-                type: "Get",
-                success: function (res) {
-                    
-                    $("#teachers-list").append(res);
-                }
-
-            });
-        }
-    })
-    //let panigation;
-    //$(document).on('click', '.pagination-jrc', function () {
-    //    panigation = $(this).text();
-    //    &
-       
-    //        $.ajax({
-    //            url: "/Blog/Pagination/",
-    //            data: { "page": panigation },
-    //            type: "Get",
-    //            success: function (res) {
-    //                $("#old-blogs-list").empty()
-    //                $("#old-blogs-list").append(res)
-    //            }
-    //        });   
-    //})
+        })
+    }
+    comment("/Course/CourseComment/", "course");
+    comment("/Event/EventComment/", "event");
+    comment("/Blog/BlogComment/", "blog");
+      //*******************
+    //Comments End
+    //******************
+   
 
 })

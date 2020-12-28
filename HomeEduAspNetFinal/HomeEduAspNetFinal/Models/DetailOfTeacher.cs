@@ -26,6 +26,8 @@ namespace HomeEduAspNetFinal.Models
         public int DesignValue { get; set; }
         public int InnovtionValue { get; set; }
         public int ComunicationValue { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
 
     }
 }

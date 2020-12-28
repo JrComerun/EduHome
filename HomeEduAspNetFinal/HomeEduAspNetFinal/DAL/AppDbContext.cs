@@ -27,5 +27,6 @@ namespace HomeEduAspNetFinal.DAL
         public DbSet<SpikersOfEvent> SpikersOfEvents { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<DetailsOfBlog> DetailsOfBlogs { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

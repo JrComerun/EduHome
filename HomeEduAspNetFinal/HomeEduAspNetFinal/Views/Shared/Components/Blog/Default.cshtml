@@ -15,7 +15,7 @@
                         <p>By @b.Author  /  @b.DateTime.Day, @b.DateTime.ToString("MMMM") @b.DateTime.Year /  </p>
                     </div>
                     <div class="blog-bottom">
-                        <h2><a asp-controller="Blog" asp-action="Detail" asp-route-id="@b.Id">@b.Title </a></h2>
+                        <h2><a asp-controller="Blog" asp-action="Detail" asp-route-id="@b.Id">@((b.Title.Length < 23)? b.Title : b.Title.Substring(0,23) + "...")  </a></h2>
                         <a asp-controller="Blog" asp-action="Detail" asp-route-id="@b.Id">read more</a>
                     </div>
                 </div>

@@ -10,5 +10,7 @@ namespace HomeEduAspNetFinal.Models
         public int Id { get; set; }
         public string Profession { get; set; }
         public ICollection<Teacher> Teachers { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
     }
 }

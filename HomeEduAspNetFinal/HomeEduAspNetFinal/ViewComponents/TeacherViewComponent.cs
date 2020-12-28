@@ -22,7 +22,7 @@ namespace HomeEduAspNetFinal.ViewComponents
 
             if (take == null)
             {
-                List<Teacher> teachers = _db.Teachers.Include(c=>c.SocMedOfTeachers).Include(c=>c.ProfessionOfTeacher).ToList();
+                List<Teacher> teachers = _db.Teachers.Where(d => d.IsDeleted == false).Include(c=>c.SocMedOfTeachers).Include(c=>c.ProfessionOfTeacher).ToList();
                 return View(await Task.FromResult(teachers));
             }
             else

@@ -12,5 +12,7 @@ namespace HomeEduAspNetFinal.Models
         public string Link { get; set; }
         public int TeacherId { get; set; }
         public Teacher Teacher { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
     }
 }

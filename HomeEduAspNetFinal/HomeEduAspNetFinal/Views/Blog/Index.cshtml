@@ -28,28 +28,7 @@
                 <div id="old-blogs-list">
                     @model List<Blog>
                     <div class="row">
-                        @foreach (Blog b in Model)
-                        {
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class="single-blog mb-60">
-                                    <div class="blog-img">
-                                        <a asp-controller="Blog" asp-action="Detail" asp-route-id="@b.Id"><img src="~/assets/img/blog/@b.Image" alt="blog"></a>
-                                        <div class="blog-hover">
-                                            <i class="fa fa-link"></i>
-                                        </div>
-                                    </div>
-                                    <div class="blog-content">
-                                        <div class="blog-top">
-                                            <p>By @b.Author  /   @b.DateTime.ToString("d MMMM yyyy")  /  </p>
-                                        </div>
-                                        <div class="blog-bottom">
-                                            <h2><a asp-controller="Blog" asp-action="Detail" asp-route-id="@b.Id"> @((b.Title.Length < 23)? b.Title : b.Title.Substring(0,23) + "...")</a></h2>
-                                            <a asp-controller="Blog" asp-action="Detail" asp-route-id="@b.Id">read more</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
+                        @await Component.InvokeAsync("Blog",new { take =6, col=6,skip=ViewBag.Page})
                     </div>
                 </div>
                 <div class="row">
@@ -65,7 +44,7 @@
                                     }
                                     else
                                     {
-                                        <li><a style="color:#2c2b5e" asp-controller="Blog" asp-action="Index" asp-route-page="@i">@i</a></li>
+                                        <li><a  style="color:#2c2b5e" asp-controller="Blog" asp-action="Index" asp-route-page="@i">@i</a></li>
                                     }
                                 }
 

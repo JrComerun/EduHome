@@ -130,15 +130,24 @@ namespace HomeEduAspNetFinal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CourseId")
+                    b.Property<int?>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -149,7 +158,58 @@ namespace HomeEduAspNetFinal.Migrations
 
                     b.HasIndex("CourseId");
 
+                    b.HasIndex("EventId");
+
                     b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("HomeEduAspNetFinal.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("HomeEduAspNetFinal.Models.Course", b =>
@@ -201,11 +261,17 @@ namespace HomeEduAspNetFinal.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Duration")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HowToApply")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Language")
                         .HasColumnType("nvarchar(max)");
@@ -239,8 +305,14 @@ namespace HomeEduAspNetFinal.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("EventId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -266,6 +338,9 @@ namespace HomeEduAspNetFinal.Migrations
                     b.Property<string>("Degree")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DesignValue")
                         .HasColumnType("int");
 
@@ -283,6 +358,9 @@ namespace HomeEduAspNetFinal.Migrations
 
                     b.Property<int>("InnovtionValue")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("LanguageValue")
                         .HasColumnType("int");
@@ -371,6 +449,12 @@ namespace HomeEduAspNetFinal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Profession")
                         .HasColumnType("nvarchar(max)");
 
@@ -401,8 +485,14 @@ namespace HomeEduAspNetFinal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
@@ -424,6 +514,9 @@ namespace HomeEduAspNetFinal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DetailOfEventId")
                         .HasColumnType("int");
 
@@ -435,6 +528,9 @@ namespace HomeEduAspNetFinal.Migrations
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Profession")
                         .HasColumnType("nvarchar(max)");
@@ -643,9 +739,26 @@ namespace HomeEduAspNetFinal.Migrations
                 {
                     b.HasOne("HomeEduAspNetFinal.Models.Course", "Course")
                         .WithMany("Blogs")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("HomeEduAspNetFinal.Models.Event", "Event")
+                        .WithMany("Blogs")
+                        .HasForeignKey("EventId");
+                });
+
+            modelBuilder.Entity("HomeEduAspNetFinal.Models.Comment", b =>
+                {
+                    b.HasOne("HomeEduAspNetFinal.Models.Blog", "Blog")
+                        .WithMany()
+                        .HasForeignKey("BlogId");
+
+                    b.HasOne("HomeEduAspNetFinal.Models.Course", "Course")
+                        .WithMany("Comments")
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("HomeEduAspNetFinal.Models.Event", "Event")
+                        .WithMany("Comments")
+                        .HasForeignKey("EventId");
                 });
 
             modelBuilder.Entity("HomeEduAspNetFinal.Models.DetailOfCourse", b =>

@@ -24,5 +24,7 @@ namespace HomeEduAspNetFinal.Models
         [ForeignKey("Course")]
         public int CourseId { get; set; }
         public Course Course { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
     }
 }

@@ -18,8 +18,13 @@ namespace HomeEduAspNetFinal.Models
         [Required]
         public string Image { get; set; }
         public DetailsOfBlog DetailsOfBlog { get; set; }
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
         public Course Course { get; set; }
-       
+        public int? EventId { get; set; }
+        public Event Event { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
+
+
     }
 }
