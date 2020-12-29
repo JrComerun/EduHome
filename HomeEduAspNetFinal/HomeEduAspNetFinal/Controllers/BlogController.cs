@@ -18,11 +18,21 @@ namespace HomeEduAspNetFinal.Controllers
         {
             _db = db;
         }
-        public IActionResult Index(int? page = 1)
+        public IActionResult Index( int? blogCourseId, int? blogEventId, int? page = 1)
         {
-
             ViewBag.PageCount = Decimal.Ceiling((decimal)_db.Blogs.Count() / 6);
             ViewBag.Page = page;
+            if (blogCourseId != null)
+            {
+                List<Blog> blogs = _db.Blogs.Where(c => c.IsDeleted == false && c.CourseId == blogCourseId).ToList();
+                return View(blogs);
+            }
+            if ( blogEventId != null)
+            {
+                List<Blog> blogs = _db.Blogs.Where(c => c.IsDeleted == false && c.EventId== blogEventId).ToList();
+                return View(blogs);
+            }
+
             return View();
         }
 
@@ -41,8 +51,8 @@ namespace HomeEduAspNetFinal.Controllers
         
         public async Task<IActionResult> BlogComment(string username, string email, string subject, string message)
         {
-            int? id = (int)TempData["Id"];
-            if (id == null) return NotFound();
+            int id = (int)TempData["Id"];
+            if ( username == null || email == null || subject == null || message == null) return NotFound();
             Comment comment = new Comment
             {
 

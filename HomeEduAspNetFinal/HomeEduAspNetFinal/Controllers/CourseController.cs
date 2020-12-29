@@ -17,9 +17,10 @@ namespace HomeEduAspNetFinal.Controllers
         {
             _db = db;
         }
-        public IActionResult Index()
+        public IActionResult Index(int blogCourseId)
         {
-            return View();
+            List<Course> courses = _db.Courses.Where(c => c.IsDeleted == false && c.Id == blogCourseId).ToList();
+            return View(courses);
         }
         public   IActionResult Detail(int? id)
         {
@@ -35,8 +36,8 @@ namespace HomeEduAspNetFinal.Controllers
         }
         public async Task<IActionResult> CourseComment(string username, string email, string subject, string message)
         {
-            int? id = (int)TempData["Id"];
-            if (id == null) return NotFound();
+            int id = (int)TempData["Id"];
+            if (username==null||email==null||subject==null||message==null) return NotFound();
             Comment comment = new Comment
             {
                 UserName = username,

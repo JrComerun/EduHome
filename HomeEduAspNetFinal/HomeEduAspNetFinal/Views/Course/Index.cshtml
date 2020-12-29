@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Course>
 @{
     ViewData["Title"] = "Course";
 }
@@ -24,6 +24,7 @@
 
         </div>
         @await Component.InvokeAsync("Course", null)
+
     </div>
 </div>
 <!-- Course End -->

@@ -37,8 +37,8 @@ namespace HomeEduAspNetFinal.Controllers
         }
         public async Task<IActionResult> EventComment(string username, string email, string subject, string message)
         {
-            int? id = (int)TempData["Id"];
-            if (id == null) return NotFound();
+            int id = (int)TempData["Id"];
+            if ( username == null || email == null || subject == null || message == null) return NotFound();
             Comment comment = new Comment
             {
 

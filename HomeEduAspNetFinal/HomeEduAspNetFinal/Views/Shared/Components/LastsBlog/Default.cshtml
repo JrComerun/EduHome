@@ -1,0 +1,61 @@
+﻿@model List<Blog>
+
+    <div class="blog-sidebar right">
+       
+        <div class="single-blog-widget mb-50">
+            @if (ViewBag.Path == "course")
+            {
+                <h3>Blogs for Course</h3>
+                <ul>
+                    @foreach (Blog c in Model.Take(7))
+                    {
+
+                        <li><a asp-controller="Blog" asp-action="Index" asp-route-blogCourseId="@c.CourseId">@c.Course.Name (@Model.Where(bc => bc.Course.Id == c.CourseId).Count())</a></li>
+                    }
+                </ul>
+            }
+            @if (ViewBag.Path == "event")
+            {
+                <h3>Blogs for Event</h3>
+                <ul>
+                    @foreach (Blog c in Model.Take(7))
+                    {
+
+                        <li><a asp-controller="Blog" asp-action="Index" asp-route-blogCourseId="@c.EventId">@c.Event.Name (@Model.Where(bc => bc.Event.Id == c.EventId).Count())</a></li>
+                    }
+                </ul>
+            }
+            @if (ViewBag.Path == "blog")
+            {
+                <h3>Blogs for Course</h3>
+                <ul>
+                    @foreach (Blog c in Model.Take(4))
+                    {
+
+                        <li><a asp-controller="Blog" asp-action="Index" asp-route-blogCourseId="@c.CourseId">@c.Course.Name (@Model.Where(bc => bc.Course.Id == c.CourseId).Count())</a></li>
+                    }
+                </ul>
+                <h3 class="mt-3">Blogs for Event</h3>
+                <ul>
+                    @foreach (Blog c in Model.Take(3))
+                    {
+
+                        <li><a asp-controller="Blog" asp-action="Index" asp-route-blogCourseId="@c.EventId">@c.Event.Name (@Model.Where(bc => bc.Event.Id == c.EventId).Count())</a></li>
+                    }
+                </ul>
+            }
+        </div>
+        <div class="single-blog-widget mb-50">
+            <div class="single-blog-banner">
+                <a href="blog-details.html" id="blog"><img src="~/assets/img/blog/blog-img.jpg" alt="blog"></a>
+                <h2>best<br> eductaion<br> theme</h2>
+            </div>
+        </div>
+        <div class="single-blog-widget mb-50 " style="display:flex!important; flex-direction:column!important;" >
+            <h3>latest post</h3>
+            
+           @await Component.InvokeAsync("Blog",new { take=0 , primary="primary" })
+            
+        </div>
+    </div>
+

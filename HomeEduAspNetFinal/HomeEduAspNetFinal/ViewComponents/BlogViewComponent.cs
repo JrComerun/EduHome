@@ -18,9 +18,10 @@ namespace HomeEduAspNetFinal.ViewComponents
             _db = db;
 
         }
-        public async Task<IViewComponentResult> InvokeAsync( int? take, int col,int? skip)
+        public async Task<IViewComponentResult> InvokeAsync( int? take, int col,int? skip,string primary)
         {
             ViewBag.Col = col;
+            ViewBag.Primary = primary;
             if (take==0)
             {
                 List<Blog> blogs = _db.Blogs.Where(d => d.IsDeleted == false).OrderByDescending(c => c.Id).ToList();

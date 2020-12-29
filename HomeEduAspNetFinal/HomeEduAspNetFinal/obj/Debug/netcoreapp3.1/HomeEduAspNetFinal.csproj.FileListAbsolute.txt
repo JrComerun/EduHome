@@ -368,3 +368,4 @@ C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\bin\
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CommentsPartial.cshtml.g.cs
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Comment\Default.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\LastsBlog\Default.cshtml.g.cs

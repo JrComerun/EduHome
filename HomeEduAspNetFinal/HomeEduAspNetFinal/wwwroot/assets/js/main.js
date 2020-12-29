@@ -196,9 +196,17 @@ $(document).ready(function () {
             });
         })
     }
-    comment("/Course/CourseComment/", "course");
-    comment("/Event/EventComment/", "event");
-    comment("/Blog/BlogComment/", "blog");
+    if ($("#reply-button").hasClass("reply-btn-course")) {
+        comment("/Course/CourseComment/", "course");
+    }
+    if ($("#reply-button").hasClass("reply-btn-event")) {
+        comment("/Event/EventComment/", "event");
+    }
+    if ($("#reply-button").hasClass("reply-btn-blog")) {
+        comment("/Blog/BlogComment/", "blog");
+    }
+    
+    
       //*******************
     //Comments End
     //******************
