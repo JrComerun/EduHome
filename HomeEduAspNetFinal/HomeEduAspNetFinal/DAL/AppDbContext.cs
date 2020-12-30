@@ -28,5 +28,8 @@ namespace HomeEduAspNetFinal.DAL
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<DetailsOfBlog> DetailsOfBlogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<HomeSlider> HomeSliders { get; set; }
+        public DbSet<NoticeBoard> NoticeBoards { get; set; }
+        public DbSet<VideoTour> VideoTours { get; set; }
     }
 }

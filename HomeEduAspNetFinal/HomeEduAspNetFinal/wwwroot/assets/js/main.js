@@ -163,6 +163,29 @@ $(document).ready(function () {
     search("/Event/Search/", "event");
     search("/Teacher/Search/", "teacher");
     search("/Blog/Search/", "blog");
+    //*********************
+    //  Global Search
+    //*********************
+    let GsearchInput;
+    $(document).on('keyup', `#global-input`, function () {
+
+        GsearchInput = $(this).val().trim();
+
+        $(`#globals-list #global-list`).remove();
+        if (GsearchInput.length > 0) {
+            $.ajax({
+                url: `/Home/GlobalSearch/`,
+                data: { "search": GsearchInput },
+                type: "Get",
+                success: function (res) {
+                    
+                    $(`#globals-list`).append(res)
+                   
+                }
+
+            });
+        }
+    })
     //*******************
     //Comments Start
     //******************
@@ -175,25 +198,59 @@ $(document).ready(function () {
         product = str;
         $(document).on('click', `.reply-btn-${product}`, function (e) {
             e.preventDefault();
-            username = $(`.name-${product}`).val();
-            email = $(`.email-${product}`).val();
-            subject = $(`.subject-${product}`).val();
-            message = $(`.message-${product}`).val();
-            console.log(username)
-            $.ajax({
-                url: `${path}`,
-                data: {
-                    "username": username,
-                    "email": email,
-                    "subject": subject,
-                    "message": message
-                },
-                type: "Post",
-                success: function (res) {
-                    console.log(res)
-                    //$(`#comment-list-${str}`).append(res)
-                }
-            });
+            if (userAuthorized) {
+                subject = $(`.subject-${product}`).val();
+                message = $(`.message-${product}`).val();
+
+
+                $.ajax({
+                    url: `${path}`,
+                    data: {
+                        "username": "",
+                        "email": "",
+                        "subject": subject,
+                        "message": message
+                    },
+                    type: "Post",
+                    success: function (res) {
+                        $(`#comment-list-${str}`).append(res)
+                        //$(`.name-${product}`).val("");
+                        //$(`.email-${product}`).val("");
+                        $(`.subject-${product}`).val("");
+                        $(`.message-${product}`).val("");
+                    }
+                });
+            }
+            else {
+                username = $(`.name-${product}`).val();
+                email = $(`.email-${product}`).val();
+                subject = $(`.subject-${product}`).val();
+                message = $(`.message-${product}`).val();
+
+
+                $.ajax({
+                    url: `${path}`,
+                    data: {
+                        "username": username,
+                        "email": email,
+                        "subject": subject,
+                        "message": message
+                    },
+                    type: "Post",
+                    success: function (res) {
+                        $(`#comment-list-${str}`).append(res)
+                        $(`.name-${product}`).val("");
+                        $(`.email-${product}`).val("");
+                        $(`.subject-${product}`).val("");
+                        $(`.message-${product}`).val("");
+                    }
+                });
+            }
+           
+            
+            
+               
+            
         })
     }
     if ($("#reply-button").hasClass("reply-btn-course")) {

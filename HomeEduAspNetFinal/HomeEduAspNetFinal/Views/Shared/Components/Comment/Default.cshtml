@@ -4,14 +4,20 @@
     <p>I must explain to you how all this a mistaken idea of ncing great explorer of the rut<br> the is lder of human happinescias unde omnis iste natus error sit volptatem </p>
     <form class="contact-form-@ViewBag.Pro" method="post">
         <div class="row">
-            <div class="col-md-12">
-                <p>Name</p>
-                <input type="text" name="name" class="name-@ViewBag.Pro">
-            </div>
-            <div class="col-md-12">
-                <p>Email</p>
-                <input type="email" name="email" class="email-@ViewBag.Pro">
-            </div>
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="col-md-12">
+                    <p>UserName</p>
+                    <input type="text" name="name" class="name-@ViewBag.Pro">
+                </div>
+                <div class="col-md-12">
+                    <p>Email</p>
+                    <input type="email" name="email" class="email-@ViewBag.Pro">
+                </div>
+            }
+
+
             <div class="col-md-12">
                 <p>Subject</p>
                 <input type="text" name="subject" class="subject-@ViewBag.Pro">
@@ -19,9 +25,24 @@
                 <p>Massage</p>
                 <textarea name="message" class="message-@ViewBag.Pro" cols="15" rows="10"></textarea>
             </div>
-            
+
         </div>
-        <button id="reply-button" class="reply-btn-@ViewBag.Pro"><span>send message</span></button>
+        <button id="reply-button" class="reply-btn-@ViewBag.Pro  btn btn-outline-danger"><span>send message</span></button>
         <p class="form-messege"></p>
     </form>
+
 </div>
+@if (User.Identity.IsAuthenticated)
+{
+    <script>
+  var userAuthorized = true;
+    </script>
+
+}
+else
+{
+    <script>
+  var userAuthorized = false;
+    </script>
+
+}

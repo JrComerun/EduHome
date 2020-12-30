@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using HomeEduAspNetFinal.DAL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
     [Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
+        
         public IActionResult Index()
         {
             return View();

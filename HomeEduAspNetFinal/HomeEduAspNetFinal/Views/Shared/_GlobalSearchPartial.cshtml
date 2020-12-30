@@ -1,0 +1,30 @@
+﻿@model SearchVM
+<ul id="global-list" >
+    @if (Model.Courses != null)
+    {
+        <li><h3>Result of Search for Course</h3></li>
+        @foreach (Course c in Model.Courses)
+        {
+            <li><a asp-controller="Course" asp-action="Detail" asp-route-id="@c.Id">@c.Name</a></li>
+        }
+        <li>...........................</li>
+    }
+    @if (Model.Events != null)
+    {
+        <li><h3>Result of Search for Events</h3></li>
+        @foreach (Event e in Model.Events)
+        {
+            <li><a asp-controller="Event" asp-action="Detail" asp-route-id="@e.Id">@e.Name</a></li>
+        }
+        <li>...........................</li>
+    }
+    @if (Model.Teachers != null)
+    {
+        <li><h3>Result of Search for Teachers</h3></li>
+        @foreach (Teacher t in Model.Teachers)
+        {
+            <li><a asp-controller="Teacher" asp-action="Detail" asp-route-id="@t.Id">@t.FullName</a></li>
+        }
+    }
+</ul>
+

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HomeEduAspNetFinal.DAL;
+using HomeEduAspNetFinal.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +12,20 @@ namespace HomeEduAspNetFinal.ViewComponents
     public class NoticeAreaViewComponent : ViewComponent
     {
 
-        //private readonly AppDbContext _db;
-        //public HeaderViewComponent()
-        //{
-        //    //_db = db;
-        //    //_userManager = userManager;
-        //}
-        public async Task<IViewComponentResult> InvokeAsync()
+        private readonly AppDbContext _db;
+        public NoticeAreaViewComponent(AppDbContext db)
         {
-            return View();
+            _db = db;
+        }
+        public async Task<IViewComponentResult> InvokeAsync(string paddingB)
+        {
+            ViewBag.PaddingB = paddingB;
+            HomeVM homeVM = new HomeVM()
+            {
+                NoticeBoards = await _db.NoticeBoards.OrderByDescending(n => n.Id).Take(6).ToListAsync(),
+                VideoTour = await _db.VideoTours.FirstOrDefaultAsync()
+            };
+            return View(await Task.FromResult(homeVM));
         }
     }
 }

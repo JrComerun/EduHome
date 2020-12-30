@@ -20,10 +20,34 @@
 
                     </div>
                     @await Component.InvokeAsync("Comment", new { product = "blog" })
+                    <div class="row" id="comment-list-blog" style="margin-top:20px">
+                        @foreach (Comment com in Model.Comments)
+                        {
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <div class="thumbnail">
+                                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                    </div><!-- /thumbnail -->
+                                </div><!-- /col-sm-1 -->
+
+                                <div class="col-sm-5">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <strong>@com.UserName</strong> <span class="text-muted">commented @com.CreateTime.ToString("f")</span>
+                                        </div>
+                                        <div class="panel-body">
+                                            @com.Message
+                                        </div><!-- /panel-body -->
+                                    </div><!-- /panel panel-default -->
+                                </div><!-- /col-sm-5 -->
+                            </div><!-- /row -->
+                        }
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
                 @await Component.InvokeAsync("LastsBlog", new { path = "blog" })
+                
             </div>
         </div>
     </div>

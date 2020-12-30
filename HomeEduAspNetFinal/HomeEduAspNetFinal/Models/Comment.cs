@@ -25,6 +25,7 @@ namespace HomeEduAspNetFinal.Models
         public Blog Blog { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
     }
 }

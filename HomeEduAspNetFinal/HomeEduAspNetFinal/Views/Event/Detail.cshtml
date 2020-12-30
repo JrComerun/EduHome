@@ -14,13 +14,13 @@
                     <div class="event-details-img">
                         <img src="~/assets/img/event/@Model.DetailOfEvent.Event.Image" alt="event-details">
                         <div class="event-date">
-                            <h3>@Model.DetailOfEvent.Event.Day <span>jun</span></h3>
+                            <h3>@Model.DetailOfEvent.Event.Date <span>jun</span></h3>
                         </div>
                     </div>
                     <div class="event-details-content">
                         <h2>@Model.DetailOfEvent.Event.Name</h2>
                         <ul>
-                            <li><span>time : </span>@Model.DetailOfEvent.Event.Month</li>
+                            <li><span>time : </span>@Model.DetailOfEvent.Event.Time</li>
                             <li><span>venue : </span>@Model.DetailOfEvent.Event.Venue</li>
                         </ul>
                         <p>@Html.Raw(Model.DetailOfEvent.Decscription) </p>
@@ -47,10 +47,34 @@
                         </div>
                     </div>
                     @await Component.InvokeAsync("Comment", new { product = "event" })
+                    <div class="row" id="comment-list-event" style="margin-top:20px">
+                        @foreach (Comment com in Model.Comments)
+                        {
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <div class="thumbnail">
+                                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                    </div><!-- /thumbnail -->
+                                </div><!-- /col-sm-1 -->
+
+                                <div class="col-sm-5">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <strong>@com.UserName</strong> <span class="text-muted">commented @com.CreateTime.ToString("f")</span>
+                                        </div>
+                                        <div class="panel-body">
+                                            @com.Message
+                                        </div><!-- /panel-body -->
+                                    </div><!-- /panel panel-default -->
+                                </div><!-- /col-sm-5 -->
+                            </div><!-- /row -->
+                        }
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
                 @await Component.InvokeAsync("LastsBlog", new { path = "event" })
+                
             </div>
         </div>
     </div>

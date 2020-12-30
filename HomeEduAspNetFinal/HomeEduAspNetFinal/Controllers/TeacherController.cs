@@ -31,6 +31,7 @@ namespace HomeEduAspNetFinal.Controllers
         }
         public IActionResult Search(string search)
         {
+            if (search == null) return NotFound();
             List<Teacher> model = _db.Teachers.Where(d => d.IsDeleted == false).Include(t=>t.ProfessionOfTeacher).Include(t=>t.SocMedOfTeachers)
                 .Where(p => p.FullName.Contains(search)).Take(8).OrderByDescending(p => p.Id).ToList();
             return PartialView("_TeacherSPartial", model);

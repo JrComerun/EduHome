@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,10 +9,15 @@ namespace HomeEduAspNetFinal.Models
     public class Event
     {
         public int Id { get; set; }
+        [Required,MaxLength(60)]
         public string Name { get; set; }
-        public int Day { get; set; }
-        public string Month { get; set; }
+        [Required]
+        public int Date { get; set; }
+        [Required]
+        public string Time { get; set; }
+        [Required]
         public string Venue { get; set; }
+        [Required]
         public string Image { get; set; }
         public DetailOfEvent DetailOfEvent { get; set; }
         public bool IsDeleted { get; set; }

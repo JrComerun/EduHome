@@ -1,6 +1,7 @@
 ﻿using HomeEduAspNetFinal.DAL;
 using HomeEduAspNetFinal.Models;
 using HomeEduAspNetFinal.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,9 +14,14 @@ namespace HomeEduAspNetFinal.Controllers
     public class CourseController : Controller
     {
         private readonly AppDbContext _db;
-        public CourseController(AppDbContext db)
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        public CourseController(AppDbContext db, SignInManager<AppUser> signInManager,
+                                                 UserManager<AppUser> userManager)
         {
             _db = db;
+            _signInManager=signInManager;
+            _userManager = userManager;
         }
         public IActionResult Index(int blogCourseId)
         {
@@ -24,8 +30,10 @@ namespace HomeEduAspNetFinal.Controllers
         }
         public   IActionResult Detail(int? id)
         {
+            int? courseId;
             if (id == null) return NotFound();
-            TempData["Id"] = id;
+             courseId = id;
+            TempData["CourseId"] = id;
             CommentVM courseCommentVM = new CommentVM
             {
                 DetailOfCourse = _db.DetailOfCourses.Where(d => d.IsDeleted == false).Include(d => d.Course).FirstOrDefault(c => c.CourseId == id),
@@ -36,24 +44,40 @@ namespace HomeEduAspNetFinal.Controllers
         }
         public async Task<IActionResult> CourseComment(string username, string email, string subject, string message)
         {
-            int id = (int)TempData["Id"];
-            if (username==null||email==null||subject==null||message==null) return NotFound();
-            Comment comment = new Comment
-            {
-                UserName = username,
-                Email = email,
-                Subject = subject,
-                Message = message,
-                CourseId = id,
-            };
-            if (comment == null) return NotFound();
+            int id = (int)TempData["CourseId"];
+            if ( subject == null || message == null) return NotFound();
+            
 
-            await _db.Comments.AddAsync(comment);
-            await _db.SaveChangesAsync();
-            return PartialView("_CommentsPartial", comment);
-        }
+            Comment comment = new Comment();
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                comment.UserName = user.UserName;
+                comment.Email = user.Email;
+            }
+            else
+            {
+                comment.UserName = "Guest-" + username;
+                comment.Email = email;
+            }
+            
+            comment.Subject = subject;
+            comment.Message = message;
+            comment.CreateTime = DateTime.UtcNow;
+            comment.CourseId = id;
+               
+                if (comment == null) return NotFound();
+                await _db.Comments.AddAsync(comment);
+                await _db.SaveChangesAsync();
+                return PartialView("_CommentsPartial", comment);
+
+
+
+                //}
+            }
         public IActionResult Search(string search)
         {
+            if (search == null) return NotFound();
             List<Course> model = _db.Courses.Where(p => p.Name.Contains(search)&&p.IsDeleted==false).Take(8).OrderByDescending(p => p.Id).ToList();
             return PartialView("_CourseSPartial", model);
         }

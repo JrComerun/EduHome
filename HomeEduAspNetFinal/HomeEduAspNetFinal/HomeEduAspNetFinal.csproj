@@ -30,6 +30,12 @@
     <Compile Remove="Migrations\20201225182855_CourseandDetailRelation.Designer.cs" />
     <Compile Remove="Migrations\20201225232003_EventAndDetailRelation.cs" />
     <Compile Remove="Migrations\20201225232003_EventAndDetailRelation.Designer.cs" />
+    <Compile Remove="Migrations\20201229204334_CreateSliderAndNoticeAreaTables.cs" />
+    <Compile Remove="Migrations\20201229204334_CreateSliderAndNoticeAreaTables.Designer.cs" />
+    <Compile Remove="Migrations\20201230091506_ChangeAllTables.cs" />
+    <Compile Remove="Migrations\20201230091506_ChangeAllTables.Designer.cs" />
+    <Compile Remove="Migrations\20201230091718_ChangeAllTables.cs" />
+    <Compile Remove="Migrations\20201230091718_ChangeAllTables.Designer.cs" />
     <Compile Remove="Models\SkillOfTeacher.cs" />
     <Compile Remove="ViewComponents\DetailOfCourseViewComponent.cs" />
   </ItemGroup>
