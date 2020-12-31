@@ -38,6 +38,8 @@ namespace HomeEduAspNetFinal
 
                 identityOptions.User.RequireUniqueEmail = true;
 
+                
+
                 identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 identityOptions.Lockout.MaxFailedAccessAttempts = 3;
                 identityOptions.Lockout.AllowedForNewUsers = true;

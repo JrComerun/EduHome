@@ -9,6 +9,7 @@ namespace HomeEduAspNetFinal.ViewModels
     public class CourseVM
     {
         public DetailOfCourse DetailOfCourse { get; set; }
+        public Course Course { get; set; }
         public List<Comment> Comments { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace HomeEduAspNetFinal.Models
         public string HowToApply { get; set; }
         public string Certification { get; set; }
         [Required]
-        public string Starts { get; set; }
+        public DateTime StartDate { get; set; }
         [Required]
         public string Duration { get; set; }
         public string ClassDuration { get; set; }

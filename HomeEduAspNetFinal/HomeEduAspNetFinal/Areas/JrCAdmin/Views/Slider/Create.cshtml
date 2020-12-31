@@ -2,15 +2,15 @@
 @{
     ViewData["Title"] = "Create";
 }
-<div class="col-md-6 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Create Category</h4>
+<div class="col-md-6 grid-margin stretch-card bg-dark">
+    <div class="card bg-dark text-light">
+        <div class="card-body bg-dark">
+            <h4 class="card-title">Create Slider</h4>
             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
             <form class="forms-sample" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="@Model.Photo"></label>
-                    <input class="form-control" accept="image/*" asp-for="@Model.Photo">
+                    <input class="form-control-file" accept="image/*" asp-for="@Model.Photo">
                     <span class="text-danger" asp-validation-for="@Model.Photo"></span>
                 </div>
                 <div class="form-group">
@@ -23,7 +23,7 @@
                     <input class="form-control" asp-for="@Model.Description">
                     <span class=" text-danger" asp-validation-for="@Model.Description"></span>
                 </div>
-                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button type="submit" class="btn btn-primary mr-2">Create</button>
                 <a asp-action="Index" class="btn btn-secondary">Go Back</a>
             </form>
         </div>
@@ -31,6 +31,6 @@
 </div>
 <h2>Create</h2>
 @section Scripts{
-   
+
     <partial name="_ScriptsPartial" />
 }

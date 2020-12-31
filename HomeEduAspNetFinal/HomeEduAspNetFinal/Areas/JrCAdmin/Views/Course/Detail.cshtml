@@ -1,0 +1,54 @@
+﻿@model Course
+@{
+    ViewData["Title"] = "Detail";
+}
+<div class="col-md-6 grid-margin stretch-card bg-dark text-light">
+    <div class="card d-flex flex-column bg-dark">
+
+        <div class="card-body ">
+            <img src="~/assets/img/course/@Model.Image" style="height: 150px !important;width: 200px !important;" />
+        </div>
+        <div class="card-body ">
+            <h4 style="font-weight:600 !important">Course Name : <span style="font-weight:200 !important"> @Model.Name </span></h4>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Description : <span style="font-weight:200 !important"> @Model.Description </span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">About Course : <span style="font-weight:200 !important"> @Model.DetailOfCourse.AboutCourse </span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">How to Apply : <span style="font-weight:200 !important"> @Model.DetailOfCourse.HowToApply </span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Cerfication : <span style="font-weight:200 !important"> @Model.DetailOfCourse.Certification </span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Start Date : <span style="font-weight:200 !important"> @Model.DetailOfCourse.StartDate </span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Students Count : <span style="font-weight:200 !important"> @Model.DetailOfCourse.Students </span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Duration  : <span style="font-weight:200 !important"> @Model.DetailOfCourse.Duration Month</span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Class Duration : <span style="font-weight:200 !important"> @Model.DetailOfCourse.ClassDuration Hours</span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Assesment : <span style="font-weight:200 !important"> @Model.DetailOfCourse.Assesments </span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Language : <span style="font-weight:200 !important"> @Model.DetailOfCourse.Language </span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Price : <span style="font-weight:200 !important"> @Model.DetailOfCourse.Price $</span></h5>
+        </div>
+
+    </div>
+</div>
+<div class="a" style="padding: 0 10px">
+    <a asp-action="Index" class="btn btn-outline-secondary">Go Back</a>
+
+</div>
+
