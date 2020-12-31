@@ -19,6 +19,8 @@ namespace HomeEduAspNetFinal.Models
         public string BgImage { get; set; }
         [NotMapped]
         public IFormFile Photo { get; set; }
-        
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
+
     }
 }

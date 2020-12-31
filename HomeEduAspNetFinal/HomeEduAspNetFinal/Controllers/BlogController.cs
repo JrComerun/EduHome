@@ -56,18 +56,27 @@ namespace HomeEduAspNetFinal.Controllers
         public async Task<IActionResult> BlogComment(string username, string email, string subject, string message)
         {
             int id = (int)TempData["BlogId"];
-            if ( username == null || email == null || subject == null || message == null) return NotFound();
-        
-                Comment comment = new Comment
-                {
-                    UserName = "Guest-" + username,
-                    Email = email,
-                    Subject = subject,
-                    Message = message,
-                    CreateTime = DateTime.UtcNow,
-                    BlogId = id,
-                };
-                if (comment == null) return NotFound();
+            if (  subject == null || message == null) return NotFound();
+
+            Comment comment = new Comment();
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                comment.UserName = user.UserName;
+                comment.Email = user.Email;
+            }
+            else
+            {
+                comment.UserName = "Guest-" + username;
+                comment.Email = email;
+            }
+
+            comment.Subject = subject;
+            comment.Message = message;
+            comment.CreateTime = DateTime.UtcNow;
+            comment.BlogId = id;
+
+            if (comment == null) return NotFound();
                 await _db.Comments.AddAsync(comment);
                 await _db.SaveChangesAsync();
                 return PartialView("_CommentsPartial", comment);

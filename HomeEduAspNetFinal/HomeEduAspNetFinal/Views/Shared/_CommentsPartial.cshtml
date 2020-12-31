@@ -11,7 +11,7 @@
     <div class="col-sm-5">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>@Model.UserName</strong> <span class="text-muted">commented @Model.CreateTime</span>
+                <strong>@Model.UserName</strong> <span class="text-muted">commented @Model.CreateTime.ToString("f")</span>
             </div>
             <div class="panel-body">
                 @Model.Message

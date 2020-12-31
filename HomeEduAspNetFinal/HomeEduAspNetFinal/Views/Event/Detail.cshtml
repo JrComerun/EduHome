@@ -14,13 +14,13 @@
                     <div class="event-details-img">
                         <img src="~/assets/img/event/@Model.DetailOfEvent.Event.Image" alt="event-details">
                         <div class="event-date">
-                            <h3>@Model.DetailOfEvent.Event.Date <span>jun</span></h3>
+                            <h3>@Model.DetailOfEvent.Event.StartingTime.ToString("dd") <span>@Model.DetailOfEvent.Event.StartingTime.ToString("MMM")</span></h3>
                         </div>
                     </div>
                     <div class="event-details-content">
                         <h2>@Model.DetailOfEvent.Event.Name</h2>
                         <ul>
-                            <li><span>time : </span>@Model.DetailOfEvent.Event.Time</li>
+                            <li><span>time : </span>@Model.DetailOfEvent.Event.StartingTime.ToString("t")-@Model.DetailOfEvent.Event.EndTime.ToString("t")</li>
                             <li><span>venue : </span>@Model.DetailOfEvent.Event.Venue</li>
                         </ul>
                         <p>@Html.Raw(Model.DetailOfEvent.Decscription) </p>

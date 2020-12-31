@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,10 +21,13 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         public SliderController(AppDbContext db, IWebHostEnvironment env)
         {
             _db = db;
+            _env = env;
         }
         public IActionResult Index()
         {
-            return View(_db.HomeSliders.ToList());
+            int countSlider = _db.HomeSliders.Where(s => s.IsDeleted == false).Count();
+            ViewBag.Count = countSlider;
+            return View(_db.HomeSliders.Where(s => s.IsDeleted == false).ToList());
         }
         public IActionResult Create()
         {
@@ -34,24 +38,91 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HomeSlider slider)
         {
-            if (slider.Photo == null)
-            {
-                return View();
-            }
-            if (!slider.Photo.IsImage())
-            {
-                ModelState.AddModelError("Photo", "Select Image Type");
-                return View();
-            }
-            if (slider.Photo.MaxSize(200))
-            {
-                ModelState.AddModelError("Photo", "Select Image max-Size 200kb");
-                return View();
-            }
-            slider.BgImage = await slider.Photo.SaveImageAsync(_env.WebRootPath, "img");
+            //?sual vermek
+            //if (!ModelState.IsValid) return NotFound();
+            if (slider.Photo == null) return IsNonValid("Photo", "Please select PHOTO!!!");
+            if (!slider.Photo.IsImage()) return IsNonValid("Photo", "Please select image type!!!");
+            if (slider.Photo.MaxSize(200)) return IsNonValid("Photo", "Select PHOTO max-size 200!");
+
+            string folder = Path.Combine("assets", "img", "slider");
+            string filename = await slider.Photo.SaveImageAsync(_env.WebRootPath, folder);
+            slider.BgImage = filename;
+            slider.IsDeleted = false;
             await _db.HomeSliders.AddAsync(slider);
             await _db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
+        public  IActionResult Detail(int? id)
+        {
+            if (id == null) return RedirectToAction(nameof(Index));
+             HomeSlider slider = _db.HomeSliders.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id);
+            if (slider == null) return RedirectToAction(nameof(Index));
+
+            return View(slider);
+        }
+        public IActionResult Delete(int? id)
+        {
+            if (id == null) return RedirectToAction(nameof(Index));
+            HomeSlider slider = _db.HomeSliders.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id);
+            if (slider == null) return RedirectToAction(nameof(Index));
+
+            return View(slider);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeletePost(int? id)
+        {
+            if (id == null) return RedirectToAction(nameof(Index));
+            HomeSlider slider = _db.HomeSliders.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id);
+            if (slider == null) RedirectToAction(nameof(Index));
+            int countSlider = _db.HomeSliders.Where(s=>s.IsDeleted==false).Count();
+            
+            if (countSlider > 3 )
+            {
+                string path = Path.Combine(_env.WebRootPath, "img", slider.BgImage);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+                _db.HomeSliders.Remove(slider);
+            }
+            else if(countSlider > 1&& countSlider <= 3)
+            {
+                slider.IsDeleted = true;
+                slider.DeletedTime = DateTime.UtcNow;
+            }
+            else
+            {
+                return Content("Davay qaqaw bir abarotda yoxla sen bacararsan");
+            }
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Update(int? id)
+        {
+            if (id == null) return RedirectToAction(nameof(Index));
+            HomeSlider slider = _db.HomeSliders.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id);
+            if (slider == null) return RedirectToAction(nameof(Index));
+
+            return View(slider);
+        }
+
+        #region Error Metod
+        public ActionResult IsNonValid(string errorName, string errorContent)
+        {
+            ModelState.AddModelError(errorName, errorContent);
+            return View();
+        }
+        public ActionResult IsNonValid(string errorName, string errorContent,object returnObj)
+        {
+            ModelState.AddModelError(errorName, errorContent);
+            return View(returnObj);
+        }
+        #endregion
+
+
+
     }
 }

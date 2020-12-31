@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace HomeEduAspNetFinal.Migrations
 {
@@ -102,13 +103,13 @@ namespace HomeEduAspNetFinal.Migrations
                 name: "Date",
                 table: "Events",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: DateTime.UtcNow);
 
             migrationBuilder.AddColumn<string>(
                 name: "Time",
                 table: "Events",
                 nullable: false,
-                defaultValue: "");
+                defaultValue:DateTime.UtcNow );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Description",

@@ -12,13 +12,13 @@
                         </div>
                     </a>
                     <div class="event-date">
-                        <h3>@ev.Date <span>jun</span></h3>
+                        <h3>@ev.StartingTime.ToString("dd") <span>@ev.StartingTime.ToString("MMM")</span></h3>
                     </div>
                 </div>
                 <div class="event-content text-left">
                     <h4><a asp-controller="Event" asp-action="Detail" asp-route-id="@ev.Id">@ev.Name</a></h4>
                     <ul>
-                        <li><span>time:</span> @ev.Time</li>
+                        <li><span>time:</span> @ev.StartingTime.ToString("t")-@ev.EndTime.ToString("t")</li>
                         <li><span>venue</span> @ev.Venue</li>
                     </ul>
                     <div class="event-content-right">

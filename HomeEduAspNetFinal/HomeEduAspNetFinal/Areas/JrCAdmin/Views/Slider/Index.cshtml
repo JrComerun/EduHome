@@ -30,17 +30,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (HomeSlider c in Model)
+                        @foreach (HomeSlider s in Model)
                         {
-
                             <tr class="bg-dark font-weight-bold text-light">
-                                <td><img src="~/assets/img/slider/@c.BgImage" class="img-fluid " style="width:80px !important;height:80px!important;" /></td>
-                                <td>@c.Title</td>
-                                <td>@c.Description</td>
+                                <td><img src="~/assets/img/slider/@s.BgImage" class="img-fluid " style="width:80px !important;height:80px!important;object-fit: cover !important;" /></td>
+                                <td>@s.Title</td>
+                                <td>@s.Description</td>
+                                
                                 <td class="d-flex flex-column">
-                                    <a asp-controller="Slider" asp-action="Detail" asp-route-id="@c.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
-                                    <a asp-controller="Slider" asp-action="Update" asp-route-id="@c.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
-                                    <a asp-controller="Slider" asp-action="Delete" asp-route-id="@c.Id" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></a>
+                                    @if (ViewBag.Conut > 1)
+                                    {
+                                        <a asp-controller="Slider" asp-action="Detail" asp-route-id="@s.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
+                                        <a asp-controller="Slider" asp-action="Update" asp-route-id="@s.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
+                                        <a asp-controller="Slider" asp-action="Delete" asp-route-id="@s.Id" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Slider" asp-action="Detail" asp-route-id="@s.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
+                                        <a asp-controller="Slider" asp-action="Update" asp-route-id="@s.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
+                                    }
+
                                 </td>
                             </tr>
                         }

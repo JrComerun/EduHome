@@ -202,7 +202,6 @@ $(document).ready(function () {
                 subject = $(`.subject-${product}`).val();
                 message = $(`.message-${product}`).val();
 
-
                 $.ajax({
                     url: `${path}`,
                     data: {
@@ -214,8 +213,6 @@ $(document).ready(function () {
                     type: "Post",
                     success: function (res) {
                         $(`#comment-list-${str}`).append(res)
-                        //$(`.name-${product}`).val("");
-                        //$(`.email-${product}`).val("");
                         $(`.subject-${product}`).val("");
                         $(`.message-${product}`).val("");
                     }
@@ -226,7 +223,6 @@ $(document).ready(function () {
                 email = $(`.email-${product}`).val();
                 subject = $(`.subject-${product}`).val();
                 message = $(`.message-${product}`).val();
-
 
                 $.ajax({
                     url: `${path}`,
@@ -246,11 +242,6 @@ $(document).ready(function () {
                     }
                 });
             }
-           
-            
-            
-               
-            
         })
     }
     if ($("#reply-button").hasClass("reply-btn-course")) {

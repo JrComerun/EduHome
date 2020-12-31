@@ -20,7 +20,7 @@ namespace HomeEduAspNetFinal.Controllers
                                                  UserManager<AppUser> userManager)
         {
             _db = db;
-            _signInManager=signInManager;
+            _signInManager = signInManager;
             _userManager = userManager;
         }
         public IActionResult Index(int blogCourseId)
@@ -28,11 +28,11 @@ namespace HomeEduAspNetFinal.Controllers
             List<Course> courses = _db.Courses.Where(c => c.IsDeleted == false && c.Id == blogCourseId).ToList();
             return View(courses);
         }
-        public   IActionResult Detail(int? id)
+        public IActionResult Detail(int? id)
         {
             int? courseId;
             if (id == null) return NotFound();
-             courseId = id;
+            courseId = id;
             TempData["CourseId"] = id;
             CommentVM courseCommentVM = new CommentVM
             {
@@ -45,8 +45,7 @@ namespace HomeEduAspNetFinal.Controllers
         public async Task<IActionResult> CourseComment(string username, string email, string subject, string message)
         {
             int id = (int)TempData["CourseId"];
-            if ( subject == null || message == null) return NotFound();
-            
+            if (subject == null || message == null) return NotFound();
 
             Comment comment = new Comment();
             if (User.Identity.IsAuthenticated)
@@ -60,25 +59,25 @@ namespace HomeEduAspNetFinal.Controllers
                 comment.UserName = "Guest-" + username;
                 comment.Email = email;
             }
-            
+
             comment.Subject = subject;
             comment.Message = message;
             comment.CreateTime = DateTime.UtcNow;
             comment.CourseId = id;
-               
-                if (comment == null) return NotFound();
-                await _db.Comments.AddAsync(comment);
-                await _db.SaveChangesAsync();
-                return PartialView("_CommentsPartial", comment);
+
+            if (comment == null) return NotFound();
+            await _db.Comments.AddAsync(comment);
+            await _db.SaveChangesAsync();
+            return PartialView("_CommentsPartial", comment);
 
 
 
-                //}
-            }
+            //}
+        }
         public IActionResult Search(string search)
         {
             if (search == null) return NotFound();
-            List<Course> model = _db.Courses.Where(p => p.Name.Contains(search)&&p.IsDeleted==false).Take(8).OrderByDescending(p => p.Id).ToList();
+            List<Course> model = _db.Courses.Where(p => p.Name.Contains(search) && p.IsDeleted == false).Take(8).OrderByDescending(p => p.Id).ToList();
             return PartialView("_CourseSPartial", model);
         }
     }

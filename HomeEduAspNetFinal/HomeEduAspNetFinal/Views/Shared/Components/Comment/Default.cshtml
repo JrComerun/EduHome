@@ -8,26 +8,26 @@
             @if (!User.Identity.IsAuthenticated)
             {
                 <div class="col-md-12">
-                    <p>UserName</p>
-                    <input type="text" name="name" class="name-@ViewBag.Pro">
+                    <p>GuestName</p>
+                    <input type="text" name="name" class="name-@ViewBag.Pro" required>
                 </div>
                 <div class="col-md-12">
                     <p>Email</p>
-                    <input type="email" name="email" class="email-@ViewBag.Pro">
+                    <input type="email" name="email" class="email-@ViewBag.Pro" required>
                 </div>
             }
 
 
             <div class="col-md-12">
                 <p>Subject</p>
-                <input type="text" name="subject" class="subject-@ViewBag.Pro">
+                <input type="text" name="subject" class="subject-@ViewBag.Pro" required>
 
                 <p>Massage</p>
-                <textarea name="message" class="message-@ViewBag.Pro" cols="15" rows="10"></textarea>
+                <textarea name="message" class="message-@ViewBag.Pro" cols="15" rows="10" required></textarea>
             </div>
 
         </div>
-        <button id="reply-button" class="reply-btn-@ViewBag.Pro  btn btn-outline-danger"><span>send message</span></button>
+        <button id="reply-button" class="reply-btn-@ViewBag.Pro  btn btn-outline-danger" required><span>send message</span></button>
         <p class="form-messege"></p>
     </form>
 
@@ -35,14 +35,17 @@
 @if (User.Identity.IsAuthenticated)
 {
     <script>
-  var userAuthorized = true;
+        var userAuthorized = true;
     </script>
 
 }
 else
 {
     <script>
-  var userAuthorized = false;
+        var userAuthorized = false;
     </script>
 
+}
+@section Scripts{
+    <partial name="_ScriptsPartial" />
 }

@@ -11,10 +11,8 @@ namespace HomeEduAspNetFinal.Models
         public int Id { get; set; }
         [Required,MaxLength(60)]
         public string Name { get; set; }
-        [Required]
-        public int Date { get; set; }
-        [Required]
-        public string Time { get; set; }
+        
+        
         [Required]
         public string Venue { get; set; }
         [Required]
@@ -25,5 +23,10 @@ namespace HomeEduAspNetFinal.Models
         public ICollection<SpikersOfEvent> SpikersOfEvents { get; set; }
         public ICollection<Blog> Blogs { get; set; }
         public ICollection<Comment> Comments { get; set; }
+       
+        [Required]
+        public DateTime StartingTime { get; set; }
+        [Required]
+        public DateTime EndTime { get; set; }
     }
 }

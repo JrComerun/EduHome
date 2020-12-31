@@ -25,8 +25,7 @@ namespace HomeEduAspNetFinal.Controllers
         {
             HomeVM homeVM = new HomeVM()
             {
-                HomeSliders = _db.HomeSliders.Take(3).ToList(),
-
+                HomeSliders = _db.HomeSliders.Where(s=>s.IsDeleted==false).ToList(),
             };
             return View(homeVM);
         }
