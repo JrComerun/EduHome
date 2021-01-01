@@ -222,6 +222,9 @@ namespace HomeEduAspNetFinal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("datetime2");
 
@@ -243,6 +246,8 @@ namespace HomeEduAspNetFinal.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Courses");
                 });
@@ -859,6 +864,13 @@ namespace HomeEduAspNetFinal.Migrations
                     b.HasOne("HomeEduAspNetFinal.Models.Event", "Event")
                         .WithMany("Comments")
                         .HasForeignKey("EventId");
+                });
+
+            modelBuilder.Entity("HomeEduAspNetFinal.Models.Course", b =>
+                {
+                    b.HasOne("HomeEduAspNetFinal.Models.AppUser", "AppUser")
+                        .WithMany("Courses")
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("HomeEduAspNetFinal.Models.DetailOfCourse", b =>

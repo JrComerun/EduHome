@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 {
     [Area("JrCAdmin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class DashboardController : Controller
     {
         

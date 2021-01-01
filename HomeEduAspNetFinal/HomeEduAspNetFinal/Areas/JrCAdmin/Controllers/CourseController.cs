@@ -4,6 +4,7 @@ using HomeEduAspNetFinal.Models;
 using HomeEduAspNetFinal.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,10 +21,12 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
     {
         private readonly AppDbContext _db;
         private readonly IWebHostEnvironment _env;
-        public CourseController(AppDbContext db, IWebHostEnvironment env)
+        private readonly UserManager<AppUser> _userManager;
+        public CourseController(AppDbContext db, IWebHostEnvironment env, UserManager<AppUser> userManager)
         {
             _db = db;
             _env = env;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -43,6 +46,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CourseVM  courseVm)
         {
+            AppUser user =await _userManager.FindByNameAsync(User.Identity.Name);
 
             if (courseVm.Course.Photo == null) return IsNonValid("", "Please select PHOTO!!!");
             if (!courseVm.Course.Photo.IsImage()) return IsNonValid("", "Please select image type!!!");
@@ -53,6 +57,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             string filename = await courseVm.Course.Photo.SaveImageAsync(_env.WebRootPath, folder);
             courseVm.Course.Image = filename;
             courseVm.Course.IsDeleted = false;
+            courseVm.Course.AppUserId = user.Id;
             await _db.Courses.AddAsync(courseVm.Course);
             await _db.SaveChangesAsync();
             courseVm.DetailOfCourse.CourseId = courseVm.Course.Id;
@@ -161,7 +166,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                         System.IO.File.Delete(path);
 
                     }
-                    _db.Courses.Remove(dbCourse);
+                    
                 }
                 dbCourse.Image = filename;
             }

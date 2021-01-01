@@ -9379,11 +9379,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Code Academy\\Desktop\\EduHome-Master\\HomeEduAspNetFinal\\HomeEduAspNetFinal\\HomeEduAspNetFinal.csproj",
+      "projectUniqueName": "C:\\Users\\Code Academy\\Desktop\\EduHome\\HomeEduAspNetFinal\\HomeEduAspNetFinal\\HomeEduAspNetFinal.csproj",
       "projectName": "HomeEduAspNetFinal",
-      "projectPath": "C:\\Users\\Code Academy\\Desktop\\EduHome-Master\\HomeEduAspNetFinal\\HomeEduAspNetFinal\\HomeEduAspNetFinal.csproj",
+      "projectPath": "C:\\Users\\Code Academy\\Desktop\\EduHome\\HomeEduAspNetFinal\\HomeEduAspNetFinal\\HomeEduAspNetFinal.csproj",
       "packagesPath": "C:\\Users\\Code Academy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Code Academy\\Desktop\\EduHome-Master\\HomeEduAspNetFinal\\HomeEduAspNetFinal\\obj\\",
+      "outputPath": "C:\\Users\\Code Academy\\Desktop\\EduHome\\HomeEduAspNetFinal\\HomeEduAspNetFinal\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

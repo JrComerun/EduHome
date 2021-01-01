@@ -182,7 +182,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                         System.IO.File.Delete(path);
 
                     }
-                    _db.Events.Remove(eventVM.Event);
+                    
                 }
                 dbEventVM.Event.Image = filename;
             }

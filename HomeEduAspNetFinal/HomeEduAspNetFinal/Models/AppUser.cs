@@ -14,5 +14,6 @@ namespace HomeEduAspNetFinal.Models
         [Required]
         public string SurName { get; set; }
         public bool IsDeleted { get; set; }
+        public ICollection<Course> Courses { get; set; }
     }
 }

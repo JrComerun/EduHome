@@ -143,7 +143,10 @@
                     </li>
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                            <img src="~/admin/images/a.jpg" alt="profile" />
+                            @if (User.IsInRole("Admin"))
+                            {
+                <img src="~/admin/images/a.jpg" alt="profile" />}
+
                             <span class="nav-profile-name">@User.Identity.Name</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
@@ -181,19 +184,20 @@
                             </span>
                         </a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="JrCAdmin" asp-controller="User" asp-action="Index">
-                            <i class="mdi mdi-account menu-icon"></i>
-                            <span class="menu-title">User</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="mdi mdi-grid-large menu-icon"></i>
-                            <span class="menu-title">Home Tables</span>
-                            <i class="menu-arrow"></i>
-                        </a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                           <li class="nav-item">
+                                  <a class="nav-link" asp-area="JrCAdmin" asp-controller="User" asp-action="Index">
+                                        <i class="mdi mdi-account menu-icon"></i>
+                                        <span class="menu-title">User</span>
+                                  </a>
+                            </li>
+                           <li class="nav-item">
+                                   <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                        <i class="mdi mdi-grid-large menu-icon"></i>
+                                        <span class="menu-title">Home Tables</span>
+                                        <i class="menu-arrow"></i>
+                                    </a>
                         <div class="collapse" id="ui-basic" style="">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">  <a class="nav-link" asp-area="JrCAdmin" asp-controller="Slider" asp-action="Index"> Slider </a></li>
@@ -204,7 +208,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                           <li class="nav-item">
                         <a class="nav-link " data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                             <i class="mdi mdi-grid-large menu-icon"></i>
                             <span class="menu-title">About Tables</span>
@@ -221,8 +225,7 @@
                             </ul>
                         </div>
                     </li>
-
-                    <li class="nav-item">
+                           <li class="nav-item">
                         <a class="nav-link" asp-area="JrCAdmin" asp-controller="Course" asp-action="Index">
                             <i class="mdi mdi-view-headline menu-icon"></i>
                             <span class="menu-title">Course</span>
@@ -230,34 +233,44 @@
                         </a>
 
                     </li>
-                    <li class="nav-item">
+                           <li class="nav-item">
                         <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
                             <i class="mdi mdi-grid-large menu-icon"></i>
                             <span class="menu-title">Event</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="ui-basic2" style="">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item">  <a class="nav-link" asp-area="JrCAdmin" asp-controller="Event" asp-action="Index"> Events </a></li>
-                                <li class="nav-item"><a class="nav-link" asp-area="JrCAdmin" asp-controller="Spikers" asp-action="Index"> Spikers </a></li>
-                                
-                            </ul>
-                        </div>
-                    </li>
-                    
+                              <ul class="nav flex-column sub-menu">
+                                  <li class="nav-item">  <a class="nav-link" asp-area="JrCAdmin" asp-controller="Event" asp-action="Index"> Events </a></li>
+                                  <li class="nav-item"><a class="nav-link" asp-area="JrCAdmin" asp-controller="Spikers" asp-action="Index"> Spikers </a></li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="JrCAdmin" asp-controller="Teacher" asp-action="Index">
-                            <i class="mdi mdi-view-headline menu-icon"></i>
-                            <span class="menu-title">Teacher</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="JrCAdmin" asp-controller="Blog" asp-action="Index">
-                            <i class="mdi mdi-view-headline menu-icon"></i>
-                            <span class="menu-title">Blog</span>
-                        </a>
-                    </li>
+                              </ul>
+                        </div>
+                     </li>
+                           <li class="nav-item">
+                                 <a class="nav-link" asp-area="JrCAdmin" asp-controller="Teacher" asp-action="Index">
+                                       <i class="mdi mdi-view-headline menu-icon"></i>
+                                       <span class="menu-title">Teacher</span>
+                                 </a>
+                           </li>
+                           <li class="nav-item">
+                                  <a class="nav-link" asp-area="JrCAdmin" asp-controller="Blog" asp-action="Index">
+                                       <i class="mdi mdi-view-headline menu-icon"></i>
+                                      <span class="menu-title">Blog</span>
+                                  </a>
+                          </li>
+                    }
+                    else 
+                    {
+                          <li class="nav-item">
+                                   <a class="nav-link" asp-area="JrCAdmin" asp-controller="SpecialCourse" asp-action="Index">
+                                        <i class="mdi mdi-view-headline menu-icon"></i>
+                                        <span class="menu-title">Special Course</span>
+                                   </a>
+                            </li>
+                    }
+
+
                 </ul>
             </nav>
             <!-- partial -->

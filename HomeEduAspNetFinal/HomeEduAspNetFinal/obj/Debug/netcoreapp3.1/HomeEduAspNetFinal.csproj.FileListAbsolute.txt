@@ -602,3 +602,17 @@ C:\Users\Code Academy\Desktop\EduHome-Master\HomeEduAspNetFinal\HomeEduAspNetFin
 C:\Users\Code Academy\Desktop\EduHome-Master\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Event\Delete.cshtml.g.cs
 C:\Users\Code Academy\Desktop\EduHome-Master\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Event\Update.cshtml.g.cs
 C:\Users\Code Academy\Desktop\EduHome-Master\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Spikers\Detail.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Event\Create.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Event\Delete.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Event\Detail.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Event\Update.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Spikers\Create.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Spikers\Delete.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Spikers\Detail.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Spikers\Index.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Spikers\Update.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SpecialCourse\Index.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SpecialCourse\Create.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SpecialCourse\Detail.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SpecialCourse\Delete.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SpecialCourse\Update.cshtml.g.cs

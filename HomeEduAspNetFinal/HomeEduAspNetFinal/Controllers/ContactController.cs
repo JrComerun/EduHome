@@ -18,31 +18,26 @@ namespace HomeEduAspNetFinal.Controllers
         }
 
 
-        //public IActionResult SendEmailToUser()
+        //public async Task<IActionResult> SendEmailToUser()
         //{
-        //    MailMessage mail = new MailMessage();
-        //    SmtpClient SmtpServer = new SmtpClient("smtp@gmail.com");
 
-        //    mail.From = new MailAddress("knjc621@gmail.com");
-        //    mail.To.Add("kami621@mail.ru");
-        //    mail.Subject = "Notifications";
-        //    mail.Body = "alindi";
-        //    mail.IsBodyHtml = true;
-        //    SmtpServer.Port = 587;
-        //    SmtpServer.Credentials = new System.Net.NetworkCredential("knjc621@gmail.com", "lene1234");
-        //    SmtpServer.EnableSsl = true;
+        //    SmtpClient client = new SmtpClient("smtp.mail.ru", 587);
+        //    client.UseDefaultCredentials = false;
+        //    client.EnableSsl = true;
+        //    client.Credentials = new NetworkCredential("kami621@mail.ru", "lene1234");
+        //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+        //    MailMessage message = new MailMessage("kami621@mail.ru", "knjc621@gmail.com");
+        //    message.Subject = "<By Default: IAP Choices Notification>";
+        //    message.Body = "Hi, <Student_Name><br>Your choice for <Program Name> has been approved<br>";
 
-        //    try
-        //    {
-        //        SmtpServer.Send(mail);
-        //        return Content("alindi");
-        //    }
-        //    catch (Exception ex)
-        //    {
 
-        //        return Content("alindinmadi");
-        //    }
-           
+        //    message.BodyEncoding = System.Text.Encoding.UTF8;
+        //    message.IsBodyHtml = true;
+
+        //    client.Send(message);
+        //    return Content(message.Body);
+
         //}
+       
     }
 }

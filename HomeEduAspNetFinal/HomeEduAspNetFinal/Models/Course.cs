@@ -24,5 +24,7 @@ namespace HomeEduAspNetFinal.Models
         public DateTime? DeletedTime { get; set; }
         public ICollection<Blog> Blogs { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }
