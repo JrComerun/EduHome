@@ -36,6 +36,8 @@
     <Compile Remove="Migrations\20201230091506_ChangeAllTables.Designer.cs" />
     <Compile Remove="Migrations\20201230091718_ChangeAllTables.cs" />
     <Compile Remove="Migrations\20201230091718_ChangeAllTables.Designer.cs" />
+    <Compile Remove="Migrations\20210101002709_addPhototoEventTable.cs" />
+    <Compile Remove="Migrations\20210101002709_addPhototoEventTable.Designer.cs" />
     <Compile Remove="Models\SkillOfTeacher.cs" />
     <Compile Remove="ViewComponents\DetailOfCourseViewComponent.cs" />
   </ItemGroup>

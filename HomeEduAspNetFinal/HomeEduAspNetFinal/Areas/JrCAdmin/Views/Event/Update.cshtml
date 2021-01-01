@@ -1,0 +1,79 @@
+﻿@model EventVM
+
+@{ ViewData["Title"] = "Update"; }
+<div class="row d-flex">
+    <div class="col-md-6 grid-margin stretch-card bg-dark text-light">
+        <div class="card d-flex flex-column bg-dark">
+
+            <div class="card-body ">
+                <img src="~/assets/img/event/@Model.Event.Image" style="height: 150px !important;width: 200px !important;" />
+            </div>
+            <div class="card-body ">
+                <h4 style="font-weight:600 !important">Event Name : <span style="font-weight:200 !important"> @Model.Event.Name </span></h4>
+            </div>
+
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Description : <span style="font-weight:200 !important"> @Model.DetailOfEvent.Decscription</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Date : <span style="font-weight:200 !important"> @Model.Event.StartingTime.ToString("dd MMM ")@Model.Event.StartingTime.ToString("t")-@Model.Event.EndTime.ToString("t")</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Venue : <span style="font-weight:200 !important"> @Model.Event.Venue </span></h5>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-md-6 grid-margin stretch-card bg-dark">
+        <div class="card bg-dark text-light">
+            <div class="card-body bg-dark">
+                <h4 class="card-title">Create Event</h4>
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <form class="forms-sample"  method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Event.Photo"></label>
+                        <input class="form-control-file" accept="image/*" asp-for="@Model.Event.Photo">
+                        <span class="text-danger" asp-validation-for="@Model.Event.Photo"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Event.Name"></label>
+                        <input class="form-control" asp-for="@Model.Event.Name">
+                        <span class=" text-danger" asp-validation-for="@Model.Event.Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.DetailOfEvent.Decscription"></label>
+                        <input class="form-control" asp-for="@Model.DetailOfEvent.Decscription">
+                        <span class=" text-danger" asp-validation-for="@Model.Event.DetailOfEvent.Decscription"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Event.StartingTime"></label>
+                        <input class="form-control" asp-for="@Model.Event.StartingTime">
+                        <span class=" text-danger" asp-validation-for="@Model.Event.StartingTime"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Event.EndTime"></label>
+                        <input class="form-control" asp-for="@Model.Event.EndTime">
+                        <span class=" text-danger" asp-validation-for="@Model.Event.EndTime"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Event.Venue"></label>
+                        <input class="form-control" asp-for="@Model.Event.Venue">
+                        <span class=" text-danger" asp-validation-for="@Model.Event.Venue"></span>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-success mr-2">Update</button>
+                    <a asp-action="Index" class="btn btn-secondary">Go Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <partial name="_ScriptsPartial" />
+}
+

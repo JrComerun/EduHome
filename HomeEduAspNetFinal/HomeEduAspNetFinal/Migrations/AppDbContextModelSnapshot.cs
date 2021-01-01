@@ -630,8 +630,8 @@ namespace HomeEduAspNetFinal.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(35)")
-                        .HasMaxLength(35);
+                        .HasColumnType("nvarchar(45)")
+                        .HasMaxLength(45);
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");

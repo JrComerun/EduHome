@@ -45,7 +45,7 @@
                             <td>@c.DetailOfCourse.Price</td>
 
                             <td class="d-flex flex-column align-items-end" >
-                                @if (ViewBag.Count > 6)
+                                @if (ViewBag.Count > 3)
                                 {
                                     <a style="width:80px!important" asp-controller="Course" asp-action="Detail" asp-route-id="@c.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
                                     <a style="width:80px!important" asp-controller="Course" asp-action="Update" asp-route-id="@c.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>

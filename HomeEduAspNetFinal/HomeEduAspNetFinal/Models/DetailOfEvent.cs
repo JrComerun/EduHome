@@ -10,7 +10,7 @@ namespace HomeEduAspNetFinal.Models
     public class DetailOfEvent
     {
         public int Id { get; set; }
-        [Required,MinLength(100),MaxLength(500)]
+        [Required,MaxLength(500)]
         public string Decscription { get; set; }
         
         [ForeignKey("Event")]

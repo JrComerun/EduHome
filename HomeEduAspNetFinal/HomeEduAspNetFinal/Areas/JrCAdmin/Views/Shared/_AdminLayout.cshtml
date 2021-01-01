@@ -231,11 +231,20 @@
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="JrCAdmin" asp-controller="Event" asp-action="Index">
-                            <i class="mdi mdi-view-headline menu-icon"></i>
+                        <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+                            <i class="mdi mdi-grid-large menu-icon"></i>
                             <span class="menu-title">Event</span>
+                            <i class="menu-arrow"></i>
                         </a>
+                        <div class="collapse" id="ui-basic2" style="">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">  <a class="nav-link" asp-area="JrCAdmin" asp-controller="Event" asp-action="Index"> Events </a></li>
+                                <li class="nav-item"><a class="nav-link" asp-area="JrCAdmin" asp-controller="Spikers" asp-action="Index"> Spikers </a></li>
+                                
+                            </ul>
+                        </div>
                     </li>
+                    
 
                     <li class="nav-item">
                         <a class="nav-link" asp-area="JrCAdmin" asp-controller="Teacher" asp-action="Index">

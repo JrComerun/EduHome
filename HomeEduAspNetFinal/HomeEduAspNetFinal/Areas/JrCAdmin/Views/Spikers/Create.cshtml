@@ -1,0 +1,47 @@
+﻿@model EventVM
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="col-md-6 grid-margin stretch-card bg-dark">
+    <div class="card bg-dark text-light">
+        <div class="card-body bg-dark">
+            <h4 class="card-title">Create Spiker</h4>
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <form class="forms-sample" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="@Model.Spiker.Photo"></label>
+                    <input class="form-control-file" accept="image/*" asp-for="@Model.Spiker.Photo">
+                    <span class="text-danger" asp-validation-for="@Model.Spiker.Photo"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Spiker.FullName"></label>
+                    <input class="form-control" asp-for="@Model.Spiker.FullName">
+                    <span class=" text-danger" asp-validation-for="@Model.Spiker.FullName"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Spiker.Profession"></label>
+                    <input class="form-control" asp-for="@Model.Spiker.Profession">
+                    <span class=" text-danger" asp-validation-for="@Model.Spiker.Profession"></span>
+                </div>
+                <div class="form-group">
+                    <select class="custom-select" required name="eventId">
+                        <option value="">Open this select menu</option>
+
+                        @foreach (Event e in Model.Events)
+                        {
+                            <option value="@e.DetailOfEvent.Id">@e.Name</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success mr-2">Create</button>
+                <a asp-action="Index" class="btn btn-secondary">Go Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <partial name="_ScriptsPartial" />
+}
+

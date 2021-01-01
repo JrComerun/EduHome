@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +19,8 @@ namespace HomeEduAspNetFinal.Models
         public string Venue { get; set; }
         [Required]
         public string Image { get; set; }
+        [NotMapped]
+        public IFormFile Photo { get; set; }
         public DetailOfEvent DetailOfEvent { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedTime { get; set; }

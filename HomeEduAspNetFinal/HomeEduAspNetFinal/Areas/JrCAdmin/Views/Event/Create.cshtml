@@ -1,0 +1,67 @@
+﻿@model EventVM
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="col-12 grid-margin stretch-card bg-dark d-flex">
+    <div class="card bg-dark text-light">
+        <div class="card-body bg-dark">
+            <h4 class="card-title">Create Event</h4>
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <form class="forms-sample" asp-controller="Event" asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="@Model.Event.Photo"></label>
+                    <input class="form-control-file" accept="image/*" asp-for="@Model.Event.Photo">
+                    <span class="text-danger" asp-validation-for="@Model.Event.Photo"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Event.Name"></label>
+                    <input class="form-control" asp-for="@Model.Event.Name">
+                    <span class=" text-danger" asp-validation-for="@Model.Event.Name"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfEvent.Decscription"></label>
+                    <input class="form-control" asp-for="@Model.DetailOfEvent.Decscription">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfEvent.Decscription"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Event.StartingTime"></label>
+                    <input class="form-control" asp-for="@Model.Event.StartingTime">
+                    <span class=" text-danger" asp-validation-for="@Model.Event.StartingTime"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Event.EndTime"></label>
+                    <input class="form-control" asp-for="@Model.Event.EndTime">
+                    <span class=" text-danger" asp-validation-for="@Model.Event.EndTime"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Event.Venue"></label>
+                    <input class="form-control" asp-for="@Model.Event.Venue">
+                    <span class=" text-danger" asp-validation-for="@Model.Event.Venue"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Spiker.Photo">Spiker Photo</label>
+                    <input class="form-control-file" accept="image/*" asp-for="@Model.Spiker.Photo">
+                    <span class="text-danger" asp-validation-for="@Model.Spiker.Photo"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Spiker.FullName">Spiker FullName</label>
+                    <input class="form-control" asp-for="@Model.Spiker.FullName">
+                    <span class=" text-danger" asp-validation-for="@Model.Spiker.FullName"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Spiker.Profession">Spiker Profession</label>
+                    <input class="form-control" asp-for="@Model.Spiker.Profession">
+                    <span class=" text-danger" asp-validation-for="@Model.Spiker.Profession"></span>
+                </div>
+               
+                <button type="submit" class="btn btn-success mr-2">Create</button>
+                <a asp-action="Index" class="btn btn-secondary">Go Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <partial name="_ScriptsPartial" />
+}

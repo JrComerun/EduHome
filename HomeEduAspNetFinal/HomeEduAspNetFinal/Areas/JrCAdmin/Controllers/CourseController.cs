@@ -1,6 +1,7 @@
 ﻿using Fiorello.Extensions;
 using HomeEduAspNetFinal.DAL;
 using HomeEduAspNetFinal.Models;
+using HomeEduAspNetFinal.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -40,22 +41,22 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(DetailOfCourse detailOfCourse, Course course)
+        public async Task<IActionResult> Create(CourseVM  courseVm)
         {
 
-            if (course.Photo == null) return IsNonValid("", "Please select PHOTO!!!");
-            if (!course.Photo.IsImage()) return IsNonValid("", "Please select image type!!!");
-            if (course.Photo.MaxSize(150)) return IsNonValid("", "Select PHOTO max-size 150!");
-            bool isExist = _db.Courses.Where(c => c.IsDeleted == false).Any(c => c.Name.ToLower() == course.Name.ToLower());
+            if (courseVm.Course.Photo == null) return IsNonValid("", "Please select PHOTO!!!");
+            if (!courseVm.Course.Photo.IsImage()) return IsNonValid("", "Please select image type!!!");
+            if (courseVm.Course.Photo.MaxSize(150)) return IsNonValid("", "Select PHOTO max-size 150!");
+            bool isExist = _db.Courses.Where(c => c.IsDeleted == false).Any(c => c.Name.ToLower() == courseVm.Course.Name.ToLower());
             if (isExist) return IsNonValid("", "This Course is already exist");
             string folder = Path.Combine("assets", "img", "course");
-            string filename = await course.Photo.SaveImageAsync(_env.WebRootPath, folder);
-            course.Image = filename;
-            course.IsDeleted = false;
-            await _db.Courses.AddAsync(course);
+            string filename = await courseVm.Course.Photo.SaveImageAsync(_env.WebRootPath, folder);
+            courseVm.Course.Image = filename;
+            courseVm.Course.IsDeleted = false;
+            await _db.Courses.AddAsync(courseVm.Course);
             await _db.SaveChangesAsync();
-            detailOfCourse.CourseId = course.Id;
-            await _db.DetailOfCourses.AddAsync(detailOfCourse);
+            courseVm.DetailOfCourse.CourseId = courseVm.Course.Id;
+            await _db.DetailOfCourses.AddAsync(courseVm.DetailOfCourse);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -91,20 +92,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             Course course = _db.Courses.Where(c => c.IsDeleted == false).Include(c => c.DetailOfCourse).FirstOrDefault(c => c.Id == id);
             if (course == null) return RedirectToAction(nameof(Index));
 
-            //if (course.Photo == null) return IsNonValid("", "Please select PHOTO!!!");
-            //if (!course.Photo.IsImage()) return IsNonValid("", "Please select image type!!!");
-            //if (course.Photo.MaxSize(150)) return IsNonValid("", "Select PHOTO max-size 150!");
-            //bool isExist = _db.Courses.Where(c => c.IsDeleted == false).Any(c => c.Name.ToLower() == course.Name.ToLower());
-            //if (isExist &&course== null) return IsNonValid("", "This Course is already exist");
-            //string folder = Path.Combine("assets", "img", "course");
-            //string filename = await course.Photo.SaveImageAsync(_env.WebRootPath, folder);
-            //course.Image = filename;
-            //course.IsDeleted = false;
-            //await _db.Courses.AddAsync(course);
-            //await _db.SaveChangesAsync();
-
-            //await _db.SaveChangesAsync();
-            int countCourse = _db.HomeSliders.Where(s => s.IsDeleted == false).Count();
+            int countCourse = _db.Courses.Where(s => s.IsDeleted == false).Count();
 
             if (countCourse > 50)
             {
@@ -117,7 +105,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 }
                 _db.Courses.Remove(course);
             }
-            else if (countCourse > 1 && countCourse <= 50)
+            else if (countCourse > 3 && countCourse <= 50)
             {
                 course.IsDeleted = true;
                 course.DeletedTime = DateTime.UtcNow;
@@ -164,7 +152,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 string filename = await course.Photo.SaveImageAsync(_env.WebRootPath, folder);
                 
 
-                int countCourse = _db.HomeSliders.Where(s => s.IsDeleted == false).Count();
+                int countCourse = _db.Events.Where(s => s.IsDeleted == false).Count();
                 if (countCourse > 50)
                 {
                     string path = Path.Combine(_env.WebRootPath, folder, dbCourse.Image);
@@ -178,10 +166,10 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 dbCourse.Image = filename;
             }
             bool isExist = _db.Courses.Where(c => c.IsDeleted == false)
-                .Any(c => c.Name.ToLower() == course.Name.ToLower()&&c.Id!=course.Id);           
+                .Any(c => c.Name.ToLower() == course.Name.ToLower()&&c.Id!=id);           
 
             
-                if(isExist ) return IsNonValid("Name", "This Course is already exist", dbCourse);
+                if(isExist ) return IsNonValid("", "This Course is already exist", dbCourse);
                 dbCourse.Name = course.Name;
                 dbCourse.Description = course.Description;
                 dbCourse.DetailOfCourse.AboutCourse = course.DetailOfCourse.AboutCourse;
@@ -195,12 +183,6 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 dbCourse.DetailOfCourse.Language = course.DetailOfCourse.Language;
                 dbCourse.DetailOfCourse.Price = course.DetailOfCourse.Price;
                 
-           
-               
-            
-            
-
-
             await _db.SaveChangesAsync();
             //return IsNonValid("", "This Course is already exist", dbCourse);
             return RedirectToAction(nameof(Index));

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PchuafVo3WJ3PThbCUS7E7+cVUss4YS2BdAmU5GgmDgtU0df97A1tOMXy3B3EmLQn5LlJZc5+bLJhDcWL8/sHQ==",
+  "dgSpecHash": "RBXi6g0SMbBxJavAVJjbvpAFzrFOIgUj38ID1B+C8n4HMw8S1YfFLZmZFzQyZoXaAZYpulJ7+EjE6iIDzb69uQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Code Academy\\Desktop\\EduHome\\HomeEduAspNetFinal\\HomeEduAspNetFinal\\HomeEduAspNetFinal.csproj",
+  "projectFilePath": "C:\\Users\\Code Academy\\Desktop\\EduHome-Master\\HomeEduAspNetFinal\\HomeEduAspNetFinal\\HomeEduAspNetFinal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Code Academy\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\Code Academy\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",

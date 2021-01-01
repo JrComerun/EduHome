@@ -1,0 +1,32 @@
+﻿@model Event
+@{
+    ViewData["Title"] = "Detail";
+}
+<div class="col-md-6 grid-margin stretch-card bg-dark text-light">
+    <div class="card d-flex flex-column bg-dark">
+
+        <div class="card-body ">
+            <img src="~/assets/img/event/@Model.Image" style="height: 150px !important;width: 200px !important;" />
+        </div>
+        <div class="card-body ">
+            <h4 style="font-weight:600 !important">Event Name : <span style="font-weight:200 !important"> @Model.Name </span></h4>
+        </div>
+        
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Description : <span style="font-weight:200 !important"> @Model.DetailOfEvent.Decscription</span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Date : <span style="font-weight:200 !important"> @Model.StartingTime.ToString("dd MMM t")-@Model.EndTime.ToString("t")</span></h5>
+        </div>
+        <div class="card-body ">
+            <h5 style="font-weight:600 !important">Venue : <span style="font-weight:200 !important"> @Model.Venue </span></h5>
+        </div>
+       
+
+    </div>
+</div>
+<div class="a" style="padding: 0 10px">
+    <a asp-action="Index" class="btn btn-outline-secondary">Go Back</a>
+
+</div>
+

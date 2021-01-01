@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-center mb-2 py-4 bg-dark font-weight-bold text-light">
                 <h2 class="card-title pt-2 mb-0 mr-5 text-light" style="font-size:larger !important;">Events </h2>
-                <a asp-action="Create" class="btn btn-success text-light ml-5" style="cursor:pointer;">Create</a>
+                <a asp-controller="Event" asp-action="Create" class="btn btn-success text-light ml-5" style="cursor:pointer;">Create</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -23,12 +23,8 @@
                                 Date
                             </th>
                             <th>
-                               Venue
+                                Venue
                             </th>
-                            <th>
-                                Spikers
-                            </th>
-
                             <th class="text-right">
                                 Settings
                             </th>
@@ -37,29 +33,27 @@
                     <tbody>
                         @foreach (Event e in Model)
                         {
-                        <tr class="bg-dark font-weight-bold text-light">
-                            <td><img src="~/assets/img/event/@e.Image" class="img-fluid " style="width:80px !important;height:80px!important;object-fit: cover !important;" /></td>
-                            <td style="text-transform:capitalize!important">@e.Name</td>
-                            <td>@e.StartingTime.ToString("f")-@e.EndTime.ToString("t") </td>
-                            <td>@e.Venue</td>
-                            @*<td>@e.SpikersOfEvents.FirstOrDefault().FullName</td>*@
-                            
+                            <tr class="bg-dark font-weight-bold text-light">
+                                <td><img src="~/assets/img/event/@e.Image" class="img-fluid " style="width:80px !important;height:80px!important;object-fit: cover !important;" /></td>
+                                <td style="text-transform:capitalize!important">@e.Name</td>
+                                <td>@e.StartingTime.ToString("dd MMM t") @e.StartingTime.ToString("t")-@e.EndTime.ToString("t") </td>
+                                <td>@e.Venue</td>
 
-                            <td class="d-flex flex-column align-items-end">
-                                @if (ViewBag.Count > 6)
-                                {
-                                    <a style="width:80px!important" asp-controller="Event" asp-action="Detail" asp-route-id="@e.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
-                                    <a style="width:80px!important" asp-controller="Event" asp-action="Update" asp-route-id="@e.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
-                                    <a style="width:80px!important" asp-controller="Event" asp-action="Delete" asp-route-id="@e.Id" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></a>
-                                }
-                                else
-                                {
-                                    <a style="width:80px!important" asp-controller="Event" asp-action="Detail" asp-route-id="@e.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
-                                    <a style="width:80px!important" asp-controller="Event" asp-action="Update" asp-route-id="@e.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
-                                }
+                                <td class="d-flex flex-column align-items-end">
+                                    @if (ViewBag.Count > 3)
+                                    {
+                                        <a style="width:80px!important" asp-controller="Event" asp-action="Detail" asp-route-id="@e.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
+                                        <a style="width:80px!important" asp-controller="Event" asp-action="Update" asp-route-id="@e.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
+                                        <a style="width:80px!important" asp-controller="Event" asp-action="Delete" asp-route-id="@e.Id" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a style="width:80px!important" asp-controller="Event" asp-action="Detail" asp-route-id="@e.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
+                                        <a style="width:80px!important" asp-controller="Event" asp-action="Update" asp-route-id="@e.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
+                                    }
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         }
 
                     </tbody>
@@ -68,4 +62,6 @@
         </div>
     </div>
 </div>
+
+
 
