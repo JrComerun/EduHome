@@ -21891,3 +21891,41 @@ dl li {
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+/*#spec-icon i {
+    font-size: 15px;
+    color: #2c2b5e;
+    background: #F6F6F6;
+    height: 40px;
+    width: 38px;
+    text-align: center;
+    line-height: 40px;
+    -webkit-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}*/
+td ul li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+    td ul li:last-child {
+        margin-right: 0px;
+    }
+
+    td ul li a i {
+        font-size: 15px;
+        color: #2c2b5e;
+        background: #F6F6F6;
+        height: 40px;
+        width: 38px;
+        text-align: center;
+        line-height: 40px !important;
+        -webkit-transition: all 0.5s ease 0s;
+        -o-transition: all 0.5s ease 0s;
+        transition: all 0.5s ease 0s;
+    }
+
+    td ul li:hover a i {
+        color: #fff;
+        background: #EC1C23;
+    }

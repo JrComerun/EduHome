@@ -61,26 +61,8 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             string filename = await eventVM.Event.Photo.SaveImageAsync(_env.WebRootPath, folder);
             eventVM.Event.Image = filename;
             eventVM.Event.IsDeleted = false;
-            
             await _db.Events.AddAsync(eventVM.Event);
             await _db.SaveChangesAsync();
-            List<SubScribe> subScribes = _db.SubScribes.ToList();
-            
-            foreach (SubScribe s in subScribes)
-            {
-                EventSubScribe eventSubScribe = new EventSubScribe();
-                eventSubScribe.EventId = eventVM.Event.Id;
-                eventSubScribe.SubScribeId = s.Id;
-                await _db.EventSubScribes.AddAsync(eventSubScribe);
-                await _db.SaveChangesAsync();
-            }
-            List<EventSubScribe> eventSubScribes = _db.EventSubScribes.ToList();
-            foreach (EventSubScribe s in eventSubScribes)
-            {
-                
-                SendEmailToUser(s.SubScribe.Email, s.SubScribe.Subject, s.SubScribe.Message);
-            }
-
             eventVM.DetailOfEvent.EventId = eventVM.Event.Id;
             eventVM.DetailOfEvent.IsDeleted = false;
             await _db.DetailOfEvents.AddAsync(eventVM.DetailOfEvent);
@@ -93,9 +75,27 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             eventVM.Spiker.IsDeleted = false;
             eventVM.Spiker.DetailOfEventId = eventVM.DetailOfEvent.Id;
             await _db.SpikersOfEvents.AddAsync(eventVM.Spiker);
-
             await _db.SaveChangesAsync();
-           
+            //*************************************************
+            //*****************send Subscrribe****************
+
+            List<SubScribe> subScribes = _db.SubScribes.ToList();
+            foreach (SubScribe s in subScribes)
+            {
+                EventSubScribe eventSubScribe = new EventSubScribe();
+                eventSubScribe.EventId = eventVM.Event.Id;
+                eventSubScribe.SubScribeId = s.Id;
+                await _db.EventSubScribes.AddAsync(eventSubScribe);
+                await _db.SaveChangesAsync();
+            }
+            List<EventSubScribe> eventSubScribes = _db.EventSubScribes.Where(s=>s.EventId==eventVM.Event.Id).ToList();
+            foreach (EventSubScribe s in eventSubScribes)
+            {
+
+                SendEmailToUser(s.SubScribe.Email, s.SubScribe.Subject, s.SubScribe.Message);
+            }
+
+
             return RedirectToAction(nameof(Index));
         }
         #endregion
@@ -125,7 +125,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         public async Task<IActionResult> DeletePost(int? id)
         {
             if (id == null) return RedirectToAction(nameof(Index));
-            Event events = _db.Events.Where(c => c.IsDeleted == false).Include(c => c.DetailOfEvent).FirstOrDefault(c => c.Id == id);
+            Event events = _db.Events.Where(c => c.IsDeleted == false).Include(c => c.DetailOfEvent).ThenInclude(e => e.SpikersOfEvents).FirstOrDefault(c => c.Id == id);
             if (events == null) return RedirectToAction(nameof(Index));
 
             int countEvent = _db.Events.Where(s => s.IsDeleted == false).Count();
@@ -147,12 +147,12 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 events.DeletedTime = DateTime.UtcNow;
                 events.DetailOfEvent.IsDeleted = true;
                 events.DetailOfEvent.DeletedTime = DateTime.UtcNow;
-                foreach (SpikersOfEvent spiker in events.SpikersOfEvents)
+                foreach (SpikersOfEvent spiker in events.DetailOfEvent.SpikersOfEvents)
                 {
                     spiker.IsDeleted = true;
                     spiker.DeletedTime = DateTime.UtcNow;
                 }
-                
+
             }
             else
             {
@@ -170,8 +170,8 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             if (id == null) return RedirectToAction(nameof(Index));
             EventVM eventVM = new EventVM
             {
-                Event= _db.Events.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id),
-                DetailOfEvent= _db.DetailOfEvents.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.EventId == id),
+                Event = _db.Events.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id),
+                DetailOfEvent = _db.DetailOfEvents.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.EventId == id),
             };
 
             if (eventVM.Event == null) return RedirectToAction(nameof(Index));
@@ -183,7 +183,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         public async Task<IActionResult> Update(int? id, EventVM eventVM)
         {
 
-           if (id == null) return RedirectToAction(nameof(Index));
+            if (id == null) return RedirectToAction(nameof(Index));
             EventVM dbEventVM = new EventVM
             {
                 Event = _db.Events.Where(c => c.IsDeleted == false).Include(c => c.DetailOfEvent).FirstOrDefault(c => c.Id == id),
@@ -210,7 +210,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                         System.IO.File.Delete(path);
 
                     }
-                    
+
                 }
                 dbEventVM.Event.Image = filename;
             }
@@ -248,9 +248,9 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             SmtpClient client = new SmtpClient("smtp.mail.ru", 587);
             client.UseDefaultCredentials = false;
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("kami621@mail.ru", "lene1234");
+            client.Credentials = new NetworkCredential("jrcomerun621@mail.ru", "lene1234");
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            MailMessage message = new MailMessage("kami621@mail.ru", toEmail);
+            MailMessage message = new MailMessage("jrcomerun621@mail.ru", toEmail);
             message.Subject = subject;
             message.Body = mesBody;
 
@@ -259,9 +259,10 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 
             client.Send(message);
 
+
         }
         #endregion
 
-        
+
     }
 }

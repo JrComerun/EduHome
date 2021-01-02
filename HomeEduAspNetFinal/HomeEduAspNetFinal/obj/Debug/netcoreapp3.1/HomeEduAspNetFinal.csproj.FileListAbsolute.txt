@@ -616,3 +616,5 @@ C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SpecialCourse\Detail.cshtml.g.cs
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SpecialCourse\Delete.cshtml.g.cs
 C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SpecialCourse\Update.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Teacher\Index.cshtml.g.cs
+C:\Users\Code Academy\Desktop\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Teacher\Create.cshtml.g.cs

@@ -33,6 +33,7 @@ namespace HomeEduAspNetFinal.DAL
         public DbSet<VideoTour> VideoTours { get; set; }
         public DbSet<SubScribe> SubScribes { get; set; }
         public DbSet<EventSubScribe> EventSubScribes { get; set; }
+        public DbSet<ProfessionOfTeacher> ProfessionOfTeacher { get; set; }
 
     }
 }

@@ -1,0 +1,122 @@
+﻿@model TeacherVM
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="col-md-6 grid-margin stretch-card bg-dark d-flex">
+    <div class="card bg-dark text-light">
+        <div class="card-body bg-dark">
+            <h4 class="card-title">Create Teacher</h4>
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <form class="forms-sample" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="@Model.Teacher.Photo"></label>
+                    <input class="form-control-file" accept="image/*" asp-for="@Model.Teacher.Photo">
+                    <span class="text-danger" asp-validation-for="@Model.Teacher.Photo"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Teacher.FullName"></label>
+                    <input class="form-control" asp-for="@Model.Teacher.FullName">
+                    <span class=" text-danger" asp-validation-for="@Model.Teacher.FullName"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.SocMedOfTeacher.Link">Social media Link</label>
+                    <input class="form-control" asp-for="@Model.SocMedOfTeacher.Link">
+                    <span class=" text-danger" asp-validation-for="@Model.SocMedOfTeacher.Link"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.SocMedOfTeacher.Icon">Social Media Icon </label>
+                    <input class="form-control" asp-for="@Model.SocMedOfTeacher.Icon">
+                    <span class=" text-danger" asp-validation-for="@Model.SocMedOfTeacher.Icon"></span>
+                </div>
+                <div class="form-group">
+                    <select class="custom-select" required name="ProfId">
+                        <option value="">Open this select menu</option>
+
+                        @foreach (ProfessionOfTeacher t in Model.ProfessionOfTeachers)
+                        {
+                            <option value="@t.Id">@t.Profession</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.AboutMe"></label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.AboutMe">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.AboutMe"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.Degree"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.Degree">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.Degree"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.Experience"></label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.Experience">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.Experience"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.Hobbies"></label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.Hobbies">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.Hobbies"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.Faculty"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.Faculty">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.Faculty"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.MailMe"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.MailMe">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.MailMe"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.MakeACall"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.MakeACall">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.MakeACall"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.Skype"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.Skype">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.Skype"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.LanguageValue"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.LanguageValue">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.LanguageValue"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.TeamLeaderValue"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.TeamLeaderValue">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.TeamLeaderValue"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.DevelopmentValue"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.DevelopmentValue">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.DevelopmentValue"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.InnovtionValue"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.InnovtionValue">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.InnovtionValue"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.ComunicationValue"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.ComunicationValue">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.ComunicationValue"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DetailOfTeacher.DesignValue"> </label>
+                    <input class="form-control" asp-for="@Model.DetailOfTeacher.DesignValue">
+                    <span class=" text-danger" asp-validation-for="@Model.DetailOfTeacher.DesignValue"></span>
+                </div>
+                <button type="submit" class="btn btn-success mr-2">Create</button>
+                <a asp-action="Index" class="btn btn-secondary">Go Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <partial name="_ScriptsPartial" />
+}
+
