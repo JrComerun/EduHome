@@ -1,0 +1,72 @@
+﻿@model Teacher
+@{
+    ViewData["Title"] = "Detail"; 
+ }
+
+ <div class="col-md-6 grid-margin stretch-card bg-dark text-light">
+        <div class="card d-flex flex-column bg-dark">
+
+            <div class="card-body ">
+                <img src="~/assets/img/teacher/@Model.Image" style="height: 150px !important;width: 200px !important;" />
+            </div>
+            <div class="card-body ">
+                <h4 style="font-weight:600 !important">Teacher FullName : <span style="font-weight:200 !important"> @Model.FullName </span></h4>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Profession : <span style="font-weight:200 !important"> @Model.ProfessionOfTeacher.Profession </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">About me : <span style="font-weight:200 !important">@Model.DetailOfTeacher.AboutMe </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Degree : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.Degree </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Experience : <span style="font-weight:200 !important">@Model.DetailOfTeacher.Experience </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Hobbies : <span style="font-weight:200 !important">@Model.DetailOfTeacher.Hobbies </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Faculty : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.Faculty </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Mail Me : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.MailMe </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Make a call : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.MakeACall </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Skype : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.Skype </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Comunication  : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.ComunicationValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Design : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.DesignValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Development : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.DevelopmentValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Innovtion : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.InnovtionValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Language : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.LanguageValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Team Leader : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.TeamLeaderValue %</span></h5>
+            </div>
+               @foreach (SocMedOfTeacher s in Model.SocMedOfTeachers)
+                {
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">social media link : <span style="font-weight:200 !important"><a href="@s.Link">@Html.Raw(s.Icon) </a> </span></h5>
+            </div>
+                }
+        </div>
+    </div>
+<div class="a" style="padding: 0 10px">
+    <a asp-action="Index" class="btn btn-outline-secondary">Go Back</a>
+
+</div>
+

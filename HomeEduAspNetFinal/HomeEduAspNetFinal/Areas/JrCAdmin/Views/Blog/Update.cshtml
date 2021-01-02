@@ -1,0 +1,91 @@
+﻿@model BlogsVM
+@{
+    ViewData["Title"] = "Update";
+}
+<div class="row d-flex">
+    <div class="col-md-6 grid-margin stretch-card bg-dark text-light">
+        <div class="card d-flex flex-column bg-dark">
+
+            <div class="card-body ">
+                <img src="~/assets/img/blog/@Model.Blog.Image" style="height: 150px !important;width: 200px !important;" />
+            </div>
+            <div class="card-body ">
+                <h4 style="font-weight:600 !important">Blog Title : <span style="font-weight:200 !important"> @Model.Blog.Title </span></h4>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Autor : <span style="font-weight:200 !important"> @Model.Blog.Author </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Description : <span style="font-weight:200 !important"> @Model.Blog.DetailsOfBlog.Description </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Date : <span style="font-weight:200 !important"> @Model.Blog.DateTime.ToString("D") </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Event : <span style="font-weight:200 !important"> @Model.Blog.Event.Name </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Course : <span style="font-weight:200 !important"> @Model.Blog.Course.Name </span></h5>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6 grid-margin stretch-card bg-dark">
+        <div class="card bg-dark text-light">
+            <div class="card-body bg-dark">
+                <h4 class="card-title">Create Slider</h4>
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Blog.Photo"></label>
+                        <input class="form-control-file" accept="image/*" asp-for="@Model.Blog.Photo">
+                        <span class="text-danger" asp-validation-for="@Model.Blog.Photo"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Blog.Title"></label>
+                        <input class="form-control" asp-for="@Model.Blog.Title">
+                        <span class=" text-danger" asp-validation-for="@Model.Blog.Title"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Blog.Author"></label>
+                        <input class="form-control" asp-for="@Model.Blog.Author">
+                        <span class=" text-danger" asp-validation-for="@Model.Blog.Author"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Blog.DetailsOfBlog.Description"></label>
+                        <input class="form-control" asp-for="@Model.Blog.DetailsOfBlog.Description">
+                        <span class=" text-danger" asp-validation-for="@Model.Blog.DetailsOfBlog.Description"></span>
+                    </div>
+                    <div class="form-group">
+                        <select class="custom-select" required name="eventId">
+                            <option value="">Open this select menu</option>
+
+                            @foreach (Event e in Model.Events)
+                            {
+                                <option value="@e.Id">@e.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="custom-select" required name="courseId">
+                            <option value="">Open this select menu</option>
+
+                            @foreach (Course c in Model.Courses)
+                            {
+                                <option value="@c.Id">@c.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Create</button>
+                    <a asp-action="Index" class="btn btn-secondary">Go Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <partial name="_ScriptsPartial" />
+}

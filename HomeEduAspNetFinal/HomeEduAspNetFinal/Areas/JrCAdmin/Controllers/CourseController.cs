@@ -157,7 +157,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 string filename = await course.Photo.SaveImageAsync(_env.WebRootPath, folder);
                 
 
-                int countCourse = _db.Events.Where(s => s.IsDeleted == false).Count();
+                int countCourse = _db.Courses.Where(s => s.IsDeleted == false).Count();
                 if (countCourse > 50)
                 {
                     string path = Path.Combine(_env.WebRootPath, folder, dbCourse.Image);

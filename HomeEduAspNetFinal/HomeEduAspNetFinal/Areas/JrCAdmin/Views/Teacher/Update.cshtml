@@ -1,0 +1,173 @@
+﻿@model TeacherVM
+@{
+    ViewData["Title"] = "Update";
+}
+<div class="row d-flex">
+    <div class="col-md-6 grid-margin stretch-card bg-dark text-light">
+        <div class="card d-flex flex-column bg-dark">
+
+            <div class="card-body ">
+                <img src="~/assets/img/teacher/@Model.Teacher.Image" style="height: 150px !important;width: 200px !important;" />
+            </div>
+            <div class="card-body ">
+                <h4 style="font-weight:600 !important">Teacher FullName : <span style="font-weight:200 !important"> @Model.Teacher.FullName </span></h4>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Profession : <span style="font-weight:200 !important"> @Model.Teacher.ProfessionOfTeacher.Profession </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">About me : <span style="font-weight:200 !important">@Model.Teacher.DetailOfTeacher.AboutMe </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Degree : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.Degree </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Experience : <span style="font-weight:200 !important">@Model.Teacher.DetailOfTeacher.Experience </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Hobbies : <span style="font-weight:200 !important">@Model.Teacher.DetailOfTeacher.Hobbies </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Faculty : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.Faculty </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Mail Me : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.MailMe </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Make a call : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.MakeACall </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Skype : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.Skype </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Comunication  : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.ComunicationValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Design : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.DesignValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Development : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.DevelopmentValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Innovtion : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.InnovtionValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Language : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.LanguageValue %</span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Team Leader : <span style="font-weight:200 !important"> @Model.Teacher.DetailOfTeacher.TeamLeaderValue %</span></h5>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6 grid-margin stretch-card bg-dark d-flex">
+        <div class="card bg-dark text-light">
+            <div class="card-body bg-dark">
+                <h4 class="card-title">Create Teacher</h4>
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.Photo"></label>
+                        <input class="form-control-file" accept="image/*" asp-for="@Model.Teacher.Photo">
+                        <span class="text-danger" asp-validation-for="@Model.Teacher.Photo"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.FullName"></label>
+                        <input class="form-control" asp-for="@Model.Teacher.FullName">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.FullName"></span>
+                    </div>
+                   
+                    <div class="form-group">
+                        <select class="custom-select" required name="ProfId">
+                            <option value="">Open this select menu</option>
+
+                            @foreach (ProfessionOfTeacher t in Model.ProfessionOfTeachers)
+                            {
+                                <option value="@t.Id">@t.Profession</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.AboutMe"></label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.AboutMe">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.AboutMe"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.Degree"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.Degree">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.Degree"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.Experience"></label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.Experience">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.Experience"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.Hobbies"></label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.Hobbies">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.Hobbies"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.Faculty"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.Faculty">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.Faculty"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.MailMe"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.MailMe">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.MailMe"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.MakeACall"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.MakeACall">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.MakeACall"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.Skype"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.Skype">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.Skype"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.LanguageValue"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.LanguageValue">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.LanguageValue"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.TeamLeaderValue"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.TeamLeaderValue">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.TeamLeaderValue"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.DevelopmentValue"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.DevelopmentValue">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.DevelopmentValue"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.InnovtionValue"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.InnovtionValue">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.InnovtionValue"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.ComunicationValue"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.ComunicationValue">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.ComunicationValue"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Teacher.DetailOfTeacher.DesignValue"> </label>
+                        <input class="form-control" asp-for="@Model.Teacher.DetailOfTeacher.DesignValue">
+                        <span class=" text-danger" asp-validation-for="@Model.Teacher.DetailOfTeacher.DesignValue"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success mr-2">Create</button>
+                    <a asp-action="Index" class="btn btn-secondary">Go Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <partial name="_ScriptsPartial" />
+}
+

@@ -140,6 +140,12 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 
                 }
                 _db.Events.Remove(events);
+                foreach (SpikersOfEvent spiker in events.DetailOfEvent.SpikersOfEvents)
+                {
+                    spiker.IsDeleted = true;
+                    spiker.DeletedTime = DateTime.UtcNow;
+                    _db.SpikersOfEvents.Remove(spiker);
+                }
             }
             else if (countEvent > 3 && countEvent <= 50)
             {
