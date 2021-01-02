@@ -32,5 +32,6 @@ namespace HomeEduAspNetFinal.Models
         public DateTime StartingTime { get; set; }
         [Required]
         public DateTime EndTime { get; set; }
+        public virtual ICollection<EventSubScribe> EventSubScribes { get; set; }
     }
 }

@@ -31,5 +31,8 @@ namespace HomeEduAspNetFinal.DAL
         public DbSet<HomeSlider> HomeSliders { get; set; }
         public DbSet<NoticeBoard> NoticeBoards { get; set; }
         public DbSet<VideoTour> VideoTours { get; set; }
+        public DbSet<SubScribe> SubScribes { get; set; }
+        public DbSet<EventSubScribe> EventSubScribes { get; set; }
+
     }
 }

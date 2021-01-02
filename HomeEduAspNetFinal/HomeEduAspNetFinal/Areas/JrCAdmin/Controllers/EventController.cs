@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
@@ -59,8 +61,26 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             string filename = await eventVM.Event.Photo.SaveImageAsync(_env.WebRootPath, folder);
             eventVM.Event.Image = filename;
             eventVM.Event.IsDeleted = false;
+            
             await _db.Events.AddAsync(eventVM.Event);
             await _db.SaveChangesAsync();
+            List<SubScribe> subScribes = _db.SubScribes.ToList();
+            
+            foreach (SubScribe s in subScribes)
+            {
+                EventSubScribe eventSubScribe = new EventSubScribe();
+                eventSubScribe.EventId = eventVM.Event.Id;
+                eventSubScribe.SubScribeId = s.Id;
+                await _db.EventSubScribes.AddAsync(eventSubScribe);
+                await _db.SaveChangesAsync();
+            }
+            List<EventSubScribe> eventSubScribes = _db.EventSubScribes.ToList();
+            foreach (EventSubScribe s in eventSubScribes)
+            {
+                
+                SendEmailToUser(s.SubScribe.Email, s.SubScribe.Subject, s.SubScribe.Message);
+            }
+
             eventVM.DetailOfEvent.EventId = eventVM.Event.Id;
             eventVM.DetailOfEvent.IsDeleted = false;
             await _db.DetailOfEvents.AddAsync(eventVM.DetailOfEvent);
@@ -73,7 +93,9 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             eventVM.Spiker.IsDeleted = false;
             eventVM.Spiker.DetailOfEventId = eventVM.DetailOfEvent.Id;
             await _db.SpikersOfEvents.AddAsync(eventVM.Spiker);
+
             await _db.SaveChangesAsync();
+           
             return RedirectToAction(nameof(Index));
         }
         #endregion
@@ -125,6 +147,12 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 events.DeletedTime = DateTime.UtcNow;
                 events.DetailOfEvent.IsDeleted = true;
                 events.DetailOfEvent.DeletedTime = DateTime.UtcNow;
+                foreach (SpikersOfEvent spiker in events.SpikersOfEvents)
+                {
+                    spiker.IsDeleted = true;
+                    spiker.DeletedTime = DateTime.UtcNow;
+                }
+                
             }
             else
             {
@@ -213,5 +241,27 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         #endregion
 
+        #region Send Email Subscribe
+        public void SendEmailToUser(string toMail, string subject, string mesBody)
+        {
+            string toEmail = toMail;
+            SmtpClient client = new SmtpClient("smtp.mail.ru", 587);
+            client.UseDefaultCredentials = false;
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("kami621@mail.ru", "lene1234");
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            MailMessage message = new MailMessage("kami621@mail.ru", toEmail);
+            message.Subject = subject;
+            message.Body = mesBody;
+
+            message.BodyEncoding = System.Text.Encoding.UTF8;
+            message.IsBodyHtml = true;
+
+            client.Send(message);
+
+        }
+        #endregion
+
+        
     }
 }

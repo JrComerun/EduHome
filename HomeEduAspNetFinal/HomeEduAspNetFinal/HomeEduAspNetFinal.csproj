@@ -38,6 +38,14 @@
     <Compile Remove="Migrations\20201230091718_ChangeAllTables.Designer.cs" />
     <Compile Remove="Migrations\20210101002709_addPhototoEventTable.cs" />
     <Compile Remove="Migrations\20210101002709_addPhototoEventTable.Designer.cs" />
+    <Compile Remove="Migrations\20210102001412_CreateSubscribeAndEventSubScribeTables.cs" />
+    <Compile Remove="Migrations\20210102001412_CreateSubscribeAndEventSubScribeTables.Designer.cs" />
+    <Compile Remove="Migrations\20210102001442_CreateSubscribeAndEventSubScribeTable.cs" />
+    <Compile Remove="Migrations\20210102001442_CreateSubscribeAndEventSubScribeTable.Designer.cs" />
+    <Compile Remove="Migrations\20210102002012_CreateSubScribeTable.cs" />
+    <Compile Remove="Migrations\20210102002012_CreateSubScribeTable.Designer.cs" />
+    <Compile Remove="Migrations\20210102002408_CreateEventSubScribeTable.cs" />
+    <Compile Remove="Migrations\20210102002408_CreateEventSubScribeTable.Designer.cs" />
     <Compile Remove="Models\SkillOfTeacher.cs" />
     <Compile Remove="ViewComponents\DetailOfCourseViewComponent.cs" />
   </ItemGroup>
