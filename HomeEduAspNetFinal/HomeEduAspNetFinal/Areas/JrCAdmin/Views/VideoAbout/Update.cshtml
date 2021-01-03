@@ -1,0 +1,59 @@
+﻿@model VideoTour
+@{
+    ViewData["Title"] = "Update";
+}
+<div class="row d-flex">
+    <div class="col-md-6 grid-margin stretch-card bg-dark text-light">
+        <div class="card d-flex flex-column bg-dark">
+
+            
+            <div class="card-body ">
+                <h4 style="font-weight:600 !important">Video Title : <span style="font-weight:200 !important"> @Model.VideoTitle </span></h4>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Board Tite : <span style="font-weight:200 !important"> @Model.BoardTitle </span></h5>
+            </div>
+            <div class="card-body ">
+                <h5 style="font-weight:600 !important">Video Link : <span style="font-weight:200 !important"> @Model.VideoLink</span></h5>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6 grid-margin stretch-card bg-dark">
+        <div class="card bg-dark text-light">
+            <div class="card-body bg-dark">
+                
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                   
+                    <div class="form-group">
+                        <label asp-for="@Model.VideoTitle"></label>
+                        <input class="form-control" asp-for="@Model.VideoTitle">
+                        <span class=" text-danger" asp-validation-for="@Model.VideoTitle"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.BoardTitle"></label>
+                        <input class="form-control" asp-for="@Model.BoardTitle">
+                        <span class=" text-danger" asp-validation-for="@Model.BoardTitle"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.VideoLink"></label>
+                        <input class="form-control" asp-for="@Model.VideoLink">
+                        <span class=" text-danger" asp-validation-for="@Model.VideoLink"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success mr-2">Update</button>
+                    <a asp-action="Index" class="btn btn-secondary">Go Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <partial name="_ScriptsPartial" />
+
+}
+

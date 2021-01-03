@@ -11,10 +11,11 @@ namespace HomeEduAspNetFinal.Models
     public class AboutArea
     {
         public int Id { get; set; }
-        [Required,MaxLength(40)]
-        public string Title { get; set; }
-        public string Description { get; set; }
         [Required]
+        public string Title { get; set; }
+        [Required]
+        public string Description { get; set; }
+       
         public string Image { get; set; }
         [NotMapped]
         public IFormFile Photo { get; set; }

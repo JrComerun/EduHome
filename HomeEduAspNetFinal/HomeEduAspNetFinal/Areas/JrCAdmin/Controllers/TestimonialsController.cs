@@ -31,6 +31,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             ViewBag.Count = countTestimonial;
             return View(_db.Testimonials.ToList());
         }
+
         #region Create Testimonial
         public IActionResult Create()
         {
