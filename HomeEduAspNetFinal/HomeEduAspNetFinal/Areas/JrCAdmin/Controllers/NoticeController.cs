@@ -114,7 +114,24 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            #endregion
+           
+
+
         }
+        #endregion
+
+
+        #region My IsNonValid Metods
+        public ActionResult IsNonValid(string errorName, string errorContent)
+        {
+            ModelState.AddModelError(errorName, errorContent);
+            return View();
+        }
+        public ActionResult IsNonValid(string errorName, string errorContent, object returnObj)
+        {
+            ModelState.AddModelError(errorName, errorContent);
+            return View(returnObj);
+        }
+        #endregion
     }
 }

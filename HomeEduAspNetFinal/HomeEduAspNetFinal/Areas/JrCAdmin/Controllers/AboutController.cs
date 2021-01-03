@@ -1,4 +1,4 @@
-﻿using Fiorello.Extensions;
+﻿using HomeEduAspNetFinal.Extensions;
 using HomeEduAspNetFinal.DAL;
 using HomeEduAspNetFinal.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -25,11 +25,11 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         public IActionResult Index()
         {
-            return View(_db.AboutAreas.FirstOrDefault());
+            return View(_db.AboutArea.FirstOrDefault());
         }
         public IActionResult Update()
         {
-            AboutArea area = _db.AboutAreas.FirstOrDefault();
+            AboutArea area = _db.AboutArea.FirstOrDefault();
             return View(area);
         }
         [HttpPost]
@@ -37,7 +37,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         public async Task<IActionResult> Update(AboutArea area)
         {
 
-            AboutArea dbArea = _db.AboutAreas.FirstOrDefault();
+            AboutArea dbArea = _db.AboutArea.FirstOrDefault();
 
             if (area.Photo != null)
             {

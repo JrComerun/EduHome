@@ -1,4 +1,4 @@
-﻿using Fiorello.Extensions;
+﻿using HomeEduAspNetFinal.Extensions;
 using HomeEduAspNetFinal.DAL;
 using HomeEduAspNetFinal.Models;
 using HomeEduAspNetFinal.ViewModels;
@@ -129,8 +129,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 teacher.DeletedTime = DateTime.UtcNow;
                 teacher.DetailOfTeacher.IsDeleted = true;
                 teacher.DetailOfTeacher.DeletedTime = DateTime.UtcNow;
-                teacher.ProfessionOfTeacher.IsDeleted = true;
-                teacher.ProfessionOfTeacher.DeletedTime = DateTime.UtcNow;
+               
                 foreach (SocMedOfTeacher s in teacher.SocMedOfTeachers)
                 {
                     s.IsDeleted = true;
@@ -176,7 +175,10 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 SocMedOfTeacher=_db.SocMedOfTeachers.Where(s=>s.IsDeleted==false).Include(e=>e.Teacher).
                 FirstOrDefault(c => c.TeacherId == id),
             };
+            bool isExist = _db.Teachers.Where(c => c.IsDeleted == false)
+               .Any(c => c.FullName.ToLower() == teacherVM.Teacher.FullName.ToLower() && c.Id != id);
 
+            if (isExist) return IsNonValid("", "This Teacher is already exist", dbteacherVM);
             if (teacherVM.Teacher == null) return RedirectToAction(nameof(Index));
             if (teacherVM.Teacher.Photo != null)
             {
@@ -201,10 +203,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 }
                 dbteacherVM.Teacher.Image = filename;
             }
-            bool isExist = _db.Teachers.Where(c => c.IsDeleted == false)
-                .Any(c => c.FullName.ToLower() == teacherVM.Teacher.FullName.ToLower() && c.Id != id);
-
-            if (isExist) return IsNonValid("", "This Teacher is already exist", dbteacherVM);
+           
             dbteacherVM.Teacher.FullName = teacherVM.Teacher.FullName;
             dbteacherVM.Teacher.DetailOfTeacher.AboutMe = teacherVM.Teacher.DetailOfTeacher.AboutMe;
             dbteacherVM.Teacher.DetailOfTeacher.Degree = teacherVM.Teacher.DetailOfTeacher.Degree;

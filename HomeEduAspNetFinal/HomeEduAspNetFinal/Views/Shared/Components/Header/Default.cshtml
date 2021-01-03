@@ -19,7 +19,7 @@
                             }
                             else
                             {
-                                if (!User.IsInRole("Admin"))
+                                if (User.IsInRole("Member"))
                                 {
                                     <li><a>@User.Identity.Name</a></li>
                                     <li><a asp-controller="Account" asp-action="LogOut">LogOut</a></li>
