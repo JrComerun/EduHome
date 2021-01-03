@@ -1,15 +1,17 @@
-﻿@model Blog
-@{ ViewData["Title"] = "Delete"; }
+﻿@model Testimonial
+@{
+    ViewData["Title"] = "Delete";
+}
 <div class="col-md-6 grid-margin stretch-card bg-dark text-light">
     <div class="card d-flex flex-column  bg-dark">
 
 
         <div class="card-body ">
 
-            <img src="~/assets/img/blog/@Model.Image" style="height: 150px !important;width: 200px !important;" />
+            <img src="~/assets/img/testimonial/@Model.Image" style="height: 150px !important;width: 200px !important;" />
         </div>
         <div class="card-body ">
-            <h4 style="font-weight:600 !important">Blog Name: <span style="font-weight:300 !important">@Model.Title </span></h4>
+            <h4 style="font-weight:600 !important">Testimonial Name: <span style="font-weight:300 !important">@Model.Person </span></h4>
         </div>
 
         <div class="card-body ">
@@ -23,4 +25,5 @@
     </form>
     <a asp-action="Index" class="btn btn-outline-secondary  " style="cursor:pointer;">Go Back</a>
 </div>
+
 

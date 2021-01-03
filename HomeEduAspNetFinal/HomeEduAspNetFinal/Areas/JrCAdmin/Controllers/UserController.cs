@@ -17,6 +17,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        
         public UserController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -86,6 +87,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 }
                 return View();
             }
+            
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> ChangeRole(string id)
