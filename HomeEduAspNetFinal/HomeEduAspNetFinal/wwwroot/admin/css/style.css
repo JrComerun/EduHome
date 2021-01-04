@@ -21929,3 +21929,11 @@ td ul li {
         color: #fff;
         background: #EC1C23;
     }
+.page-item.active .page-link {
+    background-color: #212529 !important;
+    color: white !important;
+    border-color: white !important;
+}
+.page-item.active .page-link:focus{
+    border-color:white!important;
+}

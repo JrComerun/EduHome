@@ -26,10 +26,11 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             _db = db;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            
-            return View(_db.SpikersOfEvents.Where(e => e.IsDeleted == false).Include(e => e.DetailOfEvent).ThenInclude(s=>s.Event).ToList());
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.SpikersOfEvents.Where(s => s.IsDeleted == false).Count() / 4);
+            ViewBag.Page = page;
+            return View(_db.SpikersOfEvents.Where(e => e.IsDeleted == false).Include(e => e.DetailOfEvent).ThenInclude(s=>s.Event).OrderByDescending(d => d.Id).Skip(((int)page - 1) * 4).Take(4).ToList());
         }
         #region Create Spiker
         public IActionResult Create()

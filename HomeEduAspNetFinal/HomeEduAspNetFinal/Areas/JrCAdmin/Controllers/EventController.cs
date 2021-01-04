@@ -27,11 +27,13 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             _db = db;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.Events.Where(s => s.IsDeleted == false).Count() / 4);
+            ViewBag.Page = page;
             int countevents = _db.Events.Where(s => s.IsDeleted == false).Count();
             ViewBag.Count = countevents;
-            return View(_db.Events.Where(e => e.IsDeleted == false).Include(e => e.DetailOfEvent).ToList());
+            return View(_db.Events.Where(e => e.IsDeleted == false).Include(e => e.DetailOfEvent).OrderByDescending(d => d.Id).Skip(((int)page - 1) * 4).Take(4).ToList());
         }
 
         #region Create Event

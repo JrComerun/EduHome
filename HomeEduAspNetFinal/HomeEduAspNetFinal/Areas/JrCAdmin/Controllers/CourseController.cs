@@ -28,11 +28,13 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             _env = env;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.Courses.Where(s => s.IsDeleted == false).Count() / 4);
+            ViewBag.Page = page;
             int countCourse = _db.Courses.Where(s => s.IsDeleted == false).Count();
             ViewBag.Count = countCourse;
-            return View(_db.Courses.Where(s => s.IsDeleted == false).Include(s => s.DetailOfCourse).ToList());
+            return View(_db.Courses.Where(s => s.IsDeleted == false).Include(s => s.DetailOfCourse).OrderByDescending(d => d.Id).Skip(((int)page - 1) * 4).Take(4).ToList());
         }
 
         #region Create Course 

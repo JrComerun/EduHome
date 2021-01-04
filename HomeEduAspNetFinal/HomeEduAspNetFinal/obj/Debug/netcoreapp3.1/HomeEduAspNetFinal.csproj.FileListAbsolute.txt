@@ -897,3 +897,8 @@ C:\Users\Code Academy\Desktop\elgun\EduHome\HomeEduAspNetFinal\HomeEduAspNetFina
 C:\Users\Code Academy\Desktop\elgun\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Profession\Create.cshtml.g.cs
 C:\Users\Code Academy\Desktop\elgun\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Profession\Delete.cshtml.g.cs
 C:\Users\Code Academy\Desktop\elgun\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\Profession\Update.cshtml.g.cs
+C:\Users\Code Academy\Desktop\elgun\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SocialMedia\Index.cshtml.g.cs
+C:\Users\Code Academy\Desktop\elgun\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SocialMedia\Create.cshtml.g.cs
+C:\Users\Code Academy\Desktop\elgun\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SocialMedia\Detail.cshtml.g.cs
+C:\Users\Code Academy\Desktop\elgun\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SocialMedia\Delete.cshtml.g.cs
+C:\Users\Code Academy\Desktop\elgun\EduHome\HomeEduAspNetFinal\HomeEduAspNetFinal\obj\Debug\netcoreapp3.1\Razor\Areas\JrCAdmin\Views\SocialMedia\Update.cshtml.g.cs

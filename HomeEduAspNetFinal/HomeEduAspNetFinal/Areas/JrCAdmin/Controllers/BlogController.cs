@@ -28,11 +28,14 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             _env = env;
 
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.Blogs.Where(s => s.IsDeleted == false).Count() / 7);
+            ViewBag.Page = page;
             int countBlog = _db.Blogs.Where(s => s.IsDeleted == false).Count();
+            
             ViewBag.Count = countBlog;
-            return View(_db.Blogs.Where(s => s.IsDeleted == false).Include(s => s.DetailsOfBlog).Include(c => c.Course).Include(c => c.Event).ToList());
+            return View(_db.Blogs.Where(s => s.IsDeleted == false).Include(s => s.DetailsOfBlog).Include(c => c.Course).Include(c => c.Event).OrderByDescending(d=>d.Id).Skip(((int)page-1)*7).Take(7).ToList());
         }
 
         #region Create Blog 
@@ -203,8 +206,8 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             dbBlogsVM.Blog.Author = blogVM.Blog.Author;
             dbBlogsVM.Blog.DateTime = blogVM.Blog.DateTime;
             dbBlogsVM.Blog.DetailsOfBlog.Description = blogVM.Blog.DetailsOfBlog.Description;
-            dbBlogsVM.Blog.EventId = eventId;
-            dbBlogsVM.Blog.CourseId = courseId;
+            //dbBlogsVM.Blog.EventId = eventId;
+            //dbBlogsVM.Blog.CourseId = courseId;
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

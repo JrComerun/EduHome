@@ -20,11 +20,13 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         {
             _db = db;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.ProfessionOfTeacher.Where(s => s.IsDeleted == false).Count() / 2);
+            ViewBag.Page = page;
             int countProfession = _db.ProfessionOfTeacher.Where(c => c.IsDeleted == false).Count();
             ViewBag.Count = countProfession;
-            return View(_db.ProfessionOfTeacher.Where(c => c.IsDeleted == false).ToList());
+            return View(_db.ProfessionOfTeacher.Where(c => c.IsDeleted == false).OrderByDescending(d => d.Id).Skip(((int)page - 1) * 2).Take(2).ToList());
         }
         #region Create Profession
         public IActionResult Create()

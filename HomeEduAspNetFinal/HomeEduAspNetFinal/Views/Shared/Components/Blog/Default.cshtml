@@ -41,7 +41,7 @@ else
                 </a>
             </div>
             <div class="single-post-content" style="margin-right:0px!important;">
-                <h4><a href="blog-details.html">@b.Title.Substring(0, 20)</a></h4>
+                <h4><a href="blog-details.html">@((b.Title.Length < 23)? b.Title : b.Title.Substring(0,23) + "...") </a></h4>
                 <p>By /@b.Author  @b.DateTime.ToString("d MMMM yyyy") </p>
             </div>
         </div>

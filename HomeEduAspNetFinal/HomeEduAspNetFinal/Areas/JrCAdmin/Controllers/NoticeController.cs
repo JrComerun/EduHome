@@ -21,11 +21,13 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             _db = db;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.NoticeBoards.Count() / 4);
+            ViewBag.Page = page;
             int countNotice = _db.NoticeBoards.Count();
             ViewBag.Count = countNotice;
-            return View(_db.NoticeBoards.ToList());
+            return View(_db.NoticeBoards.OrderByDescending(d => d.Id).Skip(((int)page - 1) * 4).Take(4).ToList());
         }
         #region Create Notice
         public IActionResult Create()

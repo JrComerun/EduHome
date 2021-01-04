@@ -11,7 +11,7 @@
                 <h2 class="card-title pt-2 mb-0 mr-5 text-light" style="font-size:larger !important;">Spikers </h2>
                 <a asp-controller="Spikers" asp-action="Create" class="btn btn-success text-light ml-5" style="cursor:pointer;">Create</a>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive bg-dark">
                 <table class="table table-striped">
                     <thead>
                         <tr class="bg-dark font-weight-bold text-light">
@@ -42,18 +42,39 @@
                                 <td>@s.DetailOfEvent.Event.Name</td>
 
                                 <td class="d-flex flex-column align-items-end">
-                                   
-                                        <a style="width:80px!important" asp-controller="Spikers" asp-action="Detail" asp-route-id="@s.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
-                                        <a style="width:80px!important" asp-controller="Spikers" asp-action="Update" asp-route-id="@s.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
-                                        <a style="width:80px!important" asp-controller="Spikers" asp-action="Delete" asp-route-id="@s.Id" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></a>
-                                   
-                                       
+
+                                    <a style="width:80px!important" asp-controller="Spikers" asp-action="Detail" asp-route-id="@s.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
+                                    <a style="width:80px!important" asp-controller="Spikers" asp-action="Update" asp-route-id="@s.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
+                                    <a style="width:80px!important" asp-controller="Spikers" asp-action="Delete" asp-route-id="@s.Id" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></a>
+
+
                                 </td>
                             </tr>
                         }
 
                     </tbody>
                 </table>
+                <div class="row justify-content-center mt-3">
+                    <nav class="d-flex ">
+                        <ul class="pagination">
+                            @for (int i = 1; i <= ViewBag.PageCount; i++)
+                            {
+                                if (i == ViewBag.Page)
+                                {
+                                    <li class="page-item active diabled"><a class="page-link">@i </a> </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" asp-controller="Spikers" asp-action="Index" asp-route-page="@i">@i</a></li>
+                                }
+                            }
+
+
+
+
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

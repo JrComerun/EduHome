@@ -25,11 +25,13 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             _db = db;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.Teachers.Where(s => s.IsDeleted == false).Count() / 4);
+            ViewBag.Page = page;
             int countTeachers = _db.Teachers.Where(s => s.IsDeleted == false).Count();
             ViewBag.Count = countTeachers;
-            return View(_db.Teachers.Where(t => t.IsDeleted == false).Include(t => t.ProfessionOfTeacher).Include(t => t.SocMedOfTeachers).ToList());
+            return View(_db.Teachers.Where(t => t.IsDeleted == false).Include(t => t.ProfessionOfTeacher).Include(t => t.SocMedOfTeachers).OrderByDescending(d => d.Id).Skip(((int)page - 1) * 4).Take(4).ToList());
         }
         #region Create Teacher
         public IActionResult Create()
