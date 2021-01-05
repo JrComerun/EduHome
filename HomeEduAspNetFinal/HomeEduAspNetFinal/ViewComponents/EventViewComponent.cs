@@ -24,12 +24,12 @@ namespace HomeEduAspNetFinal.ViewComponents
             
             if (take==0)
             {
-                List<Event> events = _db.Events.Where(d => d.IsDeleted == false).ToList();
+                List<Event> events = _db.Events.Where(d => d.IsDeleted == false).OrderByDescending(s=>s.Id).ToList();
                 return View(await Task.FromResult(events));
             }
             else
             {
-                List<Event> events = _db.Events.Where(d => d.IsDeleted == false).Take((int)take).ToList();
+                List<Event> events = _db.Events.Where(d => d.IsDeleted == false).OrderByDescending(s => s.Id).Take((int)take).ToList();
                 return View(await Task.FromResult(events));
             }
         }

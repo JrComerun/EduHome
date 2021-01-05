@@ -60,6 +60,8 @@
     <Compile Remove="Migrations\20210105054504_CreateDeletedTables.Designer.cs" />
     <Compile Remove="Migrations\20210105063128_ChangePropertyInTables.cs" />
     <Compile Remove="Migrations\20210105063128_ChangePropertyInTables.Designer.cs" />
+    <Compile Remove="Migrations\20210105192502_CreateMessageFromEmailToMe.cs" />
+    <Compile Remove="Migrations\20210105192502_CreateMessageFromEmailToMe.Designer.cs" />
     <Compile Remove="Models\SkillOfTeacher.cs" />
     <Compile Remove="ViewComponents\DetailOfCourseViewComponent.cs" />
   </ItemGroup>

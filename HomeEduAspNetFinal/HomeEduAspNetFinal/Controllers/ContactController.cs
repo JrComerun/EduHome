@@ -2,6 +2,7 @@
 
 using HomeEduAspNetFinal.DAL;
 using HomeEduAspNetFinal.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,34 +17,47 @@ namespace HomeEduAspNetFinal.Controllers
     public class ContactController : Controller
     {
         private readonly AppDbContext _db;
-        public ContactController(AppDbContext db)
+        private readonly UserManager<AppUser> _userManager;
+        public ContactController(AppDbContext db, UserManager<AppUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
             return View();
         }
-        #region Add Subcribe
+
+        #region Add Email Subcribe
         public async Task<IActionResult> AddSubscribe(string Email)
         {
-            if (User.Identity.IsAuthenticated)
+            bool IsExist = _db.SubScribes.Any(s => s.Email.ToLower().Trim() == Email.ToLower().Trim());
+            if (!User.Identity.IsAuthenticated)
             {
-                SubScribe subScribe = new SubScribe
-                {
-                    Email = Email,
-                 
-                };
+                
+                    if (!IsExist)
+                    {
+                        SubScribe subScribe = new SubScribe
+                        {
+                            Email = Email,
+                        };
+                        await _db.SubScribes.AddAsync(subScribe);
+                        await _db.SaveChangesAsync();
+                        return Content("You are subcribe successfull !!!");
+                    }
 
-                await _db.SubScribes.AddAsync(subScribe);
-                await _db.SaveChangesAsync();
+                    else
+                    {
+                        return Content("You are already subcribe !!!");
+                    }
+                
+                 
             }
             else
             {
-                return Content("olmaz");
+                return Content(" You are already subcribe . When you sign up you are subscribe!!!");
             }
 
-            return RedirectToAction("Index", "Home");
         }
         #endregion
 

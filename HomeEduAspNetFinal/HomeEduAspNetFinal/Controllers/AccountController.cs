@@ -1,4 +1,5 @@
-﻿using HomeEduAspNetFinal.Extensions;
+﻿using HomeEduAspNetFinal.DAL;
+using HomeEduAspNetFinal.Extensions;
 using HomeEduAspNetFinal.Models;
 using HomeEduAspNetFinal.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -12,17 +13,19 @@ namespace HomeEduAspNetFinal.Controllers
 {
     public class AccountController : Controller
     {
-
+        private readonly AppDbContext _db;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         public AccountController(UserManager<AppUser> userManager,
                                 SignInManager<AppUser> signInManager,
-                                RoleManager<IdentityRole> roleManager)
+                                RoleManager<IdentityRole> roleManager,
+                                AppDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _db = db;
         }
         public IActionResult Login()
         {
@@ -105,6 +108,20 @@ namespace HomeEduAspNetFinal.Controllers
             }
             await _userManager.AddToRoleAsync(newUser, Roles.Moderator.ToString());
             await _signInManager.SignInAsync(newUser, true);
+            bool IsExist = _db.SubScribes.Any(c=>c.Email.ToLower().Trim()==newUser.Email.ToLower().Trim());
+            // Add SubScribe for New Event
+            if (!IsExist)
+            {
+                SubScribe subScribe = new SubScribe
+                {
+                    Email = newUser.Email,
+
+                };
+
+                await _db.SubScribes.AddAsync(subScribe);
+                await _db.SaveChangesAsync();
+            }
+            
             return RedirectToAction("Index", "Home");
         
         }

@@ -90,11 +90,13 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 await _db.EventSubScribes.AddAsync(eventSubScribe);
                 await _db.SaveChangesAsync();
             }
+            string url = "https://localhost:44366/Event/Detail/"+$"{eventVM.Event.Id}";
+            string subject="New Event";
+            string message = $"<a href='{url}'> See you Created Event click here</a>";
             List<EventSubScribe> eventSubScribes = _db.EventSubScribes.Where(s=>s.EventId==eventVM.Event.Id).ToList();
             foreach (EventSubScribe s in eventSubScribes)
             {
-
-                //SendEmailToUser(s.SubScribe.Email, s.SubScribe.Subject, s.SubScribe.Message);
+                SendEmailToUser(s.SubScribe.Email,subject,message);
             }
 
 

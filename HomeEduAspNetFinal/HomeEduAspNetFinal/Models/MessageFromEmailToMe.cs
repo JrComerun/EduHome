@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace HomeEduAspNetFinal.Models
 {
-    public class SubScribe
+    public class MessageFromEmailToMe
     {
         public int Id { get; set; }
         public string Email { get; set; }
-      
-        public virtual ICollection<EventSubScribe> EventSubScribes { get; set; }
+        public string Subjects { get; set; }
+        public string Messages { get; set; }
     }
 }

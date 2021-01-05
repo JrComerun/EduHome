@@ -32,20 +32,7 @@
     </form>
 
 </div>
-@if (User.Identity.IsAuthenticated)
-{
-    <script>
-        var userAuthorized = true;
-    </script>
 
-}
-else
-{
-    <script>
-        var userAuthorized = false;
-    </script>
-
-}
 @section Scripts{
     <partial name="_ScriptsPartial" />
 }

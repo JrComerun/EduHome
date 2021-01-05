@@ -37,6 +37,7 @@ namespace HomeEduAspNetFinal.DAL
         public DbSet<ProfessionOfTeacher> ProfessionOfTeacher { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Layout> Layout { get; set; }
+        public DbSet<MessageFromEmailToMe> MessageFromEmailToMes { get; set; }
 
     }
 }
