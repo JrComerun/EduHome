@@ -38,7 +38,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         {
             TeacherVM teacherVM = new TeacherVM
             {
-
+                SocialMedias=_db.SocialMedias.ToList(),
                 Teachers = _db.Teachers.Where(e => e.IsDeleted == false).ToList(),
             };
             return View(teacherVM);
@@ -115,6 +115,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             if (id == null) return RedirectToAction(nameof(Index));
             TeacherVM teacherVM = new TeacherVM
             {
+                SocialMedias = _db.SocialMedias.ToList(),
                 SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(s => s.Id == id),
                 Teachers = _db.Teachers.Where(e => e.IsDeleted == false).ToList(),
             };
@@ -129,6 +130,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             if (id == null) return RedirectToAction(nameof(Index));
             TeacherVM dbteacherVM = new TeacherVM
             {
+                SocialMedias = _db.SocialMedias.ToList(),
                 SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(s => s.Id == id),
                 Teachers = _db.Teachers.Where(e => e.IsDeleted == false).ToList(),
             };
@@ -154,5 +156,6 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             return View(returnObj);
         }
         #endregion
+
     }
 }

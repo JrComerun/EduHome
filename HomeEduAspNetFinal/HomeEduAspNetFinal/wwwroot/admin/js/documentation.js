@@ -22,3 +22,4 @@
     window.setTimeout(offsetAnchor, 0);
     });
 })(jQuery);
+// DOM Ready

@@ -156,7 +156,6 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         #endregion
 
-
         #region My IsNonValid Metods
         public ActionResult IsNonValid(string errorName, string errorContent)
         {
@@ -169,5 +168,6 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             return View(returnObj);
         }
         #endregion
+
     }
 }

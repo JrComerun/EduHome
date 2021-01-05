@@ -17,13 +17,13 @@
                                 Image
                             </th>
                             <th>
-                                Name
+                                FullName
                             </th>
                             <th>
-                                Date
+                                Profession
                             </th>
                             <th>
-                                Venue
+                                Socisl media
                             </th>
                             <th class="text-right">
                                 Settings
@@ -39,7 +39,7 @@
                                 <td>@e.ProfessionOfTeacher.Profession  </td>
                                 <td>
                                     <ul>
-                                        @foreach (SocMedOfTeacher s in e.SocMedOfTeachers)
+                                        @foreach (SocMedOfTeacher s in e.SocMedOfTeachers.Where(s=>s.IsDeleted==false))
                                         {
                                             <li><a href="@s.Link">@Html.Raw(s.Icon)</a></li>
                                         }

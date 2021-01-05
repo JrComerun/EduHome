@@ -14,7 +14,8 @@ namespace HomeEduAspNetFinal.DAL
         {
 
         }
-        public DbSet<AboutArea> AboutArea { get; set; }
+       
+        public DbSet<AboutArea> AboutAreas { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<DetailOfCourse> DetailOfCourses { get; set; }
@@ -34,7 +35,7 @@ namespace HomeEduAspNetFinal.DAL
         public DbSet<SubScribe> SubScribes { get; set; }
         public DbSet<EventSubScribe> EventSubScribes { get; set; }
         public DbSet<ProfessionOfTeacher> ProfessionOfTeacher { get; set; }
-       
+        public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Layout> Layout { get; set; }
 
     }

@@ -18,7 +18,7 @@ namespace HomeEduAspNetFinal.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await Task.FromResult(_db.AboutArea.FirstOrDefault()));
+            return View(await Task.FromResult(_db.AboutAreas.FirstOrDefault()));
         }
     }
 }

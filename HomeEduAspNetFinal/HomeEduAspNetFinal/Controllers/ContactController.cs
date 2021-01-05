@@ -32,8 +32,7 @@ namespace HomeEduAspNetFinal.Controllers
                 SubScribe subScribe = new SubScribe
                 {
                     Email = Email,
-                    Subject = "Event",
-                    Message = "Created New Event",
+                 
                 };
 
                 await _db.SubScribes.AddAsync(subScribe);

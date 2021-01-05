@@ -53,6 +53,22 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12 grid-margin stretch-card bg-dark text-light">
+        <div class="card d-flex flex-column bg-dark">
+
+
+            <div class="card-body ">
+                @foreach (SocialMedia s in Model.SocialMedias)
+                {
+                    <h5 class="jrc-icon" style="font-weight:600 !important">@Html.Raw(s.Icon) @s.IconName : <span class="jrc" style="font-weight:200 !important;"> @s.Icon </span></h5>
+
+                }
+
+            </div>
+
+
+        </div>
+    </div>
 </div>
 
 

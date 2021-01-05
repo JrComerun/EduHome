@@ -94,7 +94,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             foreach (EventSubScribe s in eventSubScribes)
             {
 
-                SendEmailToUser(s.SubScribe.Email, s.SubScribe.Subject, s.SubScribe.Message);
+                //SendEmailToUser(s.SubScribe.Email, s.SubScribe.Subject, s.SubScribe.Message);
             }
 
 

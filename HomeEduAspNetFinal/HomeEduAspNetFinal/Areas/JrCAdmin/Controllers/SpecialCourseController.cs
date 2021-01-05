@@ -188,12 +188,12 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         #endregion
 
         #region My IsNonValid Metods
-        public ActionResult IsNonValid(string errorName, string errorContent)
+        public  ActionResult IsNonValid(string errorName, string errorContent)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View();
         }
-        public ActionResult IsNonValid(string errorName, string errorContent, object returnObj)
+        public  ActionResult IsNonValid(string errorName, string errorContent, object returnObj)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View(returnObj);

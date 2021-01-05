@@ -25,19 +25,19 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         public IActionResult Index()
         {
-            return View(_db.AboutArea.FirstOrDefault());
+            return View(_db.AboutAreas.FirstOrDefault());
         }
         public IActionResult Update()
         {
-            AboutArea area = _db.AboutArea.FirstOrDefault();
-            return View(area);
+            AboutArea areadb = _db.AboutAreas.FirstOrDefault();
+            return View(areadb);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(AboutArea area)
         {
 
-            AboutArea dbArea = _db.AboutArea.FirstOrDefault();
+            AboutArea dbArea = _db.AboutAreas.FirstOrDefault();
 
             if (area.Photo != null)
             {
@@ -57,23 +57,24 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 
                 dbArea.Image = filename;
             }
+
             dbArea.Title = area.Title;
-            dbArea.Description = area.Description;
+            //dbArea.Description = area.Description;
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         #region My IsNonValid Metods
-        public ActionResult IsNonValidd(string errorName, string errorContent)
+        public  ActionResult IsNonValidd(string errorName, string errorContent)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View();
         }
-        public ActionResult IsNonValidd(string errorName, string errorContent, object returnObj)
+        public  ActionResult IsNonValidd(string errorName, string errorContent, object returnObj)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View(returnObj);
         }
         #endregion
+
     }
 }

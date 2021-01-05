@@ -29,6 +29,8 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             ViewBag.Count = countSlider;
             return View(_db.HomeSliders.Where(s => s.IsDeleted == false).ToList());
         }
+
+        #region Create Slider
         public IActionResult Create()
         {
 
@@ -46,21 +48,27 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 
             string folder = Path.Combine("assets", "img", "slider");
             string filename = await slider.Photo.SaveImageAsync(_env.WebRootPath, folder);
-            
+
             slider.BgImage = filename;
             slider.IsDeleted = false;
             await _db.HomeSliders.AddAsync(slider);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public  IActionResult Detail(int? id)
+        #endregion
+
+        #region Detail Slider
+        public IActionResult Detail(int? id)
         {
             if (id == null) return RedirectToAction(nameof(Index));
-             HomeSlider slider = _db.HomeSliders.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id);
+            HomeSlider slider = _db.HomeSliders.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id);
             if (slider == null) return RedirectToAction(nameof(Index));
 
             return View(slider);
         }
+        #endregion
+
+        #region Delete Slider
         public IActionResult Delete(int? id)
         {
             if (id == null) return RedirectToAction(nameof(Index));
@@ -77,20 +85,20 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             if (id == null) return RedirectToAction(nameof(Index));
             HomeSlider slider = _db.HomeSliders.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id);
             if (slider == null) RedirectToAction(nameof(Index));
-            int countSlider = _db.HomeSliders.Where(s=>s.IsDeleted==false).Count();
-            
-            if (countSlider > 3 )
+            int countSlider = _db.HomeSliders.Where(s => s.IsDeleted == false).Count();
+
+            if (countSlider > 3)
             {
                 string folder = Path.Combine("assets", "img", "slider");
                 string path = Path.Combine(_env.WebRootPath, folder, slider.BgImage);
                 if (System.IO.File.Exists(path))
                 {
                     System.IO.File.Delete(path);
-        
+
                 }
                 _db.HomeSliders.Remove(slider);
             }
-            else if(countSlider > 1&& countSlider <= 3)
+            else if (countSlider > 1 && countSlider <= 3)
             {
                 slider.IsDeleted = true;
                 slider.DeletedTime = DateTime.UtcNow;
@@ -103,6 +111,9 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        #endregion
+
+        #region Update Slider
         public IActionResult Update(int? id)
         {
             if (id == null) return RedirectToAction(nameof(Index));
@@ -113,23 +124,23 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id,HomeSlider slider)
+        public async Task<IActionResult> Update(int? id, HomeSlider slider)
         {
 
             if (id == null) return RedirectToAction(nameof(Index));
             HomeSlider dbSlider = _db.HomeSliders.Where(c => c.IsDeleted == false).FirstOrDefault(c => c.Id == id);
             if (dbSlider == null) return RedirectToAction(nameof(Index));
             //if (!ModelState.IsValid) return View(dbSlider);
-            if ( slider.Title ==null||slider.Description==null) return View( dbSlider);
+            if (slider.Title == null || slider.Description == null) return View(dbSlider);
             if (slider.Photo != null)
             {
                 if (!slider.Photo.IsImage()) return IsNonValid("Photo", "Please select image type!!!", dbSlider);
                 if (slider.Photo.MaxSize(200)) return IsNonValid("Photo", "Select PHOTO max-size 200!", dbSlider);
-                
+
                 string folder = Path.Combine("assets", "img", "slider");
                 string filename = await slider.Photo.SaveImageAsync(_env.WebRootPath, folder);
-                
-                
+
+
                 int countSlider = _db.HomeSliders.Where(s => s.IsDeleted == false).Count();
                 if (countSlider > 3)
                 {
@@ -147,19 +158,21 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
         #region My IsNonValid Metods
-        public ActionResult IsNonValid(string errorName, string errorContent)
+        public  ActionResult IsNonValid(string errorName, string errorContent)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View();
         }
-        public ActionResult IsNonValid(string errorName, string errorContent,object returnObj)
+        public  ActionResult IsNonValid(string errorName, string errorContent, object returnObj)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View(returnObj);
         }
         #endregion
+
 
 
 

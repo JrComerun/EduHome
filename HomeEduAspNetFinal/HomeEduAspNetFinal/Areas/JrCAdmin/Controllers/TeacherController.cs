@@ -52,12 +52,38 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             };
 
             if (ProfId == null) return IsNonValid("", "Please select which of event!!", teacher);
-
+            if (teacherVM.Teacher.Photo==null) return IsNonValid("", "Please select Photo!!!", teacher);
             if (!teacherVM.Teacher.Photo.IsImage()) return IsNonValid("", "Please select image type!!!", teacher);
             if (teacherVM.Teacher.Photo.MaxSize(180)) return IsNonValid("", "Select PHOTO max-size 180!", teacher);
             bool isExist = _db.Teachers.Where(c => c.IsDeleted == false).
                 Any(c => c.FullName.ToLower() == teacherVM.Teacher.FullName.ToLower());
             if (isExist) return IsNonValid("", "This spiker is already exist", teacher);
+            #region Skill Value
+            if (!(teacherVM.Teacher.DetailOfTeacher.ComunicationValue > 0 && teacherVM.Teacher.DetailOfTeacher.ComunicationValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.DesignValue > 0 && teacherVM.Teacher.DetailOfTeacher.DesignValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.DevelopmentValue > 0 && teacherVM.Teacher.DetailOfTeacher.DevelopmentValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.InnovtionValue > 0 && teacherVM.Teacher.DetailOfTeacher.InnovtionValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.LanguageValue > 0 && teacherVM.Teacher.DetailOfTeacher.LanguageValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.TeamLeaderValue > 0 && teacherVM.Teacher.DetailOfTeacher.TeamLeaderValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            #endregion
             string folder = Path.Combine("assets", "img", "teacher");
             string filename = await teacherVM.Teacher.Photo.SaveImageAsync(_env.WebRootPath, folder);
             teacherVM.Teacher.Image = filename;
@@ -110,7 +136,7 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 
             if (countTeacher > 50)
             {
-                string folder = Path.Combine("assets", "img", "event");
+                string folder = Path.Combine("assets", "img", "teacher");
                 string path = Path.Combine(_env.WebRootPath, folder, teacher.Image);
                 if (System.IO.File.Exists(path))
                 {
@@ -174,21 +200,46 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 Teacher = _db.Teachers.Where(c => c.IsDeleted == false).Include(c => c.DetailOfTeacher).
                 Include(c => c.SocMedOfTeachers).Include(c => c.ProfessionOfTeacher).FirstOrDefault(c => c.Id == id),
                 ProfessionOfTeachers = _db.ProfessionOfTeacher.Where(e => e.IsDeleted == false).Include(p => p.Teachers).ToList(),
-                SocMedOfTeacher=_db.SocMedOfTeachers.Where(s=>s.IsDeleted==false).Include(e=>e.Teacher).
-                FirstOrDefault(c => c.TeacherId == id),
+               
             };
             bool isExist = _db.Teachers.Where(c => c.IsDeleted == false)
                .Any(c => c.FullName.ToLower() == teacherVM.Teacher.FullName.ToLower() && c.Id != id);
 
             if (isExist) return IsNonValid("", "This Teacher is already exist", dbteacherVM);
             if (teacherVM.Teacher == null) return RedirectToAction(nameof(Index));
+            #region Skill Value
+            if (!(teacherVM.Teacher.DetailOfTeacher.ComunicationValue > 0 && teacherVM.Teacher.DetailOfTeacher.ComunicationValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.DesignValue > 0 && teacherVM.Teacher.DetailOfTeacher.DesignValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.DevelopmentValue > 0 && teacherVM.Teacher.DetailOfTeacher.DevelopmentValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.InnovtionValue > 0 && teacherVM.Teacher.DetailOfTeacher.InnovtionValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.LanguageValue > 0 && teacherVM.Teacher.DetailOfTeacher.LanguageValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            if (!(teacherVM.Teacher.DetailOfTeacher.TeamLeaderValue > 0 && teacherVM.Teacher.DetailOfTeacher.TeamLeaderValue < 100))
+            {
+                return Content("yaxwi olacaq");
+            }
+            #endregion
             if (teacherVM.Teacher.Photo != null)
             {
 
                 if (!teacherVM.Teacher.Photo.IsImage()) return IsNonValid("", "Please select image type!!!", dbteacherVM);
                 if (teacherVM.Teacher.Photo.MaxSize(150)) return IsNonValid("", "Select PHOTO max-size 150!", dbteacherVM);
 
-                string folder = Path.Combine("assets", "img", "event");
+                string folder = Path.Combine("assets", "img", "teacher");
                 string filename = await teacherVM.Teacher.Photo.SaveImageAsync(_env.WebRootPath, folder);
 
 
@@ -227,13 +278,14 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         #endregion
 
+
         #region My IsNonValid Metods
-        public ActionResult IsNonValid(string errorName, string errorContent)
+        public  ActionResult IsNonValid(string errorName, string errorContent)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View();
         }
-        public ActionResult IsNonValid(string errorName, string errorContent, object returnObj)
+        public  ActionResult IsNonValid(string errorName, string errorContent, object returnObj)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View(returnObj);

@@ -57,10 +57,10 @@
             <div class="card-body ">
                 <h5 style="font-weight:600 !important">Team Leader : <span style="font-weight:200 !important"> @Model.DetailOfTeacher.TeamLeaderValue %</span></h5>
             </div>
-               @foreach (SocMedOfTeacher s in Model.SocMedOfTeachers)
+               @foreach (SocMedOfTeacher s in Model.SocMedOfTeachers.Where(s=>s.IsDeleted==false))
                 {
             <div class="card-body ">
-                <h5 style="font-weight:600 !important">social media link : <span style="font-weight:200 !important"><a href="@s.Link">@Html.Raw(s.Icon) </a> </span></h5>
+                <h5 style="font-weight:600 !important">social media link : <span class="jrc-icon" style="font-weight:200 !important"><a href="@s.Link">@Html.Raw(s.Icon) </a> </span></h5>
             </div>
                 }
         </div>

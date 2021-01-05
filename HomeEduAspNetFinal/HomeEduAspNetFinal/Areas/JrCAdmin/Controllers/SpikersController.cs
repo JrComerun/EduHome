@@ -28,9 +28,9 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         public IActionResult Index(int page=1)
         {
-            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.SpikersOfEvents.Where(s => s.IsDeleted == false).Count() / 4);
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.Events.Where(s => s.IsDeleted == false).Count() / 4);
             ViewBag.Page = page;
-            return View(_db.SpikersOfEvents.Where(e => e.IsDeleted == false).Include(e => e.DetailOfEvent).ThenInclude(s=>s.Event).OrderByDescending(d => d.Id).Skip(((int)page - 1) * 4).Take(4).ToList());
+            return View(_db.DetailOfEvents.Where(e => e.IsDeleted == false).Include(e=>e.Event).Include(s=>s.SpikersOfEvents).OrderByDescending(d => d.Id).Skip(((int)page - 1) * 4).Take(4).ToList());
         }
         #region Create Spiker
         public IActionResult Create()
@@ -184,18 +184,18 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         #endregion
 
-
         #region My IsNonValid Metods
-        public ActionResult IsNonValid(string errorName, string errorContent)
+        public  ActionResult IsNonValid(string errorName, string errorContent)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View();
         }
-        public ActionResult IsNonValid(string errorName, string errorContent, object returnObj)
+        public  ActionResult IsNonValid(string errorName, string errorContent, object returnObj)
         {
             ModelState.AddModelError(errorName, errorContent);
             return View(returnObj);
         }
         #endregion
+
     }
 }

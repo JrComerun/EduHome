@@ -19,11 +19,10 @@
                         <label asp-for="@Model.SocMedOfTeacher.Icon"></label>
                         <input class="form-control" asp-for="@Model.SocMedOfTeacher.Icon">
                         <span class=" text-danger" asp-validation-for="@Model.SocMedOfTeacher.Icon"></span>
-                        <p><a href="https://zavoloklom.github.io/material-design-iconic-font/icons.html#social" target="_blank">this link for icons</a></p>
                     </div>
                     <div class="form-group">
                         <select class="custom-select" required name="teacherId">
-                            <option value="">Select Event For Spiker</option>
+                            <option value="">Select Teacher For Social Media</option>
 
                             @foreach (Teacher e in Model.Teachers)
                             {
@@ -42,8 +41,12 @@
 
 
             <div class="card-body ">
-                <h5 class="jrc-icon" style="font-weight:600 !important">Instagram :  <i class="zmdi zmdi-instagram"></i><span class="jrc" style="font-weight:200 !important;"> <i class="zmdi zmdi-instagram"></i> </span></h5>
-               
+                @foreach (SocialMedia s in Model.SocialMedias)
+                {
+                    <h5 class="jrc-icon" style="font-weight:600 !important">@Html.Raw(s.Icon) @s.IconName : <span class="jrc" style="font-weight:200 !important;"> @s.Icon </span></h5>
+
+                }
+
             </div>
             
 

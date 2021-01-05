@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeEduAspNetFinal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210102003146_CreateEventSubScribeTable")]
-    partial class CreateEventSubScribeTable
+    [Migration("20210105063256_ChangePropertyInTables")]
+    partial class ChangePropertyInTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,16 +29,15 @@ namespace HomeEduAspNetFinal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(40)")
-                        .HasMaxLength(40);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -520,6 +519,24 @@ namespace HomeEduAspNetFinal.Migrations
                     b.ToTable("HomeSliders");
                 });
 
+            modelBuilder.Entity("HomeEduAspNetFinal.Models.Layout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FooterLogo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HeaderLogo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Layout");
+                });
+
             modelBuilder.Entity("HomeEduAspNetFinal.Models.NoticeBoard", b =>
                 {
                     b.Property<int>("Id")
@@ -606,6 +623,24 @@ namespace HomeEduAspNetFinal.Migrations
                     b.ToTable("SocMedOfTeachers");
                 });
 
+            modelBuilder.Entity("HomeEduAspNetFinal.Models.SocialMedia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IconName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SocialMedias");
+                });
+
             modelBuilder.Entity("HomeEduAspNetFinal.Models.SpikersOfEvent", b =>
                 {
                     b.Property<int>("Id")
@@ -657,10 +692,10 @@ namespace HomeEduAspNetFinal.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Message")
+                    b.Property<string>("Messages")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Subject")
+                    b.Property<string>("Subjects")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
