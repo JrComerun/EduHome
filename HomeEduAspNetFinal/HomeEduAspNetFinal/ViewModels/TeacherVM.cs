@@ -14,5 +14,6 @@ namespace HomeEduAspNetFinal.ViewModels
         public SocMedOfTeacher SocMedOfTeacher { get; set; }
         public List<ProfessionOfTeacher> ProfessionOfTeachers { get; set; }
         public List<Teacher> Teachers { get; set; }
+        public List<SocMedOfTeacher> SocMedOfTeachers { get; set; }
     }
 }

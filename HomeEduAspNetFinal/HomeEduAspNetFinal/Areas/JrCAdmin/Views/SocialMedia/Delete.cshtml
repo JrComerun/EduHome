@@ -1,4 +1,4 @@
-﻿@model SocMedOfTeacher
+﻿@model TeacherVM
 @{
     ViewData["Title"] = "Delete";
 }
@@ -9,10 +9,10 @@
 
         
         <div class="card-body ">
-            <h4 style="font-weight:600 !important">Link: <span style="font-weight:300 !important">@Model.Link </span></h4>
+            <h4 style="font-weight:600 !important">Link: <span style="font-weight:300 !important">@Model.SocMedOfTeacher.Link </span></h4>
         </div>
         <div class="card-body ">
-            <h4 style="font-weight:600 !important">Teacher: <span style="font-weight:300 !important">@Model.Teacher.FullName </span></h4>
+            <h4 style="font-weight:600 !important">Teacher: <span style="font-weight:300 !important">@Model.SocMedOfTeacher.Teacher.FullName </span></h4>
         </div>
 
         <div class="card-body ">

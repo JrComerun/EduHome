@@ -1,4 +1,4 @@
-﻿@model List<SocMedOfTeacher>
+﻿@model List<Teacher>
 @{
     ViewData["Title"] = "Social Media";
 }
@@ -9,70 +9,88 @@
                 <h2 class="card-title pt-2 mb-0 mr-5 text-light" style="font-size:larger !important;">Social Media </h2>
                 <a asp-action="Create" class="btn btn-success text-light ml-5" style="cursor:pointer;">Create</a>
             </div>
-            <div class="table-responsive bg-dark">
-                <table class="table table-striped">
-                    <thead>
-                        <tr class="bg-dark font-weight-bold text-light">
+            @foreach (Teacher t in Model)
+            {
+                <div class="d-flex justify-content-center mb-2 py-4 bg-dark font-weight-bold text-light">
+                    <img src="~/assets/img/teacher/@t.Image" class="img-fluid " style="width:80px !important;height:80px!important;object-fit: cover !important; margin-left:80px!important;" />
+                    <button type="button" class="btn btn-dark w-100" data-toggle="modal" data-target=".bd-example-modal-lg-@t.Id" style="text-transform:capitalize;font-size:22px!important">Teacher <span class="text-success">@t.FullName</span> 's Social Medias. for you see click here </button>
 
-                            <th>
-                                Description
-                            </th>
-                            <th>
-                                Date Time
-                            </th>
-                            <th>
-                                Teacher
-                            </th>
+                    <div class="modal fade bd-example-modal-lg-@t.Id" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="table-responsive bg-dark">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr class="bg-dark font-weight-bold text-light">
 
-                            <th class="text-right">
-                                Settings
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (SocMedOfTeacher b in Model)
+                                                <th>
+                                                    Link
+                                                </th>
+                                                <th>
+                                                    Icon
+                                                </th>
+
+
+                                                <th class="text-right">
+                                                    Settings
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                                @foreach (SocMedOfTeacher s in t.SocMedOfTeachers.Where(s=>s.IsDeleted==false))
+                                                {
+
+                                                    <tr class="bg-dark font-weight-bold text-light">
+
+                                                        <td>@s.Link</td>
+                                                        <td class="jrc-icon">@Html.Raw(s.Icon)</td>
+
+
+                                                        <td class="d-flex flex-column align-items-end">
+
+                                                            <a style="width:80px!important" asp-controller="SocialMedia" asp-action="Detail" asp-route-id="@s.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
+                                                            <a style="width:80px!important" asp-controller="SocialMedia" asp-action="Update" asp-route-id="@s.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
+                                                            <a style="width:80px!important" asp-controller="SocialMedia" asp-action="Delete" asp-route-id="@s.Id" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></a>
+
+                                                        </td>
+                                                    </tr>
+
+                                                }
+                                            
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+            <div class="d-flex justify-content-center mb-2 py-4 bg-dark font-weight-bold text-light">
+                <nav class="d-flex ">
+                    <ul class="pagination">
+                        @for (int i = 1; i <= ViewBag.PageCount; i++)
                         {
-                            <tr class="bg-dark font-weight-bold text-light">
-
-                                <td>@b.Link</td>
-                                <td>@Html.Raw(b.Icon)</td>
-                                <td>
-                                    @b.Teacher.FullName
-                                </td>
-
-                                <td class="d-flex flex-column align-items-end">
-
-                                    <a style="width:80px!important" asp-controller="SocialMedia" asp-action="Detail" asp-route-id="@b.Id" class="btn btn-outline-warning "><i class="mdi mdi-information-outline"></i></a>
-                                    <a style="width:80px!important" asp-controller="SocialMedia" asp-action="Update" asp-route-id="@b.Id" class="btn btn-outline-success"><i class="mdi mdi-tooltip-edit"></i></a>
-                                    <a style="width:80px!important" asp-controller="SocialMedia" asp-action="Delete" asp-route-id="@b.Id" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></a>
-
-                                </td>
-                            </tr>
+                            if (i == ViewBag.Page)
+                            {
+                                <li class="page-item active diabled"><a class="page-link">@i </a> </li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" asp-controller="SocialMedia" asp-action="Index" asp-route-page="@i">@i</a></li>
+                            }
                         }
 
-                    </tbody>
-                </table>
-                <div class="row justify-content-center mt-3">
-                    <nav class="d-flex ">
-                        <ul class="pagination">
-                            @for (int i = 1; i <= ViewBag.PageCount; i++)
-                            {
-                                if (i == ViewBag.Page)
-                                {
-                                    <li class="page-item active diabled"><a class="page-link">@i </a> </li>
-                                }
-                                else
-                                {
-                                    <li class="page-item"><a class="page-link" asp-controller="SocialMedia" asp-action="Index" asp-route-page="@i">@i</a></li>
-                                }
-                            }
 
 
 
-
-                        </ul>
-                    </nav>
-                </div>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

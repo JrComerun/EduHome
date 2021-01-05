@@ -24,11 +24,13 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         public IActionResult Index(int page=1)
         {
-            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Count() / 7);
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_db.Teachers.Where(s => s.IsDeleted == false).Count() / 4);
             ViewBag.Page = page;
-            int countIcons = _db.SocMedOfTeachers.Count();
-            ViewBag.Count = countIcons;
-            return View(_db.SocMedOfTeachers.Where(t=>t.IsDeleted==false).Include(s => s.Teacher).OrderByDescending(d => d.Id).Skip(((int)page - 1) * 7).Take(7).ToList());
+            
+            List<Teacher> teachers = _db.Teachers.Where(t => t.IsDeleted == false).Include(s => s.SocMedOfTeachers).
+                OrderByDescending(d => d.Id).Skip(((int)page - 1) * 4).Take(4).ToList();
+
+            return View(teachers);
         }
 
         #region Create Social
@@ -63,11 +65,11 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             if (id == null) return RedirectToAction(nameof(Index));
             TeacherVM teacherVM = new TeacherVM
             {
-                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(),
+                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(s => s.Id == id),
                 Teachers = _db.Teachers.Where(e => e.IsDeleted == false).ToList(),
             };
             if (teacherVM.SocMedOfTeacher == null) return RedirectToAction(nameof(Index));
-            return View(teacherVM.SocMedOfTeacher);
+            return View(teacherVM);
         }
         #endregion
 
@@ -77,11 +79,11 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             if (id == null) return RedirectToAction(nameof(Index));
             TeacherVM teacherVM = new TeacherVM
             {
-                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(),
+                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(s => s.Id == id),
                 Teachers = _db.Teachers.Where(e => e.IsDeleted == false).ToList(),
             };
             if (teacherVM.SocMedOfTeacher == null) return RedirectToAction(nameof(Index));
-            return View(teacherVM.SocMedOfTeacher);
+            return View(teacherVM);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -91,13 +93,10 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             if (id == null) return RedirectToAction(nameof(Index));
             TeacherVM teacherVM = new TeacherVM
             {
-                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(),
+                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(s => s.Id == id),
                 Teachers = _db.Teachers.Where(e => e.IsDeleted == false).ToList(),
             };
             if (teacherVM.SocMedOfTeacher == null) return RedirectToAction(nameof(Index));
-
-
-
 
             teacherVM.SocMedOfTeacher.IsDeleted = true;
             teacherVM.SocMedOfTeacher.DeletedTime = DateTime.UtcNow;
@@ -116,11 +115,11 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             if (id == null) return RedirectToAction(nameof(Index));
             TeacherVM teacherVM = new TeacherVM
             {
-                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(),
+                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(s => s.Id == id),
                 Teachers = _db.Teachers.Where(e => e.IsDeleted == false).ToList(),
             };
             if (teacherVM.SocMedOfTeacher == null) return RedirectToAction(nameof(Index));
-            return View(teacherVM.SocMedOfTeacher);
+            return View(teacherVM);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -130,15 +129,14 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
             if (id == null) return RedirectToAction(nameof(Index));
             TeacherVM dbteacherVM = new TeacherVM
             {
-                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(),
+                SocMedOfTeacher = _db.SocMedOfTeachers.Where(s => s.IsDeleted == false).Include(c => c.Teacher).FirstOrDefault(s => s.Id == id),
                 Teachers = _db.Teachers.Where(e => e.IsDeleted == false).ToList(),
             };
             if (teacherVM.SocMedOfTeacher == null) return RedirectToAction(nameof(Index));
 
             dbteacherVM.SocMedOfTeacher.Link = teacherVM.SocMedOfTeacher.Link;
             dbteacherVM.SocMedOfTeacher.Icon = teacherVM.SocMedOfTeacher.Icon;
-
-            dbteacherVM.SocMedOfTeacher.TeacherId  = (int)teacherId;
+            dbteacherVM.SocMedOfTeacher.TeacherId = (int)teacherId;
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

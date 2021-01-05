@@ -34,6 +34,8 @@ namespace HomeEduAspNetFinal.DAL
         public DbSet<SubScribe> SubScribes { get; set; }
         public DbSet<EventSubScribe> EventSubScribes { get; set; }
         public DbSet<ProfessionOfTeacher> ProfessionOfTeacher { get; set; }
+       
+        public DbSet<Layout> Layout { get; set; }
 
     }
 }
