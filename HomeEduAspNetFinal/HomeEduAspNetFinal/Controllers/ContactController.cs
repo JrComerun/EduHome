@@ -64,7 +64,12 @@ namespace HomeEduAspNetFinal.Controllers
         #region Message To Me
         public async Task<IActionResult> MessageToMe(string Email,string Subject,string Message)
         {
-            if (Email != null ||( Subject != null && Message != null))
+           
+            if(Subject==null || Message == null)
+            {
+                return Content("You can't send message!");
+            }
+            else
             {
                 if (User.Identity.IsAuthenticated)
                 {
@@ -78,26 +83,33 @@ namespace HomeEduAspNetFinal.Controllers
                     await _db.MessageFromEmailToMes.AddAsync(emailToMe);
                     await _db.SaveChangesAsync();
                     string bodyMes = $"{Message} from  {user.Email}";
-                    SendEmail("kamranfn@code.edu.az",  Subject, bodyMes);
-                    return Content("You send Message successfull !!!");
+                    SendEmail("kamranfn@code.edu.az", Subject, bodyMes);
+                    return Content("You send Message successfull ! Will be in touch with You during the day!");
 
                 }
                 else
                 {
-                    MessageFromEmailToMe emailToMe = new MessageFromEmailToMe
+                    if (Email != null)
                     {
-                        Email = Email,
-                        Messages = Message,
-                        Subjects = Subject,
-                    };
-                    await _db.MessageFromEmailToMes.AddAsync(emailToMe);
-                    await _db.SaveChangesAsync();
-                    string bodyMes = $"{Message} from  {Email}";
-                    SendEmail("kamranfn@code.edu.az",  Subject, bodyMes);
-                    return Content("You send Message successfull !!!");
+                        MessageFromEmailToMe emailToMe = new MessageFromEmailToMe
+                        {
+                            Email = Email,
+                            Messages = Message,
+                            Subjects = Subject,
+                        };
+                        await _db.MessageFromEmailToMes.AddAsync(emailToMe);
+                        await _db.SaveChangesAsync();
+                        string bodyMes = $"{Message} from  {Email}";
+                        SendEmail("kamranfn@code.edu.az", Subject, bodyMes);
+                        return Content("You send Message successfull ! Will be in touch with You during the day!");
+                    }
+                    else
+                    {
+                        return Content("You can't send message!");
+                    }
+                   
                 }
             }
-            return Content("Message don't send !!! ");
         }
 
         #endregion
@@ -106,12 +118,12 @@ namespace HomeEduAspNetFinal.Controllers
         public void SendEmail(string toMail, string subject, string mesBody)
         {
             string toEmail = toMail;
-            SmtpClient client = new SmtpClient("smtp.mail.ru", 587);
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.UseDefaultCredentials = false;
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("jrcomerun621@mail.ru", "lene1234");
+            client.Credentials = new NetworkCredential("knjc621@gmail.com", "lene1234");
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            MailMessage message = new MailMessage("jrcomerun621@mail.ru", toEmail);
+            MailMessage message = new MailMessage("knjc621@gmail.com", toEmail);
             message.Subject = subject;
             message.Body = mesBody;
 

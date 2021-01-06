@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
 {
@@ -36,21 +37,21 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id,AboutArea area)
+        public async Task<IActionResult> Update(int? id,string Title,IFormFile Photo,string Description)
         {
 
             if (id == null) return NotFound();
             AboutArea dbArea = _db.AboutAreas.FirstOrDefault(a => a.Id == id);
             if (dbArea == null) return NotFound();
 
-            if (area.Photo != null)
+            if (Photo != null)
             {
 
-                if (!area.Photo.IsImage()) return IsNonValidd("", "Please select image type!!!", dbArea);
-                if (area.Photo.MaxSize(300)) return IsNonValidd("", "Select PHOTO max-size 300!", dbArea);
+                if (!Photo.IsImage()) return IsNonValidd("", "Please select image type!!!", dbArea);
+                if (!Photo.MaxSize(300)) return IsNonValidd("", "Select PHOTO max-size 300!", dbArea);
 
                 string folder = Path.Combine("assets", "img", "about");
-                string filename = await area.Photo.SaveImageAsync(_env.WebRootPath, folder);
+                string filename = await Photo.SaveImageAsync(_env.WebRootPath, folder);
 
                 string path = Path.Combine(_env.WebRootPath, folder, dbArea.Image);
                 if (System.IO.File.Exists(path))
@@ -62,9 +63,16 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 dbArea.Image = filename;
             }
 
-            _db.AboutAreas.Update(area);
-            //dbArea.Description = area.Description;
-            //dbArea.Title = area.Title;
+            if (Description == null || Title == null)
+            {
+                return IsNonValidd("", "Description or Title can't be empty",dbArea);
+            }
+            else
+            {
+                dbArea.Description = Description;
+                dbArea.Title = Title;
+            }
+         
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

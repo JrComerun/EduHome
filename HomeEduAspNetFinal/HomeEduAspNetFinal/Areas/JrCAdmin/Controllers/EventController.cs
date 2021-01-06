@@ -255,12 +255,12 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         public void SendEmailToUser(string toMail, string subject, string mesBody)
         {
             string toEmail = toMail;
-            SmtpClient client = new SmtpClient("smtp.mail.ru", 587);
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.UseDefaultCredentials = false;
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("jrcomerun621@mail.ru", "lene1234");
+            client.Credentials = new NetworkCredential("knjc621@gmail.com", "lene1234");
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            MailMessage message = new MailMessage("jrcomerun621@mail.ru", toEmail);
+            MailMessage message = new MailMessage("knjc621@gmail.com", toEmail);
             message.Subject = subject;
             message.Body = mesBody;
 

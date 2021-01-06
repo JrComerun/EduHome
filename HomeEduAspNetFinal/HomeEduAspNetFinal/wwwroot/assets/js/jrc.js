@@ -1,7 +1,7 @@
 ﻿//**************************************************************************
 //                               JrC Javascript
 //**************************************************************************
-//                                Search Start
+//          Course Event Teacher and Blog       Search Start 
 //**************************************************************************
 $(document).ready(function () {
     let searchInput;
@@ -33,10 +33,16 @@ $(document).ready(function () {
     search("/Event/Search/", "event");
     search("/Teacher/Search/", "teacher");
     search("/Blog/Search/", "blog");
+//**************************************************************************
+//          Course Event Teacher and Blog       Search End
+//**************************************************************************
+
+
     //************************************************
-    //                     Global Search
+    //                Global Search  Start
     //************************************************
     let GsearchInput;
+    $("#global-input").val("");
     $(document).on('keyup', `#global-input`, function () {
 
         GsearchInput = $(this).val().trim();
@@ -56,6 +62,14 @@ $(document).ready(function () {
             });
         }
     })
+    //************************************************
+    //                Global Search  End
+    //************************************************
+
+
+
+
+
     //**************************************************
     //                   Comments Start
     //**************************************************
@@ -123,10 +137,13 @@ $(document).ready(function () {
     if ($("#reply-button").hasClass("reply-btn-blog")) {
         comment("/Blog/BlogComment/", "blog");
     }
-
-
     //************************************************************
     //                     Comments End
+    //************************************************************
+
+
+
+
     //************************************************************
     //   if !User.Identity.IsAuthenticated     Add Subscribe
     //************************************************************
@@ -162,17 +179,27 @@ $(document).ready(function () {
             }
             else if (inputEmailSub==0)
             {
-                let subNullError="email is not null"  
+                let subNullError="Email can't be empty!!!"  
                 $("#subError").append(subNullError)
             }
             else
             {
-                let subNullError = "Please write email!"
+                let subNullError = "Please write email!!!"
                 $("#subError").append(subNullError)
             }
            
         }
     })
+    //*********************************************************
+    //                  Add Subscribe  End
+    //*********************************************************
+
+
+
+
+    //*********************************************************
+    //         Email Validate ready function start
+    //*********************************************************
     function ValidateEmail(email) {
         var mailformat = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/;
         if (email.match(mailformat)) {
@@ -182,9 +209,91 @@ $(document).ready(function () {
             return false;
         }
     }
+    //*********************************************************
+    //         Email Validate ready function end
+    //*********************************************************
 
 
 
+
+    //*********************************************************
+    //                Send Message to Me  Start
+    //*********************************************************
+
+    $(document).on('click', `#buttonCon`, function (e) {
+        $("#ConEmailError").empty();
+        $("#ConSubjectError").empty();
+        $("#ConMessageError").empty();
+        $("#Form-contact").empty();
+        $(`#buttonCon`).prop("disabled", true);
+        let inputMessageCon = $("#Message-contact").val();
+        let inputSubjectCon = $("#Subject-contact").val();
+        if (inputMessageCon == 0) {
+            let conNullMessage = "Message can't be empty !!!";
+            $("#ConMessageError").append(conNullMessage);
+           
+        }
+        if (inputSubjectCon == 0) {
+            let conNullSubject = "Subject can't be empty !!!";
+            $("#ConSubjectError").append(conNullSubject);
+           
+        }
+        if (userAuthorized) {
+            
+            $.ajax({
+                url: `/Contact/MessageToMe/`,
+                data: {
+                    "Subject": inputSubjectCon,
+                    "Message": inputMessageCon,
+                },
+                type: "Post",
+                success: function (res) {
+                    $("#Form-contact").append(res);
+                    $(`#buttonCon`).prop("disabled", false);
+                    $("#Message-contact").val("");
+                    $("#Subject-contact").val("");
+                }
+            });
+        }
+        else {
+            let inputEmailCon = $("#Email-contact").val();
+            
+            if (ValidateEmail(inputEmailCon) == true) {
+                $.ajax({
+                    url: `/Contact/MessageToMe/`,
+                    data: {
+                        "Email": inputEmailCon,
+                        "Subject": inputSubjectCon,
+                        "Message": inputMessageCon,
+                    },
+                    type: "Post",
+                    success: function (res) {
+                        $("#Form-contact").append(res);
+                        $(`#buttonCon`).prop("disabled", false);
+                        $("#Message-contact").val("");
+                        $("#Subject-contact").val("");
+                    }
+                });
+            }
+            else if (inputEmailCon == 0)
+            {
+                let conNullEmail = "Email can't be empty !!!";
+                $("#ConEmailError").append(conNullEmail);
+            }
+            else {
+                let conNullError = "Please write Email !!!";
+                $("#ConEmailError").append(conNullError);
+                
+            }
+          
+            
+
+        }
+    })
+
+   //*********************************************************
+   //                Send Message to Me  ENd
+   //*********************************************************
 
 
 

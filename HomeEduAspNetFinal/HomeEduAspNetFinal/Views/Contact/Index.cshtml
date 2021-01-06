@@ -48,35 +48,41 @@
                 <div class="reply-area">
                     <h3>Contact Us</h3>
                     <p>Send Message to EduHome </p>
-                    <form id="contact-form-jrc" asp-controller="Contact" asp-action="MessageToMe" method="post">
+                    <form id="contact-form-jrc "  method="post">
                         <div class="row">
                             @if (!User.Identity.IsAuthenticated)
                             {
                                 <div class="col-md-12">
-                                    <p>Email</p>
-                                    <input type="text" name="Email" id="Email-contact" required>
+                                    <p class="jrc-form">Email <span id="ConEmailError" ></span></p>
+                                    <input type="text" name="Email" id="Email-contact" >
+                                    
                                 </div>
                                 <div class="col-md-12">
-                                    <p>Subject</p>
-                                    <input type="text" name="Subject" id="Subject-contact" required>
-                                    <p>Massage</p>
-                                    <textarea name="Message" id="Message-contact" cols="15" rows="10" required></textarea>
+                                    <p class="jrc-form">Subject <span id="ConSubjectError" ></span></p>
+                                    <input type="text" name="Subject" id="Subject-contact" >
+                                    
+                                    <p class="jrc-form">Massage  <span id="ConMessageError" ></span></p>
+                                    <textarea name="Message" id="Message-contact" cols="15" rows="10" ></textarea>
+                                    
                                 </div>
                             }
                             else
                             {
                                 
-                                <div class="col-md-12">
-                                    <p>Subject</p>
-                                    <input type="text" name="Subject" id="Subject-contact" required>
-                                    <p>Massage</p>
-                                    <textarea name="Message" id="Message-contact" cols="15" rows="10" required></textarea>
-                                </div>
+                        <div class="col-md-12">
+                            <p class="jrc-form">Subject <span id="ConSubjectError" ></span></p>
+                            <input type="text" name="Subject" id="Subject-contact">
+                            
+                            <p class="jrc-form">Massage <span id="ConMessageError" ></span></p>
+                            <textarea name="Message " id="Message-contact" cols="15" rows="10"></textarea>
+                            
+                        </div>
                             }
 
                         </div>
-                        <button type="submit" class="reply-btn-jrc" data-text="send"><span>send message</span></button>
-                        <p class="form-messege"></p>
+                        <button type="button" class="reply-btn" id="buttonCon"><span>send message</span></button>
+                        <span id="Form-contact" class="form-messege "style="padding-left: 20px !important; color: #EC1C23 !important;"></span>
+                        <span id="Form-contact2" class="form-messege "style="padding-left: 20px !important; color: #EC1C23 !important;"></span>
                     </form>
                 </div>
             </div>
