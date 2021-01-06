@@ -27,17 +27,21 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
         {
             return View(_db.AboutAreas.FirstOrDefault());
         }
-        public IActionResult Update()
+        public IActionResult Update(int? id)
         {
-            AboutArea areadb = _db.AboutAreas.FirstOrDefault();
+            if (id == null) return NotFound();
+            AboutArea areadb = _db.AboutAreas.FirstOrDefault(a=>a.Id==id);
+            if (areadb == null) return NotFound();
             return View(areadb);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(AboutArea area)
+        public async Task<IActionResult> Update(int? id,AboutArea area)
         {
 
-            AboutArea dbArea = _db.AboutAreas.FirstOrDefault();
+            if (id == null) return NotFound();
+            AboutArea dbArea = _db.AboutAreas.FirstOrDefault(a => a.Id == id);
+            if (dbArea == null) return NotFound();
 
             if (area.Photo != null)
             {
@@ -58,8 +62,9 @@ namespace HomeEduAspNetFinal.Areas.JrCAdmin.Controllers
                 dbArea.Image = filename;
             }
 
-            dbArea.Title = area.Title;
+            _db.AboutAreas.Update(area);
             //dbArea.Description = area.Description;
+            //dbArea.Title = area.Title;
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
