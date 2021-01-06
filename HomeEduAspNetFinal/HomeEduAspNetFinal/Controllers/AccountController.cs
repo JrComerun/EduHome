@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace HomeEduAspNetFinal.Controllers
@@ -130,6 +132,57 @@ namespace HomeEduAspNetFinal.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        #region Reset Password
+        public IActionResult ForEmailResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForEmailResetPassword(EmailForResetPVM resetPVM)
+        {
+            if (resetPVM == null) return View();
+            AppUser user = await _userManager.FindByEmailAsync(resetPVM.Email);
+            if (user == null) return View();
+            string url = "https://localhost:44366/Account/ResetPassword/" + $"{user.Id}";
+            string subject = "Reset password in EduHome";
+            string message = $"<a href='{url}'> Do You want reset password Click here</a>";
+            SendEmail(user.Email, subject, message);
+            return RedirectToAction("Login","Account");
+        }
+        public async Task<IActionResult> ResetPassword(string id)
+        {
+            
+            if (id == null) return NotFound();
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user == null) return NotFound();
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(string id,ResetPasswordVM reset)
+        {
+            
+            if (id == null) return NotFound();
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user == null) return NotFound();
+            if (!ModelState.IsValid) return View(user);
+
+            IdentityResult identityResult = await _userManager.ResetPasswordAsync(user, await _userManager.GeneratePasswordResetTokenAsync(user), reset.Password);
+            if (!identityResult.Succeeded)
+            {
+                foreach (IdentityError error in identityResult.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View();
+            }
+            
+            return RedirectToAction("Login");
+        }
+        #endregion
+
         #region CreateRoleManager
 
         //public async Task CreateUserRole()
@@ -141,6 +194,27 @@ namespace HomeEduAspNetFinal.Controllers
         //    if (!(await _roleManager.RoleExistsAsync(Roles.Moderator.ToString())))
         //        await _roleManager.CreateAsync(new IdentityRole { Name = Roles.Moderator.ToString() });
         //}
+        #endregion
+
+        #region Send Email 
+        public void SendEmail(string toMail, string subject, string mesBody)
+        {
+            string toEmail = toMail;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            client.UseDefaultCredentials = false;
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("knjc621@gmail.com", "lene1234");
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            MailMessage message = new MailMessage("knjc621@gmail.com", toEmail);
+            message.Subject = subject;
+            message.Body = mesBody;
+
+            message.BodyEncoding = System.Text.Encoding.UTF8;
+            message.IsBodyHtml = true;
+
+            client.Send(message);
+
+        }
         #endregion
     }
 }
