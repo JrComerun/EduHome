@@ -48,41 +48,44 @@
                 <div class="reply-area">
                     <h3>Contact Us</h3>
                     <p>Send Message to EduHome </p>
-                    <form id="contact-form-jrc "  method="post">
+                    <form id="contact-form-jrc " method="post">
                         <div class="row">
                             @if (!User.Identity.IsAuthenticated)
-                            {
-                                <div class="col-md-12">
-                                    <p class="jrc-form">Email <span id="ConEmailError" ></span></p>
-                                    <input type="text" name="Email" id="Email-contact" >
-                                    
+                            {   <div class="col-md-12">
+                                    <p class="jrc-form">Name <span id="ConNameError"></span></p>
+                                    <input type="text" name="Name" id="Name-contact">
                                 </div>
                                 <div class="col-md-12">
-                                    <p class="jrc-form">Subject <span id="ConSubjectError" ></span></p>
-                                    <input type="text" name="Subject" id="Subject-contact" >
-                                    
-                                    <p class="jrc-form">Massage  <span id="ConMessageError" ></span></p>
-                                    <textarea name="Message" id="Message-contact" cols="15" rows="10" ></textarea>
-                                    
+                                    <p class="jrc-form">Email <span id="ConEmailError"></span></p>
+                                    <input type="text" name="Email" id="Email-contact">
+
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="jrc-form">Subject <span id="ConSubjectError"></span></p>
+                                    <input type="text" name="Subject" id="Subject-contact">
+
+                                    <p class="jrc-form">Massage  <span id="ConMessageError"></span></p>
+                                    <textarea name="Message" id="Message-contact" cols="15" rows="10"></textarea>
+
                                 </div>
                             }
                             else
                             {
-                                
-                        <div class="col-md-12">
-                            <p class="jrc-form">Subject <span id="ConSubjectError" ></span></p>
-                            <input type="text" name="Subject" id="Subject-contact">
-                            
-                            <p class="jrc-form">Massage <span id="ConMessageError" ></span></p>
-                            <textarea name="Message " id="Message-contact" cols="15" rows="10"></textarea>
-                            
-                        </div>
+
+                                <div class="col-md-12">
+                                    <p class="jrc-form">Subject <span id="ConSubjectError"></span></p>
+                                    <input type="text" name="Subject" id="Subject-contact">
+
+                                    <p class="jrc-form">Massage <span id="ConMessageError"></span></p>
+                                    <textarea name="Message " id="Message-contact" cols="15" rows="10"></textarea>
+
+                                </div>
                             }
 
                         </div>
                         <button type="button" class="reply-btn" id="buttonCon"><span>send message</span></button>
-                        <span id="Form-contact" class="form-messege "style="padding-left: 20px !important; color: #EC1C23 !important;"></span>
-                        <span id="Form-contact2" class="form-messege "style="padding-left: 20px !important; color: #EC1C23 !important;"></span>
+                        <span id="Form-contact" class="form-messege " style="padding-left: 20px !important; color: #EC1C23 !important;"></span>
+                        @*<span id="Form-contact2" class="form-messege " style="padding-left: 20px !important; color: #EC1C23 !important;"></span>*@
                     </form>
                 </div>
             </div>

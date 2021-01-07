@@ -33,9 +33,9 @@ $(document).ready(function () {
     search("/Event/Search/", "event");
     search("/Teacher/Search/", "teacher");
     search("/Blog/Search/", "blog");
-//**************************************************************************
-//          Course Event Teacher and Blog       Search End
-//**************************************************************************
+    //**************************************************************************
+    //          Course Event Teacher and Blog       Search End
+    //**************************************************************************
 
 
     //************************************************
@@ -150,7 +150,7 @@ $(document).ready(function () {
     $(document).on('click', `#buttonSub`, function () {
         $("#subError").empty();
         if (userAuthorized) {
-           
+
             $.ajax({
                 url: `/Contact/AddSubscribe/`,
                 data: {
@@ -177,17 +177,15 @@ $(document).ready(function () {
                     }
                 });
             }
-            else if (inputEmailSub==0)
-            {
-                let subNullError="Email can't be empty!!!"  
+            else if (inputEmailSub == 0) {
+                let subNullError = "Email can't be empty!!!"
                 $("#subError").append(subNullError)
             }
-            else
-            {
+            else {
                 let subNullError = "Please write email!!!"
                 $("#subError").append(subNullError)
             }
-           
+
         }
     })
     //*********************************************************
@@ -201,7 +199,8 @@ $(document).ready(function () {
     //         Email Validate ready function start
     //*********************************************************
     function ValidateEmail(email) {
-        var mailformat = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/;
+        var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                         
         if (email.match(mailformat)) {
             return true;
         }
@@ -220,26 +219,27 @@ $(document).ready(function () {
     //                Send Message to Me  Start
     //*********************************************************
 
-    $(document).on('click', `#buttonCon`, function (e) {
+    $(document).on('click', `#buttonCon`, function () {
+        $(`#buttonCon`).prop("disabled", true);
         $("#ConEmailError").empty();
         $("#ConSubjectError").empty();
         $("#ConMessageError").empty();
+        $("#ConNameError").empty();
         $("#Form-contact").empty();
-        $(`#buttonCon`).prop("disabled", true);
         let inputMessageCon = $("#Message-contact").val();
         let inputSubjectCon = $("#Subject-contact").val();
         if (inputMessageCon == 0) {
             let conNullMessage = "Message can't be empty !!!";
             $("#ConMessageError").append(conNullMessage);
-           
+            $(`#buttonCon`).removeProp("disabled")
         }
         if (inputSubjectCon == 0) {
             let conNullSubject = "Subject can't be empty !!!";
             $("#ConSubjectError").append(conNullSubject);
-           
+            $(`#buttonCon`).removeProp("disabled")
         }
         if (userAuthorized) {
-            
+
             $.ajax({
                 url: `/Contact/MessageToMe/`,
                 data: {
@@ -248,52 +248,70 @@ $(document).ready(function () {
                 },
                 type: "Post",
                 success: function (res) {
+                    console.log(res)
                     $("#Form-contact").append(res);
-                    $(`#buttonCon`).prop("disabled", false);
+
+                    $(`#buttonCon`).removeProp("disabled")
+
                     $("#Message-contact").val("");
                     $("#Subject-contact").val("");
                 }
             });
         }
         else {
+           
             let inputEmailCon = $("#Email-contact").val();
-            
+            let inputNameCon = $("#Name-contact").val();
+
+            if (inputNameCon == 0) {
+                let conNullName = "Name can't be empty !!!";
+                $("#ConNameError").append(conNullName);
+                $(`#buttonCon`).removeProp("disabled")
+            }
             if (ValidateEmail(inputEmailCon) == true) {
+                console.log("salam")
                 $.ajax({
                     url: `/Contact/MessageToMe/`,
                     data: {
+                        "Name": inputNameCon,
                         "Email": inputEmailCon,
                         "Subject": inputSubjectCon,
                         "Message": inputMessageCon,
                     },
                     type: "Post",
                     success: function (res) {
+                        console.log(res)
                         $("#Form-contact").append(res);
-                        $(`#buttonCon`).prop("disabled", false);
                         $("#Message-contact").val("");
+                        $("#Email-contact").val("");
+                        $("#Name-contact").val("");
                         $("#Subject-contact").val("");
+                        $(`#buttonCon`).removeProp("disabled")
+
                     }
                 });
-            }
-            else if (inputEmailCon == 0)
-            {
-                let conNullEmail = "Email can't be empty !!!";
-                $("#ConEmailError").append(conNullEmail);
-            }
-            else {
+
+            } else {
+                console.log("sdasda")
                 let conNullError = "Please write Email !!!";
                 $("#ConEmailError").append(conNullError);
-                
+                $(`#buttonCon`).removeProp("disabled")
+
             }
-          
-            
+            //if (inputEmailCon == 0) {
+            //    let conNullEmail = "Email can't be empty !!!";
+            //    $("#ConEmailError").append(conNullEmail);
+            //    $(`#buttonCon`).removeProp("disabled")
+            //}
+
+
 
         }
     })
 
-   //*********************************************************
-   //                Send Message to Me  ENd
-   //*********************************************************
+    //*********************************************************
+    //                Send Message to Me  ENd
+    //*********************************************************
 
 
 

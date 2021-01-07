@@ -62,13 +62,14 @@ namespace HomeEduAspNetFinal.Controllers
         #endregion
 
         #region Message To Me
-        public async Task<IActionResult> MessageToMe(string Email,string Subject,string Message)
+        public async Task<IActionResult> MessageToMe(string Email,string Subject,string Message,string Name)
         {
            
             if(Subject==null || Message == null)
             {
                 return Content("You can't send message!");
             }
+           
             else
             {
                 if (User.Identity.IsAuthenticated)
@@ -76,6 +77,7 @@ namespace HomeEduAspNetFinal.Controllers
                     AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
                     MessageFromEmailToMe emailToMe = new MessageFromEmailToMe
                     {
+                        Name = user.Name,
                         Email = user.Email,
                         Messages = Message,
                         Subjects = Subject,
@@ -89,26 +91,30 @@ namespace HomeEduAspNetFinal.Controllers
                 }
                 else
                 {
-                    if (Email != null)
+                    if (Email != null && Name!=null && Subject != null && Message != null)
                     {
                         MessageFromEmailToMe emailToMe = new MessageFromEmailToMe
                         {
+                            Name=Name,
                             Email = Email,
                             Messages = Message,
                             Subjects = Subject,
                         };
                         await _db.MessageFromEmailToMes.AddAsync(emailToMe);
                         await _db.SaveChangesAsync();
-                        string bodyMes = $"{Message} from  {Email}";
+                        string bodyMes = $" Email : {Email} <br> From : {Name} <br> Message : {Message} ";
                         SendEmail("kamranfn@code.edu.az", Subject, bodyMes);
                         return Content("You send Message successfull ! Will be in touch with You during the day!");
                     }
+
                     else
                     {
                         return Content("You can't send message!");
                     }
-                   
+
+                 
                 }
+              
             }
         }
 

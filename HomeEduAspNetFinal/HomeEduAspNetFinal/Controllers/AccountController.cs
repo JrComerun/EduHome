@@ -29,6 +29,7 @@ namespace HomeEduAspNetFinal.Controllers
             _roleManager = roleManager;
             _db = db;
         }
+        #region Login
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
@@ -75,6 +76,9 @@ namespace HomeEduAspNetFinal.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        #endregion
+
+        #region Register
         public IActionResult Register()
         {
             if (User.Identity.IsAuthenticated)
@@ -110,7 +114,7 @@ namespace HomeEduAspNetFinal.Controllers
             }
             await _userManager.AddToRoleAsync(newUser, Roles.Moderator.ToString());
             await _signInManager.SignInAsync(newUser, true);
-            bool IsExist = _db.SubScribes.Any(c=>c.Email.ToLower().Trim()==newUser.Email.ToLower().Trim());
+            bool IsExist = _db.SubScribes.Any(c => c.Email.ToLower().Trim() == newUser.Email.ToLower().Trim());
             // Add SubScribe for New Event
             if (!IsExist)
             {
@@ -123,15 +127,20 @@ namespace HomeEduAspNetFinal.Controllers
                 await _db.SubScribes.AddAsync(subScribe);
                 await _db.SaveChangesAsync();
             }
-            
+
             return RedirectToAction("Index", "Home");
-        
+
         }
+
+        #endregion
+
+        #region Logout
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+        #endregion
 
         #region Reset Password
         public IActionResult ForEmailResetPassword()
